@@ -11,7 +11,7 @@
 		AA3365162984B13B00420C53 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365152984B13B00420C53 /* AlbumView.swift */; };
 		AA3365182984B18000420C53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365172984B18000420C53 /* ContentView.swift */; };
 		AA33651A2984B20600420C53 /* Coverflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365192984B20600420C53 /* Coverflow.swift */; };
-		AAE74C5B2984293A00E03B2D /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* MusicApp.swift */; };
+		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
 		AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE74C5E2984293C00E03B2D /* Assets.xcassets */; };
 		AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C69298429FB00E03B2D /* MusicLibrary.swift */; };
 		AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA87298456E2003609B2 /* AlbumsTabView.swift */; };
@@ -25,8 +25,8 @@
 		AA3365152984B13B00420C53 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		AA3365172984B18000420C53 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA3365192984B20600420C53 /* Coverflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coverflow.swift; sourceTree = "<group>"; };
-		AAE74C572984293A00E03B2D /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAE74C5A2984293A00E03B2D /* MusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicApp.swift; sourceTree = "<group>"; };
+		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE74C5A2984293A00E03B2D /* iPodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodApp.swift; sourceTree = "<group>"; };
 		AAE74C5E2984293C00E03B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAE74C69298429FB00E03B2D /* MusicLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLibrary.swift; sourceTree = "<group>"; };
 		AAFCDA87298456E2003609B2 /* AlbumsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTabView.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		AAE74C582984293A00E03B2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AAE74C572984293A00E03B2D /* Music.app */,
+				AAE74C572984293A00E03B2D /* iPod.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 		AAE74C592984293A00E03B2D /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				AAE74C5A2984293A00E03B2D /* MusicApp.swift */,
+				AAE74C5A2984293A00E03B2D /* iPodApp.swift */,
 				AA3365172984B18000420C53 /* ContentView.swift */,
 				AA3365192984B20600420C53 /* Coverflow.swift */,
 				AAFCDA9129848023003609B2 /* Utilities.swift */,
@@ -131,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AAE74C562984293A00E03B2D /* Music */ = {
+		AAE74C562984293A00E03B2D /* iPod */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAE74C652984293C00E03B2D /* Build configuration list for PBXNativeTarget "Music" */;
+			buildConfigurationList = AAE74C652984293C00E03B2D /* Build configuration list for PBXNativeTarget "iPod" */;
 			buildPhases = (
 				AAE74C532984293A00E03B2D /* Sources */,
 				AAE74C542984293A00E03B2D /* Frameworks */,
@@ -143,9 +143,9 @@
 			);
 			dependencies = (
 			);
-			name = Music;
+			name = iPod;
 			productName = Music;
-			productReference = AAE74C572984293A00E03B2D /* Music.app */;
+			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AAE74C562984293A00E03B2D /* Music */,
+				AAE74C562984293A00E03B2D /* iPod */,
 			);
 		};
 /* End PBXProject section */
@@ -204,7 +204,7 @@
 				AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */,
 				AA33651A2984B20600420C53 /* Coverflow.swift in Sources */,
 				AA3365182984B18000420C53 /* ContentView.swift in Sources */,
-				AAE74C5B2984293A00E03B2D /* MusicApp.swift in Sources */,
+				AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */,
 				AA3365162984B13B00420C53 /* AlbumView.swift in Sources */,
 				AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */,
 			);
@@ -399,7 +399,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAE74C652984293C00E03B2D /* Build configuration list for PBXNativeTarget "Music" */ = {
+		AAE74C652984293C00E03B2D /* Build configuration list for PBXNativeTarget "iPod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAE74C662984293C00E03B2D /* Debug */,

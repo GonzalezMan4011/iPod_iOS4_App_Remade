@@ -1,6 +1,6 @@
 //
 //  SongsTabView.swift
-//  Music
+//  iPod
 //
 //  Created by Lakhan Lothiyi on 27/01/2023.
 //
@@ -37,17 +37,21 @@ struct SongsTabView: View {
                             return char == letter
                         }
                         ForEach(songlist) { song in
-                            Label {
-                                Text(song.title ?? Placeholders.noItemTitle)
-                                    .padding(.leading, 2)
-                            } icon: {
-                                Image(uiImage: song.art ?? Placeholders.noArtwork)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .imageScale(.large)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(5)
-                            }
+                                HStack {
+                                    Image(uiImage: song.art ?? Placeholders.noArtwork)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .imageScale(.large)
+                                        .frame(width: 40, height: 40)
+                                        .cornerRadius(5)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(song.title ?? Placeholders.noItemTitle)
+                                        Text(song.artist ?? Placeholders.noItemTitle)
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
                         }
                     }
                 }

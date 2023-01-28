@@ -1,6 +1,6 @@
 //
 //  Coverflow.swift
-//  Music
+//  iPod
 //
 //  Created by Lakhan Lothiyi on 28/01/2023.
 //

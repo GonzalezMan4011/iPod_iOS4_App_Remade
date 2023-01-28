@@ -1,6 +1,6 @@
 //
 //  SettingsTabView.swift
-//  Music
+//  iPod
 //
 //  Created by Lakhan Lothiyi on 27/01/2023.
 //
