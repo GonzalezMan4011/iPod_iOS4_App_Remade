@@ -14,6 +14,16 @@
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
 		AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE74C5E2984293C00E03B2D /* Assets.xcassets */; };
 		AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C69298429FB00E03B2D /* MusicLibrary.swift */; };
+		AAF7C65929869BB800E1FA65 /* Icon3-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65729869BB700E1FA65 /* Icon3-@2x.png */; };
+		AAF7C65A29869BB800E1FA65 /* Icon3-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65829869BB700E1FA65 /* Icon3-@3x.png */; };
+		AAF7C65D29869BE400E1FA65 /* Icon2-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65B29869BE300E1FA65 /* Icon2-@3x.png */; };
+		AAF7C65E29869BE400E1FA65 /* Icon2-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65C29869BE300E1FA65 /* Icon2-@2x.png */; };
+		AAF7C66129869CA600E1FA65 /* Icon1-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */; };
+		AAF7C66229869CA600E1FA65 /* Icon1-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */; };
+		AAF7C6642986ACD200E1FA65 /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C6632986ACD200E1FA65 /* MiniPlayer.swift */; };
+		AAF7C6672986B4B400E1FA65 /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = AAF7C6662986B4B400E1FA65 /* HidableTabView */; };
+		AAF7C6692986B9F600E1FA65 /* PlayerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C6682986B9F600E1FA65 /* PlayerOverlay.swift */; };
+		AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */; };
 		AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA87298456E2003609B2 /* AlbumsTabView.swift */; };
 		AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA8C29845726003609B2 /* SongsTabView.swift */; };
 		AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA8F298457EA003609B2 /* PlaylistsTabView.swift */; };
@@ -25,10 +35,21 @@
 		AA3365152984B13B00420C53 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		AA3365172984B18000420C53 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA3365192984B20600420C53 /* Coverflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coverflow.swift; sourceTree = "<group>"; };
+		AA33651B2985558200420C53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AA33651C2985559300420C53 /* iPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iPod.entitlements; sourceTree = "<group>"; };
 		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE74C5A2984293A00E03B2D /* iPodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodApp.swift; sourceTree = "<group>"; };
 		AAE74C5E2984293C00E03B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAE74C69298429FB00E03B2D /* MusicLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLibrary.swift; sourceTree = "<group>"; };
+		AAF7C65729869BB700E1FA65 /* Icon3-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon3-@2x.png"; sourceTree = "<group>"; };
+		AAF7C65829869BB700E1FA65 /* Icon3-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon3-@3x.png"; sourceTree = "<group>"; };
+		AAF7C65B29869BE300E1FA65 /* Icon2-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon2-@3x.png"; sourceTree = "<group>"; };
+		AAF7C65C29869BE300E1FA65 /* Icon2-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon2-@2x.png"; sourceTree = "<group>"; };
+		AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1-@2x.png"; sourceTree = "<group>"; };
+		AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1-@3x.png"; sourceTree = "<group>"; };
+		AAF7C6632986ACD200E1FA65 /* MiniPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
+		AAF7C6682986B9F600E1FA65 /* PlayerOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerOverlay.swift; sourceTree = "<group>"; };
+		AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerClass.swift; sourceTree = "<group>"; };
 		AAFCDA87298456E2003609B2 /* AlbumsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTabView.swift; sourceTree = "<group>"; };
 		AAFCDA8C29845726003609B2 /* SongsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTabView.swift; sourceTree = "<group>"; };
 		AAFCDA8F298457EA003609B2 /* PlaylistsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsTabView.swift; sourceTree = "<group>"; };
@@ -40,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF7C6672986B4B400E1FA65 /* HidableTabView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +79,7 @@
 		AAE74C4E2984293A00E03B2D = {
 			isa = PBXGroup;
 			children = (
-				AAE74C592984293A00E03B2D /* Music */,
+				AAE74C592984293A00E03B2D /* iPod */,
 				AAE74C582984293A00E03B2D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,18 +92,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AAE74C592984293A00E03B2D /* Music */ = {
+		AAE74C592984293A00E03B2D /* iPod */ = {
 			isa = PBXGroup;
 			children = (
+				AA33651C2985559300420C53 /* iPod.entitlements */,
+				AA33651B2985558200420C53 /* Info.plist */,
 				AAE74C5A2984293A00E03B2D /* iPodApp.swift */,
 				AA3365172984B18000420C53 /* ContentView.swift */,
+				AAF7C66A2986BA2800E1FA65 /* Player */,
 				AA3365192984B20600420C53 /* Coverflow.swift */,
 				AAFCDA9129848023003609B2 /* Utilities.swift */,
 				AAFCDA86298456D4003609B2 /* Tabs */,
-				AAE74C5E2984293C00E03B2D /* Assets.xcassets */,
+				AAF7C65629869B5300E1FA65 /* Assets */,
 				AAE74C68298429E800E03B2D /* MusicLibraryTools */,
 			);
-			path = Music;
+			path = iPod;
 			sourceTree = "<group>";
 		};
 		AAE74C68298429E800E03B2D /* MusicLibraryTools */ = {
@@ -90,6 +115,30 @@
 				AAE74C69298429FB00E03B2D /* MusicLibrary.swift */,
 			);
 			path = MusicLibraryTools;
+			sourceTree = "<group>";
+		};
+		AAF7C65629869B5300E1FA65 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				AAF7C65729869BB700E1FA65 /* Icon3-@2x.png */,
+				AAF7C65829869BB700E1FA65 /* Icon3-@3x.png */,
+				AAF7C65C29869BE300E1FA65 /* Icon2-@2x.png */,
+				AAF7C65B29869BE300E1FA65 /* Icon2-@3x.png */,
+				AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */,
+				AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */,
+				AAE74C5E2984293C00E03B2D /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		AAF7C66A2986BA2800E1FA65 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				AAF7C6632986ACD200E1FA65 /* MiniPlayer.swift */,
+				AAF7C6682986B9F600E1FA65 /* PlayerOverlay.swift */,
+				AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		AAFCDA86298456D4003609B2 /* Tabs */ = {
@@ -144,6 +193,9 @@
 			dependencies = (
 			);
 			name = iPod;
+			packageProductDependencies = (
+				AAF7C6662986B4B400E1FA65 /* HidableTabView */,
+			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
 			productType = "com.apple.product-type.application";
@@ -172,6 +224,9 @@
 				Base,
 			);
 			mainGroup = AAE74C4E2984293A00E03B2D;
+			packageReferences = (
+				AAF7C6652986B4B400E1FA65 /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
+			);
 			productRefGroup = AAE74C582984293A00E03B2D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -187,6 +242,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */,
+				AAF7C66229869CA600E1FA65 /* Icon1-@3x.png in Resources */,
+				AAF7C66129869CA600E1FA65 /* Icon1-@2x.png in Resources */,
+				AAF7C65E29869BE400E1FA65 /* Icon2-@2x.png in Resources */,
+				AAF7C65A29869BB800E1FA65 /* Icon3-@3x.png in Resources */,
+				AAF7C65929869BB800E1FA65 /* Icon3-@2x.png in Resources */,
+				AAF7C65D29869BE400E1FA65 /* Icon2-@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,12 +260,15 @@
 			files = (
 				AAFCDA9229848023003609B2 /* Utilities.swift in Sources */,
 				AA33651429848C2100420C53 /* SettingsTabView.swift in Sources */,
+				AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */,
 				AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */,
 				AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */,
 				AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */,
 				AA33651A2984B20600420C53 /* Coverflow.swift in Sources */,
+				AAF7C6642986ACD200E1FA65 /* MiniPlayer.swift in Sources */,
 				AA3365182984B18000420C53 /* ContentView.swift in Sources */,
 				AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */,
+				AAF7C6692986B9F600E1FA65 /* PlayerOverlay.swift in Sources */,
 				AA3365162984B13B00420C53 /* AlbumView.swift in Sources */,
 				AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */,
 			);
@@ -332,24 +396,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iPod/iPod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 566RT33SA2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iPod/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "To get your music files";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.Music;
+				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -362,24 +429,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iPod/iPod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 566RT33SA2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iPod/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "To get your music files";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.Music;
+				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -409,6 +479,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AAF7C6652986B4B400E1FA65 /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliMert/HidableTabView-SwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AAF7C6662986B4B400E1FA65 /* HidableTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAF7C6652986B4B400E1FA65 /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */;
+			productName = HidableTabView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AAE74C4F2984293A00E03B2D /* Project object */;
 }

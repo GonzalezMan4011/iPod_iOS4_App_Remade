@@ -15,16 +15,29 @@ struct AlbumsTabView: View {
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
+    @State var searchQuery: String = ""
+    
+    @State var albumsFiltered: [MPMediaItemCollection] = []
+    
+    var db: [MPMediaItemCollection] {
+        searchQuery.isEmpty ? ml.albums : albumsFiltered
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(ml.albums) { album in
+                    ForEach(db) { album in
                         AlbumButton(album: album)
                     }
                 }
+                .padding()
             }
             .navigationTitle("Albums")
+            .searchable(text: $searchQuery, prompt: Text("Search Albums"))
+            .onChange(of: searchQuery) { _ in
+                search(searchQuery)
+            }
         }
     }
     
@@ -51,6 +64,14 @@ struct AlbumsTabView: View {
                 .padding(8)
             }
             .buttonStyle(.plain)
+        }
+    }
+    
+    func search(_ q: String) {
+        self.albumsFiltered = ml.albums.filter { album in
+            album.albumTitle?.lowercased().contains(q.lowercased()) ?? false
+            ||
+            album.representativeItem?.artist?.lowercased().contains(q.lowercased()) ?? false
         }
     }
 }

@@ -8,12 +8,13 @@
 import Foundation
 import SwiftUI
 
+// MARK: - iPod placeholders
 struct Placeholders {
     static let noItemTitle = "Unknown"
     static let noArtwork = UIImage(named: "MissingArtwork")!
 }
 
-
+// MARK: - Make ordered list have index scrollTo
 struct VerticalIndex: ViewModifier {
     let indexableList: [String]
     func body(content: Content) -> some View {
@@ -30,9 +31,8 @@ struct VerticalIndex: ViewModifier {
                                         }
                                     }, label: {
                                         Text(letter)
-                                            .font(.system(size: 12))
+                                            .font(.system(size: 12).bold())
                                             .padding(.trailing, 7)
-                                            .bold()
                                     })
                                 }
                             }
@@ -44,7 +44,9 @@ struct VerticalIndex: ViewModifier {
     }
 }
 
+let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "#"] //swiftlint:disable comma
 
+// MARK: - Detect device rotation changes
 struct DeviceRotationViewModifier: ViewModifier {
     let action: (UIDeviceOrientation) -> Void
 
@@ -57,9 +59,26 @@ struct DeviceRotationViewModifier: ViewModifier {
     }
 }
 
-// A View wrapper to make the modifier easier to use
 extension View {
     func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
         self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
+
+// MARK: - Round specific corners
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
 }
