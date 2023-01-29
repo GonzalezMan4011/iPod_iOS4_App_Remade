@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var rotation: UIDeviceOrientation = UIDevice.current.orientation
+    @ObservedObject var player = Player.shared
     var body: some View {
         TabView {
             AlbumsTabView()
@@ -37,6 +38,14 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
+        .brightness(player.isMini ? 0 : -0.4)
+        .scaleEffect(player.isMini ? 1 : 0.9)
+        .allowsHitTesting(player.isMini)
+        .animation(.easeOut, value: player.isMini)
+        .overlay(alignment: .bottom, content: {
+            PlayerOverlay()
+        })
+        .ignoresSafeArea()
         .overlay {
             Coverflow()
                 .ignoresSafeArea()
