@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import HidableTabView
 
 struct MiniPlayer: View {
     

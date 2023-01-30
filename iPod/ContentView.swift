@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var rotation: UIDeviceOrientation = UIDevice.current.orientation
+    @State var rotation: UIDeviceOrientation = .unknown
     @ObservedObject var player = Player.shared
     var body: some View {
         TabView {
@@ -52,6 +52,7 @@ struct ContentView: View {
                 .opacity(rotation == .landscapeLeft || rotation == .landscapeRight ? 1 : 0)
                 .animation(.easeInOut, value: rotation)
         }
+        .onAppear { self.rotation = UIDevice.current.orientation }
         .onRotate { gm in
             self.rotation = gm
         }

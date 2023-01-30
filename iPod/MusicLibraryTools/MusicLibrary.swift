@@ -8,7 +8,7 @@
 import Foundation
 import MediaPlayer
 
-@MainActor
+
 class MusicLibrary: ObservableObject {
     static let shared = MusicLibrary()
     
@@ -27,7 +27,7 @@ class MusicLibrary: ObservableObject {
         ml.beginGeneratingLibraryChangeNotifications()
         
         NotificationCenter.default.addObserver(forName: .MPMediaLibraryDidChange, object: nil, queue: nil, using: { _ in
-            Task { await self.updateLibrary() }
+            Task { self.updateLibrary() }
         })
         
         if status == .authorized { updateLibrary() }

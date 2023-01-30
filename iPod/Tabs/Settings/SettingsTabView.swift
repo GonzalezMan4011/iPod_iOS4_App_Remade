@@ -59,7 +59,7 @@ struct SettingsTabView: View {
                     } label: {
                         Text("Equaliser")
                     }
-
+                    Button("gm") { gm = true }
                     Button("Respring") {
                         let window = UIApplication.shared.windows.first!
                         while true {
@@ -71,6 +71,18 @@ struct SettingsTabView: View {
             .navigationTitle("Settings")
         }
     }
+}
+
+struct Transparency: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 struct SettingsTabView_Previews: PreviewProvider {

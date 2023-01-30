@@ -21,7 +21,6 @@
 		AAF7C66129869CA600E1FA65 /* Icon1-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */; };
 		AAF7C66229869CA600E1FA65 /* Icon1-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */; };
 		AAF7C6642986ACD200E1FA65 /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C6632986ACD200E1FA65 /* MiniPlayer.swift */; };
-		AAF7C6672986B4B400E1FA65 /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = AAF7C6662986B4B400E1FA65 /* HidableTabView */; };
 		AAF7C6692986B9F600E1FA65 /* PlayerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C6682986B9F600E1FA65 /* PlayerOverlay.swift */; };
 		AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */; };
 		AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA87298456E2003609B2 /* AlbumsTabView.swift */; };
@@ -61,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAF7C6672986B4B400E1FA65 /* HidableTabView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +192,6 @@
 			);
 			name = iPod;
 			packageProductDependencies = (
-				AAF7C6662986B4B400E1FA65 /* HidableTabView */,
 			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
@@ -225,7 +222,6 @@
 			);
 			mainGroup = AAE74C4E2984293A00E03B2D;
 			packageReferences = (
-				AAF7C6652986B4B400E1FA65 /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
 			);
 			productRefGroup = AAE74C582984293A00E03B2D /* Products */;
 			projectDirPath = "";
@@ -418,9 +414,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -451,9 +450,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
@@ -479,25 +481,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AAF7C6652986B4B400E1FA65 /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AliMert/HidableTabView-SwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AAF7C6662986B4B400E1FA65 /* HidableTabView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AAF7C6652986B4B400E1FA65 /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */;
-			productName = HidableTabView;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AAE74C4F2984293A00E03B2D /* Project object */;
 }
