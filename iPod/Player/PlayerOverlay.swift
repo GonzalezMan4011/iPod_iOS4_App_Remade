@@ -9,40 +9,35 @@ import SwiftUI
 
 struct PlayerOverlay: View {
     @ObservedObject var player = Player.shared
-    
     @State var offset = CGSize.zero
     var body: some View {
         VStack {
+            Spacer()
+            content
+        }
+        .edgesIgnoringSafeArea(.bottom)
+    }
+    
+    @ViewBuilder
+    var content: some View {
+        VStack {
             Button("gn") {
-                player.isMini.toggle()
+                player.playerIsMini.toggle()
             }
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: screenheight - 75)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.regularMaterial)
-        .offset(y: player.isMini ? screenheight : 0)
-        .opacity(player.isMini ? 0 : 1)
-        .animation(.easeInOut, value: player.isMini)
-        .cornerRadius(50, corners: [.topLeft, .topRight])
-        .offset(y: offset.height / 2)
-        .gesture(
-            DragGesture()
-                .onChanged { gesture in
-                    offset = gesture.translation
-                }
-                .onEnded { _ in
-                    if abs(offset.height) > 100 {
-                        withAnimation(.easeInOut(duration: 0.1)) {
-                            offset = .zero
-                        }
-                        player.isMini = true
-                    } else {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            offset = .zero
-                        }
-                    }
-                }
-        )
+        .cornerRadius(30, corners: [.topLeft, .topRight])
+        .overlay(alignment: .top, content: {
+            Image(systemName: "chevron.compact.down")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 35)
+                .foregroundColor(.secondary)
+                .padding(.top)
+                .opacity(0.8)
+        })
+        .padding(.top)
     }
     
     var screenheight: CGFloat {
@@ -55,4 +50,29 @@ struct PlayerOverlay_Previews: PreviewProvider {
     static var previews: some View {
         PlayerOverlay()
     }
+}
+
+struct Transparency: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+struct ViewIntercept: UIViewRepresentable {
+    @Binding var view: UIView?
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async {
+            self.view = view.superview?.superview
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }

@@ -70,10 +70,23 @@ struct SongsTabView: View {
     }
     
     struct SongButton: View {
+        @State var view: UIView? = nil
         var song: MPMediaItem
         var body: some View {
             Button {
-                
+                if let assetURL = song.assetURL {
+                    print(assetURL)
+                    Task {
+//                        guard let fileURL = await export(assetURL) else { return }
+//                        print(fileURL)
+//                        DispatchQueue.main.async {
+//                            let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+//                            //present(activityViewController, animated: true, completion: nil)
+//                            guard let vc = view?.window?.rootViewController else { return }
+//                            vc.present(activityViewController, animated: true, completion: nil)
+//                        }
+                    }
+                }
             } label: {
                 HStack {
                     Image(uiImage: song.art ?? Placeholders.noArtwork)
@@ -92,6 +105,7 @@ struct SongsTabView: View {
                 }
             }
             .buttonStyle(.plain)
+            .background(ViewIntercept(view: $view))
         }
     }
 }

@@ -55,11 +55,10 @@ struct SettingsTabView: View {
                 
                 Section("Audio") {
                     NavigationLink {
-                        
+                        eqSettings
                     } label: {
                         Text("Equaliser")
                     }
-                    Button("gm") { gm = true }
                     Button("Respring") {
                         let window = UIApplication.shared.windows.first!
                         while true {
@@ -71,18 +70,45 @@ struct SettingsTabView: View {
             .navigationTitle("Settings")
         }
     }
+    
+    @ObservedObject var store = StorageManager.shared
+    @ViewBuilder
+    var eqSettings: some View {
+        VStack {
+            let bands = 8
+            HStack {
+                ForEach(0..<bands, id: \.self) { i in
+                    GeometryReader { geo in
+                        VerticalSlider(
+                            value: $store.s.eqBands[i], geo: geo.size
+                        )
+                    }
+                }
+            }
+            .frame(height: screenheight / 3.5)
+        }
+        .navigationTitle("Equaliser")
+    }
+    
+    var screenheight: CGFloat {
+        UIScreen.main.bounds.height
+    }
 }
 
-struct Transparency: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView()
-        DispatchQueue.main.async {
-            view.superview?.superview?.backgroundColor = .clear
-        }
-        return view
-    }
+struct VerticalSlider: View {
+    @Binding var value: Double
+    var geo: CGSize
 
-    func updateUIView(_ uiView: UIView, context: Context) {}
+    var body: some View {
+        Slider(
+            value: $value,
+            in: -6...12,
+            step: 0.1
+        )
+        .rotationEffect(.degrees(-90.0), anchor: .topLeading)
+        .frame(width: geo.height)
+        .offset(x: geo.width / 5, y: geo.height)
+    }
 }
 
 struct SettingsTabView_Previews: PreviewProvider {

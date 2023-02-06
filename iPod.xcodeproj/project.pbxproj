@@ -11,6 +11,7 @@
 		AA3365162984B13B00420C53 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365152984B13B00420C53 /* AlbumView.swift */; };
 		AA3365182984B18000420C53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365172984B18000420C53 /* ContentView.swift */; };
 		AA33651A2984B20600420C53 /* Coverflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365192984B20600420C53 /* Coverflow.swift */; };
+		AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* StorageManager.swift */; };
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
 		AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE74C5E2984293C00E03B2D /* Assets.xcassets */; };
 		AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C69298429FB00E03B2D /* MusicLibrary.swift */; };
@@ -36,6 +37,7 @@
 		AA3365192984B20600420C53 /* Coverflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coverflow.swift; sourceTree = "<group>"; };
 		AA33651B2985558200420C53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA33651C2985559300420C53 /* iPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iPod.entitlements; sourceTree = "<group>"; };
+		AABA01EE2991AFAD0088591A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE74C5A2984293A00E03B2D /* iPodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodApp.swift; sourceTree = "<group>"; };
 		AAE74C5E2984293C00E03B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				AAF7C66A2986BA2800E1FA65 /* Player */,
 				AA3365192984B20600420C53 /* Coverflow.swift */,
 				AAFCDA9129848023003609B2 /* Utilities.swift */,
+				AABA01EE2991AFAD0088591A /* StorageManager.swift */,
 				AAFCDA86298456D4003609B2 /* Tabs */,
 				AAF7C65629869B5300E1FA65 /* Assets */,
 				AAE74C68298429E800E03B2D /* MusicLibraryTools */,
@@ -257,6 +260,7 @@
 				AAFCDA9229848023003609B2 /* Utilities.swift in Sources */,
 				AA33651429848C2100420C53 /* SettingsTabView.swift in Sources */,
 				AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */,
+				AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */,
 				AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */,
 				AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */,
 				AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */,

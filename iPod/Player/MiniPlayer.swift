@@ -15,31 +15,31 @@ struct MiniPlayer: View {
     var body: some View {
         VStack {
             Button("gm") {
-                player.isMini.toggle()
+                player.playerIsMini.toggle()
             }
         }
         .frame(maxWidth: .infinity)
         .frame(height: 60)
         .background(.bar)
-        .cornerRadius(player.isMini ? 0 : 20, corners: [.topLeft, .topRight])
-        .offset(y: player.isMini ? 0 : 60)
-        .opacity(player.isMini ? 1 : 0)
-        .animation(.easeInOut, value: player.isMini)
-        .onChange(of: player.isMini) { newState in
+        .cornerRadius(player.playerIsMini ? 0 : 20, corners: [.topLeft, .topRight])
+        .offset(y: player.playerIsMini ? 0 : 60)
+        .opacity(player.playerIsMini ? 1 : 0)
+        .animation(.easeInOut, value: player.playerIsMini)
+        .onChange(of: player.playerIsMini) { newState in
             player.tabBar(newState)
         }
-        .offset(y: offset.height / 10)
         .gesture(
             DragGesture()
                 .onChanged { gesture in
                     offset = gesture.translation
                 }
                 .onEnded { _ in
-                    if abs(offset.height) > 100 {
+                    let value = offset.height.rounded()
+                    if value < -100 {
                         withAnimation(.easeInOut(duration: 0.1)) {
                             offset = .zero
                         }
-                        player.isMini = false
+                        player.playerIsMini = false
                     } else {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             offset = .zero

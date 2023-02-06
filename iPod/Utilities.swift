@@ -172,3 +172,11 @@ extension UIView {
         return allSubviews
     }
 }
+
+// MARK: - let bindings of bool be inverted with ! prefix
+prefix func ! (value: Binding<Bool>) -> Binding<Bool> {
+    Binding<Bool>(
+        get: { !value.wrappedValue },
+        set: { value.wrappedValue = !$0 }
+    )
+}

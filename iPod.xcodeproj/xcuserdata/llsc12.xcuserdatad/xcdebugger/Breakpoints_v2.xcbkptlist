@@ -7,17 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CDA5C743-14D0-4441-8B1D-6D824183AB0A"
-            shouldBeEnabled = "No"
+            uuid = "78237066-B1CA-40CF-B256-8BBC6D10CC0C"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iPod/Player/MiniPlayer.swift"
+            filePath = "iPod/Tabs/Songs/SongsTabView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "78237066-B1CA-40CF-B256-8BBC6D10CC0C - c3e906a460032189"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in iPod.SongsTabView.SongButton.body.getter : some"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Tabs/Songs/SongsTabView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "780">
+               </Location>
+               <Location
+                  uuid = "78237066-B1CA-40CF-B256-8BBC6D10CC0C - ee58210b1f26b0e8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () async -&gt; () in closure #1 () -&gt; () in iPod.SongsTabView.SongButton.body.getter : some"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Tabs/Songs/SongsTabView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "444">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

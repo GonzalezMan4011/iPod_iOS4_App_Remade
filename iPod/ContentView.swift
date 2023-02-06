@@ -38,13 +38,10 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
-        .brightness(player.isMini ? 0 : -0.4)
-        .scaleEffect(player.isMini ? 1 : 0.9)
-        .allowsHitTesting(player.isMini)
-        .animation(.easeOut, value: player.isMini)
-        .overlay(alignment: .bottom, content: {
+        .popover(isPresented: !$player.playerIsMini) {
             PlayerOverlay()
-        })
+                .background(Transparency())
+        }
         .ignoresSafeArea()
         .overlay {
             Coverflow()
@@ -59,8 +56,26 @@ struct ContentView: View {
     }
 }
 
+
+
+
+
+
+
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        egg()
+    }
+}
+struct egg: View {
+    @State var obj: AnyClass? = nil
+    var body: some View {
+        Text(obj == nil ? "n" : ":D")
+            .task {
+                try? await Task.sleep(for: .seconds(2))
+                let gm: AnyClass? = NSClassFromString("AVAudioEngine")
+                self.obj = gm
+            }
     }
 }
