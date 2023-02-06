@@ -1,7 +1,8 @@
 # iPod
 ## A modern recreation of the iPod app from iOS 4
 
-> This project is currently under heavy work and is not fully functional. You can still test builds from GitHub Actions. 
+> This project is currently under heavy work and is not fully functional. You can still test builds by downloading from [GitHub Actions](https://nightly.link/llsc12/iPod/workflows/build/main/iPod). 
+
 
 ## Backstory
 
