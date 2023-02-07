@@ -15,7 +15,7 @@ class Player: NSObject, ObservableObject {
     
     @Published var playerIsMini = true
     
-        
+    
     func tabBar(_ egg: Bool) {
         if egg {
             UITabBar.showTabBar(animated: true)
@@ -74,6 +74,6 @@ class Player: NSObject, ObservableObject {
     private let eq = AVAudioUnitEQ(numberOfBands: 8)
     
     enum Errors: Error {
-    case AssetExportFailed
+        case AssetExportFailed
     }
 }

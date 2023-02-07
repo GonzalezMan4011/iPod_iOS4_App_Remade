@@ -20,7 +20,7 @@ class MusicLibrary: ObservableObject {
     @Published public var songs: [MPMediaItem] = []
     @Published public var playlists: [MPMediaItemCollection] = []
     @Published public var artists: [MPMediaItem] = []
-
+    
     init() {
         status = MPMediaLibrary.authorizationStatus()
         

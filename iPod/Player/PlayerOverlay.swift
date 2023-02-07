@@ -60,7 +60,7 @@ struct Transparency: UIViewRepresentable {
         }
         return view
     }
-
+    
     func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
@@ -73,6 +73,6 @@ struct ViewIntercept: UIViewRepresentable {
         }
         return view
     }
-
+    
     func updateUIView(_ uiView: UIView, context: Context) {}
 }

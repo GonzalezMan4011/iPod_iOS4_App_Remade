@@ -21,7 +21,7 @@ struct VerticalIndex: ViewModifier {
     func body(content: Content) -> some View {
         var body: some View {
             ScrollViewReader { scrollProxy in
-                    content
+                content
                     .overlay(alignment: .trailing) {
                         VStack {
                             ForEach(indexableList, id: \.self) { letter in
@@ -50,7 +50,7 @@ let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",
 // MARK: - Detect device rotation changes
 struct DeviceRotationViewModifier: ViewModifier {
     let action: (UIDeviceOrientation) -> Void
-
+    
     func body(content: Content) -> some View {
         content
             .onAppear()
@@ -68,10 +68,10 @@ extension View {
 
 // MARK: - Round specific corners
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
@@ -96,7 +96,7 @@ public extension UITabBar {
             })
         }
     }
-
+    
     // if tab View is used hide Tab Bar
     static func hideTabBar(animated: Bool = true) {
         DispatchQueue.main.async {
@@ -116,27 +116,27 @@ public extension UITabBar {
             sv.frame = currentFrame
         }
     }
-
+    
     // logic is implemented for hiding or showing the tab bar with animation
     private func setIsHidden(_ hidden: Bool, animated: Bool) {
         let isViewHidden = self.isHidden
-
+        
         if animated {
             if self.isHidden && !hidden {
                 self.isHidden = false
                 Self.updateFrame(self)
                 self.frame.origin.y = UIScreen.main.bounds.height + 200
             }
-
+            
             if isViewHidden && !hidden {
                 self.alpha = 0.0
             }
-
+            
             UIView.animate(withDuration: 0.8, animations: {
                 self.alpha = hidden ? 0.0 : 1.0
             })
             UIView.animate(withDuration: 0.6, animations: {
-
+                
                 if !isViewHidden && hidden {
                     self.frame.origin.y = UIScreen.main.bounds.height + 200
                 }

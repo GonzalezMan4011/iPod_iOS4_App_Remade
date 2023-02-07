@@ -11,7 +11,7 @@ struct MiniPlayer: View {
     
     @ObservedObject var player = Player.shared
     @State private var offset = CGSize.zero
-
+    
     var body: some View {
         VStack {
             Button("gm") {

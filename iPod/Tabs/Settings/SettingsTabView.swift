@@ -98,7 +98,7 @@ struct SettingsTabView: View {
 struct VerticalSlider: View {
     @Binding var value: Double
     var geo: CGSize
-
+    
     var body: some View {
         Slider(
             value: $value,
