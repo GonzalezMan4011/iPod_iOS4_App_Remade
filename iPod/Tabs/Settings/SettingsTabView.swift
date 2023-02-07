@@ -17,7 +17,7 @@ struct SettingsTabView: View {
                         UIApplication.shared.setAlternateIconName("AppIcon-3")
                     } label: {
                         Label {
-                            Text("iOS 1")
+                            Text("iPhoneOS 1")
                         } icon: {
                             Image("AppIcon3")
                                 .resizable()
