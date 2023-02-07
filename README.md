@@ -20,6 +20,8 @@ I'm making this to bring nostalgia and make it a little more fun to listen to mu
 
 [WhitetailAni](https://github.com/RealKGB) for help with finding icons
 
+[Superbro](https://github.com/superbro9) for help with setting alternative icons
+
 [Nebula](https://github.com/itsnebulalol) for the GitHub Actions setup
 
 ## Contributing
