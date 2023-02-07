@@ -21,7 +21,7 @@ struct SongsTabView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             let indexes = Array<String>(Set(
                 db.compactMap({ item in
                     var char: String {
@@ -71,7 +71,6 @@ struct SongsTabView: View {
             .navigationTitle("Songs")
             .listStyle(.plain)
             .modifier(VerticalIndex(indexableList: indexes))
-            .scrollIndicators(.hidden)
             .searchable(text: $searchQuery, prompt: Text("Search Songs"))
             .onChange(of: searchQuery) { _ in
                 search(searchQuery)

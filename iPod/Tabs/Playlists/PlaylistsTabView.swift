@@ -12,7 +12,7 @@ struct PlaylistsTabView: View {
     @ObservedObject var ml = MusicLibrary.shared
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 ForEach(ml.playlists) { playlist in
                     Text(playlist.playlistTitle ?? "Unknown")

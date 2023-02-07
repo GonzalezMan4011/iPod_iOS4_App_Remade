@@ -91,11 +91,12 @@ class StorageManager: ObservableObject {
     internal static let blankTemplate = StorageObject(
         eqBands: [0,0,0,0,0,0,0,0,0,0],
         eqPresets: [
-            EQPreset(name: "Bass boost", bands: [3, 2.5, 1.8, 0.3, 0, 0, 0, 0, 0, 0])
+             EQPreset(name: "Default", bands: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]),
+             EQPreset(name: "Bass Boost", bands: [3, 2.5, 1.8, 0.3, 0, 0, 0, 0, 0, 0])
         ],
         eqMin: -6,
         eqMax: 12,
-        appColorTheme: Color(red: 0.925, green: 0.471, blue: 0.208)
+        appColorTheme: AccentColor
     )
 }
 

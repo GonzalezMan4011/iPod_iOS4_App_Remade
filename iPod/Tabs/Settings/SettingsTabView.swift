@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsTabView: View {
     @ObservedObject var store = StorageManager.shared
     var body: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 Button {
                     let url = URL(string: "https://github.com/llsc12/iPod")!
@@ -23,16 +23,34 @@ struct SettingsTabView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     }
-
+                    
                 }
-
+                
                 Section("App Icon") {
+                    Button {
+                        UIApplication.shared.setAlternateIconName("AppIcon4")
+                    } label: {
+                        Label {
+                            HStack {
+                                Text("iPhoneOS 1")
+                                Spacer()
+                                Text("Apple")
+                                    .foregroundColor(.secondary)
+                            }
+                        } icon: {
+                            Image("Icon4")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                        }
+                    }
+                    
                     Button {
                         UIApplication.shared.setAlternateIconName("AppIcon3")
                     } label: {
                         Label {
                             HStack {
-                                Text("iPhoneOS 1")
+                                Text("iOS 4")
                                 Spacer()
                                 Text("Apple")
                                     .foregroundColor(.secondary)
@@ -50,9 +68,9 @@ struct SettingsTabView: View {
                     } label: {
                         Label {
                             HStack {
-                                Text("iOS 4")
+                                Text("Modern")
                                 Spacer()
-                                Text("Apple")
+                                Text("WhitetailAni")
                                     .foregroundColor(.secondary)
                             }
                         } icon: {
@@ -62,13 +80,33 @@ struct SettingsTabView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                         }
                     }
+                    .contextMenu {
+                        Button {
+                            let url = URL(string: "https://thanos.lol")!
+                            UIApplication.shared.open(url)
+                        } label: {
+                            HStack {
+                                Text("WhitetailAni")
+                                Spacer()
+                                let img = URL(string: "https://thanos.lol/resources/fakekgb.png")!
+                                AsyncImage(url: img) {
+                                    $0
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
+                        }
+                    }
                     
                     Button {
                         UIApplication.shared.setAlternateIconName(nil)
                     } label: {
                         Label {
                             HStack {
-                                Text("Modern")
+                                Text("Modern++")
                                 Spacer()
                                 Text("@Kutarin_")
                                     .foregroundColor(.secondary)
@@ -102,7 +140,7 @@ struct SettingsTabView: View {
                     }
                     
                     Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon4")
+                        UIApplication.shared.setAlternateIconName("AppIcon5")
                     } label: {
                         Label {
                             HStack {
@@ -112,7 +150,7 @@ struct SettingsTabView: View {
                                     .foregroundColor(.secondary)
                             }
                         } icon: {
-                            Image("Icon4")
+                            Image("Icon5")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
@@ -120,12 +158,12 @@ struct SettingsTabView: View {
                     }
                     .contextMenu {
                         Button {
-                            UIApplication.shared.setAlternateIconName("AppIcon5")
+                            UIApplication.shared.setAlternateIconName("AppIcon6")
                         } label: {
                             HStack {
                                 Text("Secret Icon")
                                 Spacer()
-                                Image("Icon5")
+                                Image("Icon6")
                             }
                         }
                         Button {
@@ -168,6 +206,9 @@ struct SettingsTabView: View {
                 
                 Section("App") {
                     ColorPicker("App Color", selection: $store.s.appColorTheme, supportsOpacity: false)
+                    Button("Reset Color") {
+                        store.s.appColorTheme = AccentColor
+                    }
                 }
             }
             .navigationTitle("Settings")

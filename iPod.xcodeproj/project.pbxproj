@@ -56,6 +56,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+			isa = PBXGroup;
+			children = (
+				AAFCDA9129848023003609B2 /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		AA33651229848C0A00420C53 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +96,7 @@
 				AA3365172984B18000420C53 /* ContentView.swift */,
 				AAF7C66A2986BA2800E1FA65 /* Player */,
 				AA3365192984B20600420C53 /* Coverflow.swift */,
-				AAFCDA9129848023003609B2 /* Utilities.swift */,
+				AA3330532992FDBB009F594F /* Utilities */,
 				AABA01EE2991AFAD0088591A /* StorageManager.swift */,
 				AAFCDA86298456D4003609B2 /* Tabs */,
 				AAF7C65629869B5300E1FA65 /* Assets */,
@@ -370,7 +377,7 @@
 		AAE74C662984293C00E03B2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon3 AppIcon2 AppIcon5 AppIcon4";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -388,7 +395,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,7 +415,7 @@
 		AAE74C672984293C00E03B2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon3 AppIcon2 AppIcon5 AppIcon4";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -426,7 +433,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

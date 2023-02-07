@@ -59,27 +59,3 @@ struct ContentView: View {
         }
     }
 }
-
-
-
-
-
-
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        egg()
-    }
-}
-struct egg: View {
-    @State var obj: AnyClass? = nil
-    var body: some View {
-        Text(obj == nil ? "n" : ":D")
-            .task {
-                try? await Task.sleep(for: .seconds(2))
-                let gm: AnyClass? = NSClassFromString("AVAudioEngine")
-                self.obj = gm
-            }
-    }
-}

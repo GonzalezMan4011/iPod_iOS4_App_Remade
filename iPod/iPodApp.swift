@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let accentColor = Color(red: 0.925, green: 0.471, blue: 0.208)
+let AccentColor = Color(red: 0.925, green: 0.471, blue: 0.208)
 
 @main
 struct iPodApp: App {

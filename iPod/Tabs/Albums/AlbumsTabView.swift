@@ -24,7 +24,7 @@ struct AlbumsTabView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(db) { album in
