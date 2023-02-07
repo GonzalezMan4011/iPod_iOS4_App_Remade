@@ -15,7 +15,9 @@ I'm making this to bring nostalgia and make it a little more fun to listen to mu
 
 ## Credits
 [Alpha_Stream](https://twitter.com/@Kutarin_) for the modern iPod icon!
+
 [sourcelocation](https://github.com/sourcelocation) for help with some EQ stuff
+
 [WhitetailAni](https://github.com/RealKGB) for help with finding icons
 
 ## Contributing
