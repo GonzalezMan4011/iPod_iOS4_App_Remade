@@ -29,9 +29,7 @@ class StorageManager: ObservableObject {
             StorageManager.saveLoadedObjectToLocalStorage(self)
         }
     }
-    
-    internal static let blankTemplate = StorageObject(eqBands: [0,0,0,0,0,0,0,0])
-    
+        
     init() {
         
         // create file if it doesnt exist
@@ -86,8 +84,28 @@ class StorageManager: ObservableObject {
             fatalError(error.localizedDescription)
         }
     }
+    
+    
+    
+    internal static let blankTemplate = StorageObject(
+        eqBands: [0,0,0,0,0,0,0,0,0,0],
+        eqPresets: [
+            EQPreset(name: "Bass boost", bands: [3, 2.5, 1.8, 0.3, 0, 0, 0, 0, 0, 0])
+        ],
+        eqMin: -6,
+        eqMax: 12
+    )
 }
 
 struct StorageObject: Codable {
-    var eqBands: [Float64]
+    var eqBands: [Double]
+    var eqPresets: [EQPreset]
+    var eqMin: Double
+    var eqMax: Double
+}
+
+struct EQPreset: Codable, Identifiable, Equatable {
+    var id = UUID()
+    var name: String
+    var bands: [Double]
 }
