@@ -52,6 +52,10 @@ struct ContentView: View {
         .onAppear { self.rotation = UIDevice.current.orientation }
         .onRotate { gm in
             self.rotation = gm
+            
+            if rotation == .landscapeLeft || rotation == .landscapeRight {
+                player.playerIsMini = true
+            }
         }
     }
 }

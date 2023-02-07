@@ -40,10 +40,12 @@ class MusicLibrary: ObservableObject {
     }
     
     internal func updateLibrary() {
-        if let albums = MPMediaQuery.albums().collections { self.albums = albums }
-        if let songs = MPMediaQuery.songs().items { self.songs = songs }
-        if let playlists = MPMediaQuery.playlists().collections { self.playlists = playlists }
-        if let artists = MPMediaQuery.artists().items { self.artists = artists }
+        DispatchQueue.main.async {
+            if let albums = MPMediaQuery.albums().collections { self.albums = albums }
+            if let playlists = MPMediaQuery.playlists().collections { self.playlists = playlists }
+            if let songs = MPMediaQuery.songs().items { self.songs = songs }
+            if let artists = MPMediaQuery.artists().items { self.artists = artists }
+        }
     }
 }
 

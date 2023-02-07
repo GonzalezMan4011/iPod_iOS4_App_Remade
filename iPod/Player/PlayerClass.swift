@@ -14,6 +14,7 @@ class Player: NSObject, ObservableObject {
     static let shared = Player()
     
     @Published var playerIsMini = true
+    
         
     func tabBar(_ egg: Bool) {
         if egg {
@@ -22,6 +23,8 @@ class Player: NSObject, ObservableObject {
             UITabBar.hideTabBar(animated: false)
         }
     }
+    
+    @Published var playerQueue: [UInt64] = []
     
     internal static func getSongAssetUrlByID(persistentID: UInt64) -> URL? {
         let item = Player.getSongItem(persistentID: persistentID)

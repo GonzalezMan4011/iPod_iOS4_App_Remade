@@ -45,7 +45,25 @@ struct SongsTabView: View {
                             return char == letter
                         }
                         ForEach(songlist) { song in
-                            SongButton(song: song)
+                            Button {
+                                #warning("play song")
+                                if let assetURL = song.assetURL {
+                                    print(assetURL)
+                                    Task {
+                //                        guard let fileURL = await export(assetURL) else { return }
+                //                        print(fileURL)
+                //                        DispatchQueue.main.async {
+                //                            let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+                //                            //present(activityViewController, animated: true, completion: nil)
+                //                            guard let vc = view?.window?.rootViewController else { return }
+                //                            vc.present(activityViewController, animated: true, completion: nil)
+                //                        }
+                                    }
+                                }
+                            } label: {
+                                SongButton(song: song)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                 }
@@ -73,38 +91,23 @@ struct SongsTabView: View {
         @State var view: UIView? = nil
         var song: MPMediaItem
         var body: some View {
-            Button {
-                if let assetURL = song.assetURL {
-                    print(assetURL)
-                    Task {
-//                        guard let fileURL = await export(assetURL) else { return }
-//                        print(fileURL)
-//                        DispatchQueue.main.async {
-//                            let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-//                            //present(activityViewController, animated: true, completion: nil)
-//                            guard let vc = view?.window?.rootViewController else { return }
-//                            vc.present(activityViewController, animated: true, completion: nil)
-//                        }
-                    }
+            HStack {
+                Image(uiImage: song.art ?? Placeholders.noArtwork)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .imageScale(.large)
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(5)
+                
+                VStack(alignment: .leading) {
+                    Text(song.title ?? Placeholders.noItemTitle)
+                    Text(song.artist ?? Placeholders.noItemTitle)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
                 }
-            } label: {
-                HStack {
-                    Image(uiImage: song.art ?? Placeholders.noArtwork)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .imageScale(.large)
-                        .frame(width: 40, height: 40)
-                        .cornerRadius(5)
-                    
-                    VStack(alignment: .leading) {
-                        Text(song.title ?? Placeholders.noItemTitle)
-                        Text(song.artist ?? Placeholders.noItemTitle)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                }
+                Spacer()
             }
-            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity)
             .background(ViewIntercept(view: $view))
         }
     }
