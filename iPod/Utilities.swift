@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
-
+#elseif canImport(AppKit)
+import AppKit
+#endif
 // MARK: - iPod placeholders
 struct Placeholders {
     static let noItemTitle = "Unknown"
@@ -173,10 +176,81 @@ extension UIView {
     }
 }
 
-// MARK: - let bindings of bool be inverted with ! prefix
+// MARK: - Let bindings of Bool be inverted with ! prefix
 prefix func ! (value: Binding<Bool>) -> Binding<Bool> {
     Binding<Bool>(
         get: { !value.wrappedValue },
         set: { value.wrappedValue = !$0 }
     )
+}
+
+// MARK: - Get color values of Color
+extension Color {
+    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
+
+        #if canImport(UIKit)
+        typealias NativeColor = UIColor
+        #elseif canImport(AppKit)
+        typealias NativeColor = NSColor
+        #endif
+
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var o: CGFloat = 0
+
+        guard NativeColor(self).getRed(&r, green: &g, blue: &b, alpha: &o) else {
+            // You can handle the failure here as you want
+            return (0, 0, 0, 0)
+        }
+
+        return (r, g, b, o)
+    }
+}
+
+// MARK: - Make Color conform to codable
+extension Color: Codable {
+    public func encode(to encoder: Encoder) throws {
+        let (r,g,b,a) = self.components
+        var container = encoder.singleValueContainer()
+        try container.encode("\(r) \(g) \(b) \(a)")
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let str = try decoder.singleValueContainer().decode(String.self)
+        let components = str.components(separatedBy: " ")
+        guard components.count >= 3 else { throw "RGB color values not found"}
+        guard let r = Double(components[0]),
+            let g = Double(components[1]),
+            let b = Double(components[2])
+        else { throw "Invalid RGB values"}
+        
+        if components.count >= 4, let a = Double(components[3]) {
+            self.init(red: r, green: g, blue: b, opacity: a)
+        } else {
+            self.init(red: r, green: g, blue: b)
+        }
+    }
+}
+
+// MARK: - Throw strings for errors
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+
+// MARK: - Get UIColor from Color
+extension Color {
+    var uiColor: UIColor {
+        UIColor(self)
+    }
+}
+
+// MARK: - Function to set the accent color of all windows in the app
+extension UIApplication {
+    public func setTintColor(_ color: Color) {
+        let windows = self.windows
+        windows.forEach { win in
+            win.tintColor = color.uiColor
+        }
+    }
 }

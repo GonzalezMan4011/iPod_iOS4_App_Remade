@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct SettingsTabView: View {
+    @ObservedObject var store = StorageManager.shared
     var body: some View {
         NavigationStack {
             Form {
+                Button {
+                    let url = URL(string: "https://github.com/llsc12/iPod")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    Label {
+                        Text("Open Source on GitHub!")
+                    } icon: {
+                        Image("GitHub")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+
+                }
+
                 Section("App Icon") {
                     Button {
                         UIApplication.shared.setAlternateIconName("AppIcon3")
@@ -136,12 +151,12 @@ struct SettingsTabView: View {
                 
                 Section("Audio") {
                     NavigationLink {
-                        eqSettings
+                        EQSettings()
                     } label: {
                         Text("Equaliser")
                     }
                     Button("Reset Storage") {
-                        StorageManager.shared.s = StorageManager.blankTemplate
+                        store.s = StorageManager.blankTemplate
                     }
                     Button("Respring") {
                         let window = UIApplication.shared.windows.first!
@@ -150,11 +165,37 @@ struct SettingsTabView: View {
                         }
                     }
                 }
+                
+                Section("App") {
+                    ColorPicker("App Color", selection: $store.s.appColorTheme, supportsOpacity: false)
+                }
             }
             .navigationTitle("Settings")
         }
     }
+}
+
+struct VerticalSlider: View {
+    @Binding var value: Double
+    var geo: CGSize
+    @ObservedObject var store = StorageManager.shared
     
+    var body: some View {
+        Slider(
+            value: $value,
+            in: store.s.eqMin...store.s.eqMax,
+            step: 0.1
+        )
+        .rotationEffect(.degrees(-90.0), anchor: .topLeading)
+        .frame(width: geo.height)
+        .offset(x: geo.width / 8, y: geo.height)
+        .animation(.spring(), value: value)
+        .animation(.spring(), value: store.s.eqMax)
+        .animation(.spring(), value: store.s.eqMin)
+    }
+}
+
+struct EQSettings: View {
     @State var text1 = ""
     @State var text2 = ""
     @State var alert = false
@@ -163,7 +204,7 @@ struct SettingsTabView: View {
     @State var options = false
     
     @ViewBuilder
-    var eqSettings: some View {
+    var body: some View {
         VStack {
             eq
                 .frame(height: screenheight / 3.2)
@@ -305,26 +346,6 @@ struct SettingsTabView: View {
     
     var screenheight: CGFloat {
         UIScreen.main.bounds.height
-    }
-}
-
-struct VerticalSlider: View {
-    @Binding var value: Double
-    var geo: CGSize
-    @ObservedObject var store = StorageManager.shared
-    
-    var body: some View {
-        Slider(
-            value: $value,
-            in: store.s.eqMin...store.s.eqMax,
-            step: 0.1
-        )
-        .rotationEffect(.degrees(-90.0), anchor: .topLeading)
-        .frame(width: geo.height)
-        .offset(x: geo.width / 8, y: geo.height)
-        .animation(.spring(), value: value)
-        .animation(.spring(), value: store.s.eqMax)
-        .animation(.spring(), value: store.s.eqMin)
     }
 }
 

@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class StorageManager: ObservableObject {
     
@@ -93,7 +94,8 @@ class StorageManager: ObservableObject {
             EQPreset(name: "Bass boost", bands: [3, 2.5, 1.8, 0.3, 0, 0, 0, 0, 0, 0])
         ],
         eqMin: -6,
-        eqMax: 12
+        eqMax: 12,
+        appColorTheme: Color(red: 0.925, green: 0.471, blue: 0.208)
     )
 }
 
@@ -102,6 +104,8 @@ struct StorageObject: Codable {
     var eqPresets: [EQPreset]
     var eqMin: Double
     var eqMax: Double
+    
+    var appColorTheme: Color
 }
 
 struct EQPreset: Codable, Identifiable, Equatable {
