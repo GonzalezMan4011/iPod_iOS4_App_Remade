@@ -12,30 +12,39 @@ struct SettingsTabView: View {
         NavigationStack {
             Form {
                 Section("App Icon") {
-                    
                     Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon-3")
+                        UIApplication.shared.setAlternateIconName("AppIcon3")
                     } label: {
                         Label {
-                            Text("iPhoneOS 1")
+                            HStack {
+                                Text("iPhoneOS 1")
+                                Spacer()
+                                Text("Apple")
+                                    .foregroundColor(.secondary)
+                            }
                         } icon: {
-                            Image("AppIcon3")
+                            Image("Icon3")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                         }
                     }
                     
                     Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon-2")
+                        UIApplication.shared.setAlternateIconName("AppIcon2")
                     } label: {
                         Label {
-                            Text("iOS 4")
+                            HStack {
+                                Text("iOS 4")
+                                Spacer()
+                                Text("Apple")
+                                    .foregroundColor(.secondary)
+                            }
                         } icon: {
-                            Image("AppIcon2")
+                            Image("Icon2")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                         }
                     }
                     
@@ -43,12 +52,84 @@ struct SettingsTabView: View {
                         UIApplication.shared.setAlternateIconName(nil)
                     } label: {
                         Label {
-                            Text("Modern")
+                            HStack {
+                                Text("Modern")
+                                Spacer()
+                                Text("@Kutarin_")
+                                    .foregroundColor(.secondary)
+                            }
                         } icon: {
-                            Image("AppIcon1")
+                            Image("Icon1")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                        }
+                    }
+                    .contextMenu {
+                        Button {
+                            let url = URL(string: "https://twitter.com/@Kutarin_")!
+                            UIApplication.shared.open(url)
+                        } label: {
+                            HStack {
+                                Text("@Kutarin_")
+                                Spacer()
+                                let img = URL(string: "https://pbs.twimg.com/profile_images/1476283620998336512/roa2yt1o_400x400.jpg")!
+                                AsyncImage(url: img) {
+                                    $0
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
+                        }
+                    }
+                    
+                    Button {
+                        UIApplication.shared.setAlternateIconName("AppIcon4")
+                    } label: {
+                        Label {
+                            HStack {
+                                Text("DankPods")
+                                Spacer()
+                                Text("@Kutarin_")
+                                    .foregroundColor(.secondary)
+                            }
+                        } icon: {
+                            Image("Icon4")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                        }
+                    }
+                    .contextMenu {
+                        Button {
+                            UIApplication.shared.setAlternateIconName("AppIcon5")
+                        } label: {
+                            HStack {
+                                Text("Secret Icon")
+                                Spacer()
+                                Image("Icon5")
+                            }
+                        }
+                        Button {
+                            let url = URL(string: "https://twitter.com/@Kutarin_")!
+                            UIApplication.shared.open(url)
+                        } label: {
+                            HStack {
+                                Text("@Kutarin_")
+                                Spacer()
+                                let img = URL(string: "https://pbs.twimg.com/profile_images/1476283620998336512/roa2yt1o_400x400.jpg")!
+                                AsyncImage(url: img) {
+                                    $0
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
                         }
                     }
                 }

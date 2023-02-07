@@ -15,12 +15,6 @@
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
 		AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE74C5E2984293C00E03B2D /* Assets.xcassets */; };
 		AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C69298429FB00E03B2D /* MusicLibrary.swift */; };
-		AAF7C65929869BB800E1FA65 /* Icon3-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65729869BB700E1FA65 /* Icon3-@2x.png */; };
-		AAF7C65A29869BB800E1FA65 /* Icon3-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65829869BB700E1FA65 /* Icon3-@3x.png */; };
-		AAF7C65D29869BE400E1FA65 /* Icon2-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65B29869BE300E1FA65 /* Icon2-@3x.png */; };
-		AAF7C65E29869BE400E1FA65 /* Icon2-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65C29869BE300E1FA65 /* Icon2-@2x.png */; };
-		AAF7C66129869CA600E1FA65 /* Icon1-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */; };
-		AAF7C66229869CA600E1FA65 /* Icon1-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */; };
 		AAF7C6642986ACD200E1FA65 /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C6632986ACD200E1FA65 /* MiniPlayer.swift */; };
 		AAF7C6692986B9F600E1FA65 /* PlayerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C6682986B9F600E1FA65 /* PlayerOverlay.swift */; };
 		AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */; };
@@ -42,12 +36,6 @@
 		AAE74C5A2984293A00E03B2D /* iPodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodApp.swift; sourceTree = "<group>"; };
 		AAE74C5E2984293C00E03B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAE74C69298429FB00E03B2D /* MusicLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLibrary.swift; sourceTree = "<group>"; };
-		AAF7C65729869BB700E1FA65 /* Icon3-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon3-@2x.png"; sourceTree = "<group>"; };
-		AAF7C65829869BB700E1FA65 /* Icon3-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon3-@3x.png"; sourceTree = "<group>"; };
-		AAF7C65B29869BE300E1FA65 /* Icon2-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon2-@3x.png"; sourceTree = "<group>"; };
-		AAF7C65C29869BE300E1FA65 /* Icon2-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon2-@2x.png"; sourceTree = "<group>"; };
-		AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1-@2x.png"; sourceTree = "<group>"; };
-		AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1-@3x.png"; sourceTree = "<group>"; };
 		AAF7C6632986ACD200E1FA65 /* MiniPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
 		AAF7C6682986B9F600E1FA65 /* PlayerOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerOverlay.swift; sourceTree = "<group>"; };
 		AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerClass.swift; sourceTree = "<group>"; };
@@ -121,12 +109,6 @@
 		AAF7C65629869B5300E1FA65 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				AAF7C65729869BB700E1FA65 /* Icon3-@2x.png */,
-				AAF7C65829869BB700E1FA65 /* Icon3-@3x.png */,
-				AAF7C65C29869BE300E1FA65 /* Icon2-@2x.png */,
-				AAF7C65B29869BE300E1FA65 /* Icon2-@3x.png */,
-				AAF7C65F29869CA500E1FA65 /* Icon1-@2x.png */,
-				AAF7C66029869CA600E1FA65 /* Icon1-@3x.png */,
 				AAE74C5E2984293C00E03B2D /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -241,12 +223,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */,
-				AAF7C66229869CA600E1FA65 /* Icon1-@3x.png in Resources */,
-				AAF7C66129869CA600E1FA65 /* Icon1-@2x.png in Resources */,
-				AAF7C65E29869BE400E1FA65 /* Icon2-@2x.png in Resources */,
-				AAF7C65A29869BB800E1FA65 /* Icon3-@3x.png in Resources */,
-				AAF7C65929869BB800E1FA65 /* Icon3-@2x.png in Resources */,
-				AAF7C65D29869BE400E1FA65 /* Icon2-@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,8 +370,10 @@
 		AAE74C662984293C00E03B2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon3 AppIcon2 AppIcon5 AppIcon4";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = iPod/iPod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -430,8 +408,10 @@
 		AAE74C672984293C00E03B2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon3 AppIcon2 AppIcon5 AppIcon4";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = iPod/iPod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

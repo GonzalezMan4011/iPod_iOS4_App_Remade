@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ipod icon thing.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

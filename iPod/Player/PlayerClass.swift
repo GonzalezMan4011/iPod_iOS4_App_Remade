@@ -10,7 +10,7 @@ import SwiftUI
 import MediaPlayer
 import AVFoundation
 
-class Player: NSObject, ObservableObject {
+class Player: ObservableObject {
     static let shared = Player()
     
     @Published var playerIsMini = true
@@ -71,7 +71,11 @@ class Player: NSObject, ObservableObject {
     private var audioFileBuffer: AVAudioPCMBuffer?
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
-    private let eq = AVAudioUnitEQ(numberOfBands: 8)
+    private let eq = AVAudioUnitEQ(numberOfBands: 10)
+    
+    init() {
+        
+    }
     
     enum Errors: Error {
         case AssetExportFailed

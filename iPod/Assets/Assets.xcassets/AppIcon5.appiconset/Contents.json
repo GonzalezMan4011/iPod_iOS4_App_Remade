@@ -1,0 +1,14 @@
+{
+  "images" : [
+    {
+      "filename" : "image_srcnn_anime_noise0_1024w.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
