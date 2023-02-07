@@ -29,3 +29,4 @@ i have no clue what to put here, so dont copy my code formatting its ass
 - [ ] Equaliser
 - [ ] Player backend
 - [ ] Coverflow
+- [ ] iPad UI?
