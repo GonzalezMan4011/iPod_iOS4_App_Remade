@@ -20,6 +20,8 @@ I'm making this to bring nostalgia and make it a little more fun to listen to mu
 
 [WhitetailAni](https://github.com/RealKGB) for help with finding icons
 
+[Nebula](https://github.com/itsnebulalol) for the GitHub Actions setup
+
 ## Contributing
 
 i have no clue what to put here, so dont copy my code formatting its ass
