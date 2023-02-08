@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; };
+		AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AA33651429848C2100420C53 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA33651329848C2100420C53 /* SettingsTabView.swift */; };
 		AA3365162984B13B00420C53 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365152984B13B00420C53 /* AlbumView.swift */; };
 		AA3365182984B18000420C53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365172984B18000420C53 /* ContentView.swift */; };
@@ -23,6 +25,20 @@
 		AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA8F298457EA003609B2 /* PlaylistsTabView.swift */; };
 		AAFCDA9229848023003609B2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA9129848023003609B2 /* Utilities.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA3330622994002E009F594F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AA33651329848C2100420C53 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
@@ -50,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +195,7 @@
 				AAE74C532984293A00E03B2D /* Sources */,
 				AAE74C542984293A00E03B2D /* Frameworks */,
 				AAE74C552984293A00E03B2D /* Resources */,
+				AA3330622994002E009F594F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,6 +203,7 @@
 			);
 			name = iPod;
 			packageProductDependencies = (
+				AA33305F2993FFD4009F594F /* LNPopupUI */,
 			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
@@ -215,6 +234,7 @@
 			);
 			mainGroup = AAE74C4E2984293A00E03B2D;
 			packageReferences = (
+				AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */,
 			);
 			productRefGroup = AAE74C582984293A00E03B2D /* Products */;
 			projectDirPath = "";
@@ -378,7 +398,7 @@
 		AAE74C662984293C00E03B2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6 AppIcon7 AppIcon8";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -416,7 +436,7 @@
 		AAE74C672984293C00E03B2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6 AppIcon7 AppIcon8";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -473,6 +493,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LeoNatan/LNPopupUI";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA33305F2993FFD4009F594F /* LNPopupUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */;
+			productName = LNPopupUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AAE74C4F2984293A00E03B2D /* Project object */;
 }

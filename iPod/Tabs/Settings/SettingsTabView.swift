@@ -26,167 +26,6 @@ struct SettingsTabView: View {
                     
                 }
                 
-                Section("App Icon") {
-                    Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon4")
-                    } label: {
-                        Label {
-                            HStack {
-                                Text("iPhoneOS 1")
-                                Spacer()
-                                Text("Apple")
-                                    .foregroundColor(.secondary)
-                            }
-                        } icon: {
-                            Image("Icon4")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                        }
-                    }
-                    
-                    Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon3")
-                    } label: {
-                        Label {
-                            HStack {
-                                Text("iOS 4")
-                                Spacer()
-                                Text("Apple")
-                                    .foregroundColor(.secondary)
-                            }
-                        } icon: {
-                            Image("Icon3")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                        }
-                    }
-                    
-                    Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon2")
-                    } label: {
-                        Label {
-                            HStack {
-                                Text("Modern")
-                                Spacer()
-                                Text("WhitetailAni")
-                                    .foregroundColor(.secondary)
-                            }
-                        } icon: {
-                            Image("Icon2")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                        }
-                    }
-                    .contextMenu {
-                        Button {
-                            let url = URL(string: "https://thanos.lol")!
-                            UIApplication.shared.open(url)
-                        } label: {
-                            HStack {
-                                Text("WhitetailAni")
-                                Spacer()
-                                let img = URL(string: "https://thanos.lol/resources/fakekgb.png")!
-                                AsyncImage(url: img) {
-                                    $0
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .clipShape(Circle())
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            }
-                        }
-                    }
-                    
-                    Button {
-                        UIApplication.shared.setAlternateIconName(nil)
-                    } label: {
-                        Label {
-                            HStack {
-                                Text("Modern++")
-                                Spacer()
-                                Text("@Kutarin_")
-                                    .foregroundColor(.secondary)
-                            }
-                        } icon: {
-                            Image("Icon1")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                        }
-                    }
-                    .contextMenu {
-                        Button {
-                            let url = URL(string: "https://twitter.com/@Kutarin_")!
-                            UIApplication.shared.open(url)
-                        } label: {
-                            HStack {
-                                Text("@Kutarin_")
-                                Spacer()
-                                let img = URL(string: "https://pbs.twimg.com/profile_images/1476283620998336512/roa2yt1o_400x400.jpg")!
-                                AsyncImage(url: img) {
-                                    $0
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .clipShape(Circle())
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            }
-                        }
-                    }
-                    
-                    Button {
-                        UIApplication.shared.setAlternateIconName("AppIcon5")
-                    } label: {
-                        Label {
-                            HStack {
-                                Text("DankPods")
-                                Spacer()
-                                Text("@Kutarin_")
-                                    .foregroundColor(.secondary)
-                            }
-                        } icon: {
-                            Image("Icon5")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                        }
-                    }
-                    .contextMenu {
-                        Button {
-                            UIApplication.shared.setAlternateIconName("AppIcon6")
-                        } label: {
-                            HStack {
-                                Text("Secret Icon")
-                                Spacer()
-                                Image("Icon6")
-                            }
-                        }
-                        Button {
-                            let url = URL(string: "https://twitter.com/@Kutarin_")!
-                            UIApplication.shared.open(url)
-                        } label: {
-                            HStack {
-                                Text("@Kutarin_")
-                                Spacer()
-                                let img = URL(string: "https://pbs.twimg.com/profile_images/1476283620998336512/roa2yt1o_400x400.jpg")!
-                                AsyncImage(url: img) {
-                                    $0
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .clipShape(Circle())
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            }
-                        }
-                    }
-                }
-                
                 Section("Audio") {
                     NavigationLink {
                         EQSettings()
@@ -204,14 +43,255 @@ struct SettingsTabView: View {
                     }
                 }
                 
-                Section("App") {
+                Section("Theming") {
                     ColorPicker("App Color", selection: $store.s.appColorTheme, supportsOpacity: false)
                     Button("Reset Color") {
                         store.s.appColorTheme = AccentColor
                     }
                 }
+                
+                AppIcons
             }
             .navigationTitle("Settings")
+        }
+    }
+    
+    @ViewBuilder var AppIcons: some View {
+        Section("App Icon") {
+            Button {
+                UIApplication.shared.setAlternateIconName("AppIcon4")
+            } label: {
+                Label {
+                    HStack {
+                        Text("iPhoneOS 1")
+                        Spacer()
+                        Text("Apple")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon4")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            
+            Button {
+                UIApplication.shared.setAlternateIconName("AppIcon3")
+            } label: {
+                Label {
+                    HStack {
+                        Text("iOS 4")
+                        Spacer()
+                        Text("Apple")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon3")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            
+            Button {
+                UIApplication.shared.setAlternateIconName("AppIcon2")
+            } label: {
+                Label {
+                    HStack {
+                        Text("Modern")
+                        Spacer()
+                        Text("WhitetailAni")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            .contextMenu {
+                Button {
+                    let url = URL(string: "https://thanos.lol")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    HStack {
+                        Text("WhitetailAni")
+                        Spacer()
+                        let img = URL(string: "https://thanos.lol/resources/fakekgb.png")!
+                        AsyncImage(url: img) {
+                            $0
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+            }
+            
+            Button {
+                UIApplication.shared.setAlternateIconName(nil)
+            } label: {
+                Label {
+                    HStack {
+                        Text("Modern++")
+                        Spacer()
+                        Text("Alpha Stream")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon1")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            .contextMenu {
+                Button {
+                    let url = URL(string: "https://twitter.com/@Kutarin_")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    HStack {
+                        Text("@Kutarin_")
+                        Spacer()
+                        let img = URL(string: "https://pbs.twimg.com/profile_images/1476283620998336512/roa2yt1o_400x400.jpg")!
+                        AsyncImage(url: img) {
+                            $0
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+            }
+            
+            Button {
+                UIApplication.shared.setAlternateIconName("AppIcon5")
+            } label: {
+                Label {
+                    HStack {
+                        Text("Big Sur")
+                        Spacer()
+                        Text("yazanoo16")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon5")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            .contextMenu {
+                Button {
+                    let url = URL(string: "https://twitter.com/@yazanoo16")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    HStack {
+                        Text("@yazanoo16")
+                        Spacer()
+                        let img = URL(string: "https://pbs.twimg.com/profile_images/1575535224519270400/Qv48-10B_400x400.png")!
+                        AsyncImage(url: img) {
+                            $0
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+            }
+            
+            Button {
+                UIApplication.shared.setAlternateIconName("AppIcon6")
+            } label: {
+                Label {
+                    HStack {
+                        Text("Paint")
+                        Spacer()
+                        Text("iCraze")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon6")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            .contextMenu {
+                Button {
+                    let url = URL(string: "https://twitter.com/@iCrazeiOS")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    HStack {
+                        Text("@iCrazeiOS")
+                        Spacer()
+                        let img = URL(string: "https://pbs.twimg.com/profile_images/1076564134261596162/eWvkoFR__400x400.jpg")!
+                        AsyncImage(url: img) {
+                            $0
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+            }
+            
+            Button {
+                UIApplication.shared.setAlternateIconName("AppIcon7")
+            } label: {
+                Label {
+                    HStack {
+                        Text("DankPods")
+                        Spacer()
+                        Text("Alpha Stream")
+                            .foregroundColor(.secondary)
+                    }
+                } icon: {
+                    Image("Icon7")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+            }
+            .contextMenu {
+                Button {
+                    UIApplication.shared.setAlternateIconName("AppIcon8")
+                } label: {
+                    HStack {
+                        Text("Secret Icon")
+                        Spacer()
+                        Image("Icon8")
+                    }
+                }
+                Button {
+                    let url = URL(string: "https://twitter.com/@Kutarin_")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    HStack {
+                        Text("@Kutarin_")
+                        Spacer()
+                        let img = URL(string: "https://pbs.twimg.com/profile_images/1476283620998336512/roa2yt1o_400x400.jpg")!
+                        AsyncImage(url: img) {
+                            $0
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+            }
         }
     }
 }

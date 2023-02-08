@@ -42,7 +42,7 @@ class Player: ObservableObject {
     
     public func playSongItem(persistentID: UInt64) async throws {
         guard let fileUrl = await Player.getSongFileUrl(persistentID: persistentID)
-        else { throw Player.Errors.AssetExportFailed }
+        else { throw "Asset export failed" }
         
         try prepareToPlay(url: fileUrl)
     }
@@ -65,6 +65,7 @@ class Player: ObservableObject {
         file = try AVAudioFile(forReading: url)
         audioFileBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
         try file!.read(into: audioFileBuffer!)
+        
     }
     
     private var file: AVAudioFile?
@@ -74,10 +75,23 @@ class Player: ObservableObject {
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
     
     init() {
-        
+        engineInit()
     }
     
-    enum Errors: Error {
-        case AssetExportFailed
+    internal func engineInit() {
+        setEQBands()
+    }
+    
+    func setEQBands() {
+        let bands = StorageManager.shared.s.eqBands
+        var freq = 32
+        for i in 0..<eq.bands.count {
+            eq.bands[i].frequency  = Float(freq)
+            eq.bands[i].gain       = Float(bands[i])
+            eq.bands[i].bypass     = false
+            eq.bands[i].filterType = .parametric
+            
+            freq += freq
+        }
     }
 }
