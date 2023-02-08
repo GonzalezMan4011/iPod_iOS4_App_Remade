@@ -19,6 +19,28 @@ class Player: ObservableObject {
     @Published var coverImage: Image = Image("MissingArtwork")
     @Published var trackTitle: String = "Not Playing"
     
+    @Published var isPaused: Bool = false
+    
+    func resume() {
+        isPaused = false
+    }
+    
+    func pause() {
+        isPaused = true
+    }
+    
+    func togglePlayback() {
+        isPaused.toggle()
+    }
+    
+    func nextSong() {
+        
+    }
+    
+    func previousSong() {
+        
+    }
+    
     func tabBar(_ egg: Bool) {
         if egg {
             UITabBar.showTabBar(animated: true)
@@ -44,10 +66,30 @@ class Player: ObservableObject {
     }
     
     public func playSongItem(persistentID: UInt64) async throws {
+        guard let song = Player.getSongItem(persistentID: persistentID) else { throw "No song found" }
+        self.currentlyPlaying = song
         guard let fileUrl = await Player.getSongFileUrl(persistentID: persistentID)
         else { throw "Asset export failed" }
-        
-        try prepareToPlay(url: fileUrl)
+        do {
+            setPlayerData(song)
+            try prepareToPlay(url: fileUrl)
+        } catch {
+            setPlayerData(nil)
+            throw error
+        }
+    }
+    
+    internal func setPlayerData(_ item: MPMediaItem?) {
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+            if let song = item {
+                self.trackTitle = song.title ?? "Unknown"
+                self.coverImage = Image(uiImage: song.art)
+            } else {
+                self.trackTitle = "Not Playing"
+                self.coverImage = Image(uiImage: Placeholders.noArtwork)
+            }
+        }
     }
     
     internal static func getSongFileUrl(persistentID: UInt64) async -> URL? {
@@ -65,12 +107,13 @@ class Player: ObservableObject {
     
     internal func prepareToPlay(url: URL) throws {
         // file prep
-        file = try AVAudioFile(forReading: url)
-        audioFileBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
-        try file!.read(into: audioFileBuffer!)
+//        file = try AVAudioFile(forReading: url)
+//        audioFileBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
+//        try file!.read(into: audioFileBuffer!)
         
     }
     
+    var currentlyPlaying: MPMediaItem? = nil
     private var file: AVAudioFile?
     private var audioFileBuffer: AVAudioPCMBuffer?
     private let engine = AVAudioEngine()

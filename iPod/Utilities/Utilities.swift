@@ -187,23 +187,23 @@ prefix func ! (value: Binding<Bool>) -> Binding<Bool> {
 // MARK: - Get color values of Color
 extension Color {
     var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
-
-        #if canImport(UIKit)
+        
+#if canImport(UIKit)
         typealias NativeColor = UIColor
-        #elseif canImport(AppKit)
+#elseif canImport(AppKit)
         typealias NativeColor = NSColor
-        #endif
-
+#endif
+        
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
         var o: CGFloat = 0
-
+        
         guard NativeColor(self).getRed(&r, green: &g, blue: &b, alpha: &o) else {
             // You can handle the failure here as you want
             return (0, 0, 0, 0)
         }
-
+        
         return (r, g, b, o)
     }
 }
@@ -221,8 +221,8 @@ extension Color: Codable {
         let components = str.components(separatedBy: " ")
         guard components.count >= 3 else { throw "RGB color values not found"}
         guard let r = Double(components[0]),
-            let g = Double(components[1]),
-            let b = Double(components[2])
+              let g = Double(components[1]),
+              let b = Double(components[2])
         else { throw "Invalid RGB values"}
         
         if components.count >= 4, let a = Double(components[3]) {
@@ -252,5 +252,34 @@ extension UIApplication {
         windows.forEach { win in
             win.tintColor = color.uiColor
         }
+    }
+}
+
+// MARK: - Detect press and release gesture
+struct PressActions: ViewModifier {
+    var onPress: () -> Void
+    var onRelease: () -> Void
+    
+    func body(content: Content) -> some View {
+        content
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged({ _ in
+                        onPress()
+                    })
+                    .onEnded({ _ in
+                        onRelease()
+                    })
+            )
+    }
+}
+
+extension View {
+    func pressAction(onPress: @escaping (() -> Void), onRelease: @escaping (() -> Void)) -> some View {
+        modifier(PressActions(onPress: {
+            onPress()
+        }, onRelease: {
+            onRelease()
+        }))
     }
 }

@@ -35,7 +35,9 @@ struct ContentView: View {
         }
         .popup(isBarPresented: $player.playerBarShown, isPopupOpen: $player.playerFullscreen, popupContent: {
             PlayerPopover()
-                .background(RemoveBG())
+                .background(
+                    ArtCoverBackground()
+                )
         })
         .ignoresSafeArea()
         .overlay {
@@ -56,12 +58,26 @@ struct ContentView: View {
     }
 }
 
-
-struct RemoveBG: UIViewRepresentable {
-    func makeUIView(context: Context) -> some UIView {
-        let view = UIView()
-        view.superview?.superview?.superview?.superview?.backgroundColor = .clear
-        return view
+struct ArtCoverBackground: View {
+    @ObservedObject var play = Player.shared
+    var body: some View {
+        play.coverImage
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .blur(radius: 5)
+            .overlay {
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .opacity(0)
+                    .allowsHitTesting(false)
+                    .background(.ultraThinMaterial)
+            }
+            .ignoresSafeArea()
     }
-    func updateUIView(_ uiView: UIViewType, context: Context) { }
+}
+
+struct previews: PreviewProvider {
+    static var previews: some View {
+        ArtCoverBackground()
+    }
 }

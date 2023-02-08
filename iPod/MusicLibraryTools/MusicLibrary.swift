@@ -55,10 +55,10 @@ extension MPMediaItem: Identifiable, Comparable {
     }
     
     public var id: String { self.persistentID.description }
-    public var art: UIImage? {
+    public var art: UIImage {
         let item = self
-        guard let artwork = item.artwork else { return nil }
-        return artwork.image(at: artwork.bounds.size)
+        guard let artwork = item.artwork else { return Placeholders.noArtwork }
+        return artwork.image(at: artwork.bounds.size) ?? Placeholders.noArtwork
     }
     
 }
@@ -67,9 +67,9 @@ extension MPMediaItemCollection: Identifiable {
     public var id: String { self.persistentID.description }
     public var playlistTitle: String? { self.value(forProperty: MPMediaPlaylistPropertyName) as? String}
     public var albumTitle: String? { self.representativeItem?.albumTitle}
-    public var albumArt: UIImage? {
-        guard let item = self.representativeItem else { return nil }
-        guard let artwork = item.artwork else { return nil }
-        return artwork.image(at: artwork.bounds.size)
+    public var albumArt: UIImage {
+        guard let item = self.representativeItem else { return Placeholders.noArtwork }
+        guard let artwork = item.artwork else { return Placeholders.noArtwork }
+        return artwork.image(at: artwork.bounds.size) ?? Placeholders.noArtwork
     }
 }

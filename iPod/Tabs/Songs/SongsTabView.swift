@@ -10,7 +10,7 @@ import SwiftUI
 import MediaPlayer
 
 struct SongsTabView: View {
-    
+    @ObservedObject var player = Player.shared
     @ObservedObject var ml = MusicLibrary.shared
     @State var searchQuery: String = ""
     
@@ -47,18 +47,8 @@ struct SongsTabView: View {
                         ForEach(songlist) { song in
                             Button {
 #warning("play song")
-                                if let assetURL = song.assetURL {
-                                    print(assetURL)
-                                    Task {
-                                        //                        guard let fileURL = await export(assetURL) else { return }
-                                        //                        print(fileURL)
-                                        //                        DispatchQueue.main.async {
-                                        //                            let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-                                        //                            //present(activityViewController, animated: true, completion: nil)
-                                        //                            guard let vc = view?.window?.rootViewController else { return }
-                                        //                            vc.present(activityViewController, animated: true, completion: nil)
-                                        //                        }
-                                    }
+                                Task {
+                                    try? await player.playSongItem(persistentID: song.persistentID)
                                 }
                             } label: {
                                 SongButton(song: song)
@@ -90,7 +80,7 @@ struct SongsTabView: View {
         var song: MPMediaItem
         var body: some View {
             HStack {
-                Image(uiImage: song.art ?? Placeholders.noArtwork)
+                Image(uiImage: song.art)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .imageScale(.large)

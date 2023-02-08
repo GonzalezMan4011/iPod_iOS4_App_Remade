@@ -25,28 +25,3 @@ struct iPodApp: App {
         }
     }
 }
-
-struct preview: PreviewProvider {
-    static var previews: some View {
-        nog()
-    }
-}
-
-struct nog: View {
-    @State var c: Color? = nil
-    var body: some View {
-        Rectangle()
-            .foregroundColor(c)
-            .task {
-                struct e: Codable {
-                    let color: Color
-                }
-                let data = "{\"color\":\"0.8 0.2 0.2\"}".data(using: .utf8)!
-                
-                let json = try? JSONDecoder().decode(e.self, from: data)
-                if let json = json {
-                    self.c = json.color
-                }
-            }
-    }
-}
