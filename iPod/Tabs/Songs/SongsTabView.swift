@@ -87,7 +87,6 @@ struct SongsTabView: View {
     }
     
     struct SongButton: View {
-        @State var view: UIView? = nil
         var song: MPMediaItem
         var body: some View {
             HStack {
@@ -107,7 +106,6 @@ struct SongsTabView: View {
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .background(ViewIntercept(view: $view))
         }
     }
 }

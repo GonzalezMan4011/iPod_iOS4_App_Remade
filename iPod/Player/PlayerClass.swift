@@ -13,8 +13,11 @@ import AVFoundation
 class Player: ObservableObject {
     static let shared = Player()
     
-    @Published var playerIsMini = true
+    @Published var playerBarShown = true
+    @Published var playerFullscreen = false
     
+    @Published var coverImage: Image = Image("MissingArtwork")
+    @Published var trackTitle: String = "Not Playing"
     
     func tabBar(_ egg: Bool) {
         if egg {

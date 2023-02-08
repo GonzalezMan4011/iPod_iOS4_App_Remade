@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import LNPopupUI
 
 struct ContentView: View {
     @State var rotation: UIDeviceOrientation = .unknown
@@ -16,32 +18,25 @@ struct ContentView: View {
                 .tabItem {
                     Label("Albums", systemImage: "square.stack.fill")
                 }
-                .safeAreaInset(edge: .bottom, content: {
-                    MiniPlayer()
-                })
             SongsTabView()
                 .tabItem {
                     Label("Songs", systemImage: "music.note")
                 }
-                .safeAreaInset(edge: .bottom, content: {
-                    MiniPlayer()
-                })
             PlaylistsTabView()
                 .tabItem {
                     Label("Playlists", systemImage: "music.note.list")
                 }
-                .safeAreaInset(edge: .bottom, content: {
-                    MiniPlayer()
-                })
             SettingsTabView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
+                .onAppear { player.playerBarShown = false }
+                .onDisappear { player.playerBarShown = true }
         }
-        .popover(isPresented: !$player.playerIsMini) {
-            PlayerOverlay()
-                .background(Transparency())
-        }
+        .popup(isBarPresented: $player.playerBarShown, isPopupOpen: $player.playerFullscreen, popupContent: {
+            PlayerPopover()
+                .background(RemoveBG())
+        })
         .ignoresSafeArea()
         .overlay {
             Coverflow()
@@ -54,8 +49,19 @@ struct ContentView: View {
             self.rotation = gm
             
             if rotation == .landscapeLeft || rotation == .landscapeRight {
-                player.playerIsMini = true
+                player.playerBarShown = false
+                player.playerFullscreen = false
             }
         }
     }
+}
+
+
+struct RemoveBG: UIViewRepresentable {
+    func makeUIView(context: Context) -> some UIView {
+        let view = UIView()
+        view.superview?.superview?.superview?.superview?.backgroundColor = .clear
+        return view
+    }
+    func updateUIView(_ uiView: UIViewType, context: Context) { }
 }
