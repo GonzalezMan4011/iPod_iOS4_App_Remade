@@ -86,6 +86,7 @@ class Player: ObservableObject {
             
         } catch {
             setPlayerData(nil)
+            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
             throw error
         }
     }
@@ -105,16 +106,17 @@ class Player: ObservableObject {
     
     internal static func getSongFileUrl(persistentID: UInt64) async -> URL? {
         guard let assetUrl = Player.getSongItem(persistentID: persistentID)?.assetURL else {
-            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be accessed.")
+            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be accessed.", actions: [UIAlertAction(title: "OK", style: .cancel)])
             return nil
         }
         let asset = AVURLAsset(url: assetUrl)
+        print(asset)
         guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetPassthrough) else { return nil }
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent(NSUUID().uuidString)
-            .appendingPathExtension("m4a")
+            .appendingPathExtension("caf")
         exporter.outputURL = fileURL
-        exporter.outputFileType = .m4a
+        exporter.outputFileType = .caf
         await exporter.export()
         return fileURL
     }
@@ -191,3 +193,38 @@ class Player: ObservableObject {
         }
     }
 }
+
+
+let AVFileTypeLookupTable: [String: AVFileType] = [
+    "mov": .mov,
+    "mp4": .mp4,
+    "m4v": .m4v,
+    "m4a": .m4a,
+    "3gp": .mobile3GPP,
+    "3gpp": .mobile3GPP,
+    "sdv": .mobile3GPP,
+    "3g2": .mobile3GPP2,
+    "3gp2": .mobile3GPP2,
+    "caf": .caf,
+    "wav": .wav,
+    "wave": .wav,
+    "bwf": .wav,
+    "aif": .aiff,
+    "aiff": .aiff,
+    "aifc": .aifc,
+    "cdda": .aifc,
+    "amr": .amr,
+    "mp3": .mp3,
+    "au": .au,
+    "snd": .au,
+    "ac3": .ac3,
+    "eac3": .eac3,
+    "jpg": .jpg,
+    "jpeg": .jpg,
+    "dng": .dng,
+    "heic": .heic,
+    "avci": .avci,
+    "heif": .heif,
+    "tif": .tif,
+    "tiff": .tif
+]
