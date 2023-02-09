@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
+import MediaPlayer
 
 struct AlbumView: View {
+    var album: MPMediaItemCollection
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct AlbumView_Previews: PreviewProvider {
-    static var previews: some View {
-        AlbumView()
+        ScrollView {
+            Image(uiImage: album.albumArt)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        }
     }
 }

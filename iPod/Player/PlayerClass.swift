@@ -122,17 +122,16 @@ class Player: ObservableObject {
     internal func prepareToPlay(url: URL) throws {
 //      file prep
         file = try AVAudioFile(forReading: url)
-        audioBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
-        try file!.read(into: audioBuffer!)
+//        audioBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
+//        try file!.read(into: audioBuffer!)
         
         engineInit()
-        
         player.play()
     }
     
     var currentlyPlaying: MPMediaItem? = nil
     private var file: AVAudioFile?
-    private var audioBuffer: AVAudioPCMBuffer?
+//    private var audioBuffer: AVAudioPCMBuffer?
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
@@ -154,11 +153,12 @@ class Player: ObservableObject {
     
     internal func engineInit() {
         setEQBands()
-        guard let audioBuffer = audioBuffer else {
+        guard let file = file else {
             UIApplication.shared.presentAlert(title: "Engine Init Error", message: "Audio File Buffer did not exist.")
             return
         }
-        player.scheduleBuffer(audioBuffer, at: nil, options: .interrupts, completionHandler: nil)
+//        player.scheduleBuffer(audioBuffer, at: nil, options: .interrupts, completionHandler: nil)
+        player.scheduleFile(file, at: nil)
         engine.prepare()
         do {
             try engine.start()

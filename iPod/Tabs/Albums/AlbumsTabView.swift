@@ -45,7 +45,7 @@ struct AlbumsTabView: View {
         var album: MPMediaItemCollection
         var body: some View {
             NavigationLink {
-                
+                AlbumView(album: album)
             } label: {
                 VStack(alignment: .leading) {
                     Image(uiImage: album.albumArt)
