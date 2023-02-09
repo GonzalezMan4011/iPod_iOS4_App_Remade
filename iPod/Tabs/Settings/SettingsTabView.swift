@@ -309,6 +309,7 @@ struct SettingsTabView: View {
 
 struct VerticalSlider: View {
     @Binding var value: Double
+    @Binding var state: Bool
     var geo: CGSize
     @ObservedObject var store = StorageManager.shared
     
@@ -316,14 +317,14 @@ struct VerticalSlider: View {
         Slider(
             value: $value,
             in: store.s.eqMin...store.s.eqMax,
-            step: 0.1
+            step: 0.1,
+            onEditingChanged: { state in
+                self.state = state
+            }
         )
         .rotationEffect(.degrees(-90.0), anchor: .topLeading)
         .frame(width: geo.height)
         .offset(x: geo.width / 8, y: geo.height)
-        .animation(.spring(), value: value)
-        .animation(.spring(), value: store.s.eqMax)
-        .animation(.spring(), value: store.s.eqMin)
     }
 }
 
@@ -334,6 +335,8 @@ struct EQSettings: View {
     @State var focusedBand = 0
     @ObservedObject var store = StorageManager.shared
     @State var options = false
+    
+    @State var showDbLabels = false
     
     @ViewBuilder
     var body: some View {
@@ -370,7 +373,9 @@ struct EQSettings: View {
             Button("Cancel") {}
             Button("Save") {
                 guard let value = Double(text1) else { return }
-                store.s.eqBands[focusedBand] = value
+                withAnimation(.spring()) {
+                    store.s.eqBands[focusedBand] = value
+                }
             }
         }
         .alert("Edit Ranges", isPresented: $options) {
@@ -379,10 +384,14 @@ struct EQSettings: View {
             Button("Cancel") {}
             Button("Save") {
                 if let value = Double(text1) {
-                    store.s.eqMin = value
+                    withAnimation(.spring()) {
+                        store.s.eqMin = value
+                    }
                 }
                 if let value = Double(text2) {
-                    store.s.eqMax = value
+                    withAnimation(.spring()) {
+                        store.s.eqMax = value
+                    }
                 }
             }
         } message: {
@@ -396,15 +405,23 @@ struct EQSettings: View {
         HStack {
             ForEach(0..<bands, id: \.self) { i in
                 VStack {
-                    Text("\(store.s.eqBands[i])".prefix(4))
-                        .lineLimit(1)
-                        .font(.system(size: 9))
+                    #warning("change this to frequency")
+                    if !showDbLabels {
+                        Text("\(Player.shared.computedFrequencies[i])")
+                            .lineLimit(1)
+                            .font(.system(size: 9))
+                    } else {
+                        Text("\(store.s.eqBands[i])".prefix(4))
+                            .lineLimit(1)
+                            .font(.system(size: 9))
+                    }
                     GeometryReader { geo in
                         VerticalSlider(
                             value: $store.s.eqBands[i],
+                            state: $showDbLabels,
                             geo: geo.size
                         )
-                        .onTapGesture {
+                        .onTapGesture(count: 2) {
                             focusedBand = i
                             text1 = "\(store.s.eqBands[i])"
                             alert = true
@@ -424,7 +441,9 @@ struct EQSettings: View {
             Section("Presets") {
                 ForEach(store.s.eqPresets) { preset in
                     Button(preset.name) {
-                        store.s.eqBands = preset.bands
+                        withAnimation(.spring()) {
+                            store.s.eqBands = preset.bands
+                        }
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {

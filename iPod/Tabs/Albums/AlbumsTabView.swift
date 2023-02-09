@@ -31,7 +31,7 @@ struct AlbumsTabView: View {
                         AlbumButton(album: album)
                     }
                 }
-                .padding()
+                .padding(10)
             }
             .navigationTitle("Albums")
             .searchable(text: $searchQuery, prompt: Text("Search Albums"))

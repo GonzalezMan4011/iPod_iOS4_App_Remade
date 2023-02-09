@@ -122,8 +122,6 @@ class Player: ObservableObject {
     internal func prepareToPlay(url: URL) throws {
 //      file prep
         file = try AVAudioFile(forReading: url)
-//        audioBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
-//        try file!.read(into: audioBuffer!)
         
         engineInit()
         player.play()
@@ -131,12 +129,14 @@ class Player: ObservableObject {
     
     var currentlyPlaying: MPMediaItem? = nil
     private var file: AVAudioFile?
-//    private var audioBuffer: AVAudioPCMBuffer?
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
     
     init() {
+        
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+        
         setEQBands()
         
         // attach nodes to engine
@@ -165,6 +165,16 @@ class Player: ObservableObject {
         } catch {
             UIApplication.shared.presentAlert(title: "Engine Init Error", message: error.localizedDescription)
         }
+    }
+    
+    var computedFrequencies: [Int] {
+        var array: [Int] = []
+        var freq = 32
+        for _ in 0..<eq.bands.count {
+            array.append(freq)
+            freq += freq
+        }
+        return array
     }
     
     func setEQBands() {
