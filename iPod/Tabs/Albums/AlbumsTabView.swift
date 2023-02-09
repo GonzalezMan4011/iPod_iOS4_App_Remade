@@ -48,7 +48,7 @@ struct AlbumsTabView: View {
                 
             } label: {
                 VStack(alignment: .leading) {
-                    Image(uiImage: album.albumArt ?? Placeholders.noArtwork)
+                    Image(uiImage: album.albumArt)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(5)

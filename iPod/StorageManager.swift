@@ -96,7 +96,8 @@ class StorageManager: ObservableObject {
         ],
         eqMin: -6,
         eqMax: 12,
-        appColorTheme: AccentColor
+        appColorTheme: AccentColor,
+        playbackHistory: []
     )
 }
 
@@ -107,6 +108,8 @@ struct StorageObject: Codable {
     var eqMax: Double
     
     var appColorTheme: Color
+    
+    var playbackHistory: [UInt64]
 }
 
 struct EQPreset: Codable, Identifiable, Equatable {

@@ -46,10 +46,7 @@ struct SongsTabView: View {
                         }
                         ForEach(songlist) { song in
                             Button {
-#warning("play song")
-                                Task {
-                                    try? await player.playSongItem(persistentID: song.persistentID)
-                                }
+                                Task { try? await player.playSongItem(persistentID: song.persistentID, addToHistory: true) }
                             } label: {
                                 SongButton(song: song)
                             }

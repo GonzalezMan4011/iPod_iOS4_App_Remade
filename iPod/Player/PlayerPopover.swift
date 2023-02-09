@@ -30,10 +30,13 @@ struct PlayerPopover: View {
             }
             .foregroundColor(cs == .light ? .black : .white)
             .opacity(player.currentlyPlaying == nil ? 0.4 : 1)
-
+            .animation(.easeInOut, value: player.currentlyPlaying)
+            
             Button {
-                guard player.currentlyPlaying != nil else { return }
-                player.nextSong()
+                Task {
+                    guard player.currentlyPlaying != nil else { return }
+                    try? await player.nextSong()
+                }
             } label: {
                 Image(systemName: "forward.fill")
                     .font(.body.bold())
@@ -42,6 +45,7 @@ struct PlayerPopover: View {
             }
             .foregroundColor(cs == .light ? .black : .white)
             .opacity(player.currentlyPlaying == nil ? 0.4 : 1)
+            .animation(.easeInOut, value: player.currentlyPlaying)
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

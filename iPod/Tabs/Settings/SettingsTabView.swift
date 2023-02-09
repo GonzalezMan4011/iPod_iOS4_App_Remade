@@ -32,15 +32,9 @@ struct SettingsTabView: View {
                     } label: {
                         Text("Equaliser")
                     }
-                    Button("Reset Storage") {
-                        store.s = StorageManager.blankTemplate
-                    }
-                    Button("Respring") {
-                        let window = UIApplication.shared.windows.first!
-                        while true {
-                            window.snapshotView(afterScreenUpdates: false)
-                        }
-                    }
+                }
+                .onChange(of: store.s.eqBands) { _ in
+                    Player.shared.setEQBands()
                 }
                 
                 Section("Theming") {
@@ -51,6 +45,23 @@ struct SettingsTabView: View {
                 }
                 
                 AppIcons
+                
+                Section("DEBUG") {
+                    Button("Reset Storage") {
+                        store.s = StorageManager.blankTemplate
+                    }
+                    Button("Respring") {
+                        let window = UIApplication.shared.windows.first!
+                        while true {
+                            window.snapshotView(afterScreenUpdates: false)
+                        }
+                    }
+                    Button {
+                        UIApplication.shared.presentAlert(title: "Engine Init Error", message: "GM")
+                    } label: {
+                        Text("Alert test")
+                    }
+                }
             }
             .navigationTitle("Settings")
         }

@@ -14,10 +14,137 @@
             filePath = "iPod/Tabs/Settings/SettingsTabView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "AppIcons"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8088476-5422-4AC8-8FF1-66BB0E0CDD54"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iPod/Player/PlayerClass.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "prepareToPlay(url:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E913DBD-B7C5-468A-A028-6D1FA2A11771"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iPod/Player/PlayerClass.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "playSongItem(persistentID:addToHistory:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4E913DBD-B7C5-468A-A028-6D1FA2A11771 - 3c7d893b542ccafa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for iPod.Player.playSongItem(persistentID: Swift.UInt64, addToHistory: Swift.Bool) async throws -&gt; ()"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Player/PlayerClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "4E913DBD-B7C5-468A-A028-6D1FA2A11771 - fabc46d3fccd8a84"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for iPod.Player.playSongItem(persistentID: Swift.UInt64, addToHistory: Swift.Bool) async throws -&gt; ()"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Player/PlayerClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "584">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "647B8110-DBF1-4F05-85A2-A81722AFED7D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iPod/Player/PlayerClass.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "getSongFileUrl(persistentID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "647B8110-DBF1-4F05-85A2-A81722AFED7D - 563ce3d27c56d56b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for static iPod.Player.getSongFileUrl(persistentID: Swift.UInt64) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Player/PlayerClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "647B8110-DBF1-4F05-85A2-A81722AFED7D - 563ce3d27c56d56b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for static iPod.Player.getSongFileUrl(persistentID: Swift.UInt64) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Player/PlayerClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "616">
+               </Location>
+               <Location
+                  uuid = "647B8110-DBF1-4F05-85A2-A81722AFED7D - 563ce3d27c56d56b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for static iPod.Player.getSongFileUrl(persistentID: Swift.UInt64) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "iPod"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/llsc12/Documents/GitHub/Music/iPod/Player/PlayerClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "1720">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

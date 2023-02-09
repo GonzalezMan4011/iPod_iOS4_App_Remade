@@ -283,3 +283,25 @@ extension View {
         }))
     }
 }
+
+// MARK: - Add a popFirst mutating function to Arrays
+extension Array {
+    mutating func popFirst() -> Iterator.Element? {
+        let element = self.first
+        self.removeFirst()
+        return element
+    }
+}
+
+// MARK: - Quickly present a UIAlert
+
+extension UIApplication {
+    public func presentAlert(title: String?, message: String?, actions: [UIAlertAction] = []) {
+        guard let window = self.windows.first else { return }
+        guard let vc = window.rootViewController else { return }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        actions.forEach { alert.addAction($0) }
+        vc.present(alert, animated: true, completion: nil)
+    }
+}

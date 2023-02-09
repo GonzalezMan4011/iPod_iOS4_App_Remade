@@ -33,12 +33,19 @@ class Player: ObservableObject {
         isPaused.toggle()
     }
     
-    func nextSong() {
-        
+    func nextSong() async throws {
+        guard let _ = self.playerQueue.first else { return }
+        let nextQueueItem = self.playerQueue.popFirst()!
+        try await self.playSongItem(persistentID: nextQueueItem, addToHistory: true)
     }
     
-    func previousSong() {
-        
+    func previousSong() async throws {
+        guard let _ = StorageManager.shared.s.playbackHistory.last else { return }
+        let item = StorageManager.shared.s.playbackHistory.popLast()!
+        if let playing = self.currentlyPlaying {
+            self.playerQueue.insert(playing.persistentID, at: 0)
+        }
+        try await self.playSongItem(persistentID: item, addToHistory: false)
     }
     
     func tabBar(_ egg: Bool) {
@@ -65,14 +72,18 @@ class Player: ObservableObject {
         return item
     }
     
-    public func playSongItem(persistentID: UInt64) async throws {
+    public func playSongItem(persistentID: UInt64, addToHistory: Bool = false) async throws {
         guard let song = Player.getSongItem(persistentID: persistentID) else { throw "No song found" }
         self.currentlyPlaying = song
         guard let fileUrl = await Player.getSongFileUrl(persistentID: persistentID)
         else { throw "Asset export failed" }
+        if addToHistory, let playing = self.currentlyPlaying {
+            StorageManager.shared.s.playbackHistory.append(playing.persistentID)
+        }
         do {
             setPlayerData(song)
             try prepareToPlay(url: fileUrl)
+            
         } catch {
             setPlayerData(nil)
             throw error
@@ -93,7 +104,10 @@ class Player: ObservableObject {
     }
     
     internal static func getSongFileUrl(persistentID: UInt64) async -> URL? {
-        guard let assetUrl = Player.getSongItem(persistentID: persistentID)?.assetURL else { return nil }
+        guard let assetUrl = Player.getSongItem(persistentID: persistentID)?.assetURL else {
+            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be accessed.")
+            return nil
+        }
         let asset = AVURLAsset(url: assetUrl)
         guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetPassthrough) else { return nil }
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory())
@@ -106,31 +120,57 @@ class Player: ObservableObject {
     }
     
     internal func prepareToPlay(url: URL) throws {
-        // file prep
-//        file = try AVAudioFile(forReading: url)
-//        audioFileBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
-//        try file!.read(into: audioFileBuffer!)
+//      file prep
+        file = try AVAudioFile(forReading: url)
+        audioBuffer = AVAudioPCMBuffer(pcmFormat: file!.processingFormat, frameCapacity: UInt32(file!.length))
+        try file!.read(into: audioBuffer!)
         
+        engineInit()
+        
+        player.play()
     }
     
     var currentlyPlaying: MPMediaItem? = nil
     private var file: AVAudioFile?
-    private var audioFileBuffer: AVAudioPCMBuffer?
+    private var audioBuffer: AVAudioPCMBuffer?
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
     
     init() {
-        engineInit()
+        setEQBands()
+        
+        // attach nodes to engine
+        engine.attach(eq)
+        engine.attach(player)
+        
+        // connect player to eq node
+        let mixer = engine.mainMixerNode
+        engine.connect(player, to: eq, format: mixer.outputFormat(forBus: 0))
+        
+        // connect eq node to mixer
+        engine.connect(eq, to: mixer, format: mixer.outputFormat(forBus: 0))
     }
     
     internal func engineInit() {
         setEQBands()
+        guard let audioBuffer = audioBuffer else {
+            UIApplication.shared.presentAlert(title: "Engine Init Error", message: "Audio File Buffer did not exist.")
+            return
+        }
+        player.scheduleBuffer(audioBuffer, at: nil, options: .interrupts, completionHandler: nil)
+        engine.prepare()
+        do {
+            try engine.start()
+        } catch {
+            UIApplication.shared.presentAlert(title: "Engine Init Error", message: error.localizedDescription)
+        }
     }
     
     func setEQBands() {
         let bands = StorageManager.shared.s.eqBands
         var freq = 32
+        eq.globalGain = 1
         for i in 0..<eq.bands.count {
             eq.bands[i].frequency  = Float(freq)
             eq.bands[i].gain       = Float(bands[i])
