@@ -19,18 +19,36 @@ class Player: ObservableObject {
     @Published var coverImage: Image = Image("MissingArtwork")
     @Published var trackTitle: String = "Not Playing"
     
-    @Published var isPaused: Bool = false
+    @Published var isPaused: Bool = true
     
     func resume() {
-        isPaused = false
+        self.player.play()
+        DispatchQueue.main.async {
+            self.isPaused = false
+        }
     }
     
     func pause() {
-        isPaused = true
+        self.player.pause()
+        DispatchQueue.main.async {
+            self.isPaused = true
+        }
+    }
+    
+    func stop() {
+        self.player.stop()
+        self.currentlyPlaying = nil
+        DispatchQueue.main.async {
+            self.isPaused = true
+        }
     }
     
     func togglePlayback() {
-        isPaused.toggle()
+        if self.player.isPlaying {
+            self.player.pause()
+        } else {
+            self.player.play()
+        }
     }
     
     func nextSong() async throws {
@@ -73,6 +91,8 @@ class Player: ObservableObject {
     }
     
     public func playSongItem(persistentID: UInt64, addToHistory: Bool = false) async throws {
+        self.stop()
+        setPlayerData(nil)
         guard let song = Player.getSongItem(persistentID: persistentID) else { throw "No song found" }
         self.currentlyPlaying = song
         guard let fileUrl = await Player.getSongFileUrl(persistentID: persistentID)
@@ -83,7 +103,7 @@ class Player: ObservableObject {
         do {
             setPlayerData(song)
             try prepareToPlay(url: fileUrl)
-            
+            self.resume()
         } catch {
             setPlayerData(nil)
             await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
@@ -100,6 +120,7 @@ class Player: ObservableObject {
             } else {
                 self.trackTitle = "Not Playing"
                 self.coverImage = Image(uiImage: Placeholders.noArtwork)
+                self.isPaused = true
             }
         }
     }
@@ -126,7 +147,6 @@ class Player: ObservableObject {
         file = try AVAudioFile(forReading: url)
         
         engineInit()
-        player.play()
     }
     
     var currentlyPlaying: MPMediaItem? = nil

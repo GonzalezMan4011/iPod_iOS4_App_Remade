@@ -59,12 +59,13 @@ struct ContentView: View {
 }
 
 struct ArtCoverBackground: View {
+    @ObservedObject var store = StorageManager.shared
     @ObservedObject var play = Player.shared
     var body: some View {
         play.coverImage
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .blur(radius: 5)
+            .blur(radius: CGFloat(store.s.playerBlurAmount))
             .overlay {
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

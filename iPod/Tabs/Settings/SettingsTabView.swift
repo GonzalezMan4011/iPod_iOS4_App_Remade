@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import MediaPlayer
 
 struct SettingsTabView: View {
     @ObservedObject var store = StorageManager.shared
+    @ObservedObject var lib = MusicLibrary.shared
+    @State var song: MPMediaItem? = nil
+    @State var showHiddenAlbum = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -41,6 +46,51 @@ struct SettingsTabView: View {
                     ColorPicker("App Color", selection: $store.s.appColorTheme, supportsOpacity: false)
                     Button("Reset Color") {
                         store.s.appColorTheme = AccentColor
+                    }
+                    
+                    Slider(value: $store.s.playerBlurAmount, in: 1...50)
+                        .task {
+                            guard let song = lib.songs.randomElement() else { return }
+                            self.song = song
+                        }
+                    
+                    VStack(alignment: .leading) {
+                        Text("Adjusts the fullscreen player's background blur.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        if let song = song {
+                            Image(uiImage: song.art)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .blur(radius: CGFloat(showHiddenAlbum ? 0.0 : store.s.playerBlurAmount))
+                                .overlay {
+                                    Rectangle()
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .opacity(0)
+                                        .allowsHitTesting(false)
+                                        .background(.ultraThinMaterial.opacity(showHiddenAlbum ? 0 : 1))
+                                }
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .onTapGesture(count: 2) {
+                                    guard let song = lib.songs.randomElement() else { return }
+                                    withAnimation(.easeInOut) {
+                                        self.song = song
+                                    }
+                                }
+                                .pressAction(onPress: {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        showHiddenAlbum = true
+                                    }
+                                }, onRelease: {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        showHiddenAlbum = false
+                                    }
+                                })
+                            
+                            Text("Hold album cover to reveal, double tap to shuffle.")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
                 
@@ -405,7 +455,7 @@ struct EQSettings: View {
         HStack {
             ForEach(0..<bands, id: \.self) { i in
                 VStack {
-                    #warning("change this to frequency")
+#warning("change this to frequency")
                     if !showDbLabels {
                         Text("\(Player.shared.computedFrequencies[i])")
                             .lineLimit(1)

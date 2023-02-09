@@ -23,7 +23,7 @@ struct PlayerPopover: View {
                 guard player.currentlyPlaying != nil else { return }
                 player.togglePlayback()
             } label: {
-                Image(systemName: player.isPaused ? "pause.fill" : "play.fill")
+                Image(systemName: player.isPaused ? "play.fill" : "pause.fill")
                     .font(.body.bold())
                     .padding(.horizontal, 4)
                     .frame(maxHeight: .infinity)
@@ -46,6 +46,11 @@ struct PlayerPopover: View {
             .foregroundColor(cs == .light ? .black : .white)
             .opacity(player.currentlyPlaying == nil ? 0.4 : 1)
             .animation(.easeInOut, value: player.currentlyPlaying)
+        })
+        .popupBarCustomizer({ popupBar in
+            if popupBar.imageView.image == Placeholders.noArtwork {
+                popupBar.imageView.alpha = 0.5
+            }
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
