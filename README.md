@@ -7,6 +7,8 @@ or
 
 > [Download Here](https://nightly.link/llsc12/iPod/workflows/build/main/iPod.zip)
 
+This is what I think an iPod app would look like on modern iOS, plus extra features!
+
 ## Backstory
 I hate the official Music app a lot because it sucks, it has a ton of Apple Music ads (annoying when you sync music from your Mac) and is kinda boring.
 
