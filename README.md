@@ -14,7 +14,7 @@ This is what I think an iPod app would look like on modern iOS, plus extra featu
 I’ve made notes available [here](notes/notes.md)
 
 ## Backstory
-I hate the official Music app a lot because it sucks, it has a ton of Apple Music ads (annoying when you sync music from your Mac) and is kinda boring.
+I hate the official Music app a lot because it sucks, it has a ton of Apple Music ads (annoying when you sync music from your Mac) and it's kinda boring.
 
 ## The Goal
 I'm making this to bring nostalgia and make it a little more fun to listen to music, also I need an app with EQ. 
