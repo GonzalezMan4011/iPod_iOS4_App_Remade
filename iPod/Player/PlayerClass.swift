@@ -126,6 +126,15 @@ class Player: ObservableObject {
     }
     
     internal static func getSongFileUrl(persistentID: UInt64) async -> URL? {
+        // clear out tmp cos it builds up fast
+        if let dir = try? FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory()) {
+            dir.forEach { file in
+                let url = URL(fileURLWithPath: NSTemporaryDirectory())
+                    .appendingPathComponent(file)
+                print(url)
+                try? FileManager.default.removeItem(at: url)
+            }
+        }
         guard let assetUrl = Player.getSongItem(persistentID: persistentID)?.assetURL else {
             await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be accessed.", actions: [UIAlertAction(title: "OK", style: .cancel)])
             return nil
