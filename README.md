@@ -11,6 +11,8 @@ or
 
 This is what I think an iPod app would look like on modern iOS, plus extra features!
 
+I’ve made notes available [here](notes/notes.md)
+
 ## Backstory
 I hate the official Music app a lot because it sucks, it has a ton of Apple Music ads (annoying when you sync music from your Mac) and is kinda boring.
 
