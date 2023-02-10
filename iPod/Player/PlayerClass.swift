@@ -45,9 +45,9 @@ class Player: ObservableObject {
     
     func togglePlayback() {
         if self.player.isPlaying {
-            self.player.pause()
+            self.pause()
         } else {
-            self.player.play()
+            self.resume()
         }
     }
     
@@ -95,8 +95,7 @@ class Player: ObservableObject {
         setPlayerData(nil)
         guard let song = Player.getSongItem(persistentID: persistentID) else { throw "No song found" }
         self.currentlyPlaying = song
-        guard let fileUrl = await Player.getSongFileUrl(persistentID: persistentID)
-        else { throw "Asset export failed" }
+        guard let fileUrl = song.assetURL else { throw "Asset track fetch failed" }
         if addToHistory, let playing = self.currentlyPlaying {
             StorageManager.shared.s.playbackHistory.append(playing.persistentID)
         }
@@ -123,32 +122,6 @@ class Player: ObservableObject {
                 self.isPaused = true
             }
         }
-    }
-    
-    internal static func getSongFileUrl(persistentID: UInt64) async -> URL? {
-        // clear out tmp cos it builds up fast
-        if let dir = try? FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory()) {
-            dir.forEach { file in
-                let url = URL(fileURLWithPath: NSTemporaryDirectory())
-                    .appendingPathComponent(file)
-                print(url)
-                try? FileManager.default.removeItem(at: url)
-            }
-        }
-        guard let assetUrl = Player.getSongItem(persistentID: persistentID)?.assetURL else {
-            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be accessed.", actions: [UIAlertAction(title: "OK", style: .cancel)])
-            return nil
-        }
-        let asset = AVURLAsset(url: assetUrl)
-        print(asset)
-        guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetPassthrough) else { return nil }
-        let fileURL = URL(fileURLWithPath: NSTemporaryDirectory())
-            .appendingPathComponent(NSUUID().uuidString)
-            .appendingPathExtension("caf")
-        exporter.outputURL = fileURL
-        exporter.outputFileType = .caf
-        await exporter.export()
-        return fileURL
     }
     
     internal func prepareToPlay(url: URL) throws {
