@@ -107,9 +107,10 @@ struct SettingsTabView: View {
                         }
                     }
                     Button {
-                        UIApplication.shared.presentAlert(title: "Engine Init Error", message: "GM")
+                        let trol = String(reflecting: StorageManager.shared.s)
+                        print(trol)
                     } label: {
-                        Text("Alert test")
+                        Text("print storage to console")
                     }
                 }
             }

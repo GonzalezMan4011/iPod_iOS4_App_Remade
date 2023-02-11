@@ -34,7 +34,6 @@ struct SongsTabView: View {
             )).sorted()
             List {
                 ForEach(indexes, id: \.self) { letter in
-                    
                     Section(header: Text(letter).id(letter)) {
                         let songlist = db.filter { gm in
                             var char: String {
@@ -46,7 +45,7 @@ struct SongsTabView: View {
                         }
                         ForEach(songlist) { song in
                             Button {
-                                Task { try? await player.playSongItem(persistentID: song.persistentID, addToHistory: true) }
+                                Task { try? await player.playSongItem(persistentID: song.persistentID) }
                             } label: {
                                 SongButton(song: song)
                             }

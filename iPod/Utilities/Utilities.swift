@@ -294,7 +294,6 @@ extension Array {
 }
 
 // MARK: - Quickly present a UIAlert
-
 extension UIApplication {
     public func presentAlert(title: String?, message: String?, actions: [UIAlertAction] = []) {
         guard let window = self.windows.first else { return }

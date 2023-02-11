@@ -92,7 +92,8 @@ class StorageManager: ObservableObject {
         eqBands: [0,0,0,0,0,0,0,0,0,0],
         eqPresets: [
              EQPreset(name: "Default", bands: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]),
-             EQPreset(name: "Bass Boost", bands: [3, 2.5, 1.8, 0.3, 0, 0, 0, 0, 0, 0])
+             EQPreset(name: "Bass Boost", bands: [3, 2.5, 1.8, 0.3, 0, 0, 0, 0, 0, 0]),
+             EQPreset(name: "AirPods Pro (1st generation)", bands: [18.400000000000002, 16.8, 11.7, 4.700000000000001, 1.6000000000000005, 1.8000000000000007, 2.5, 1.1000000000000005, 6.300000000000001, 12.5])
         ],
         eqMin: -6,
         eqMax: 12,

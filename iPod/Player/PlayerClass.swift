@@ -158,11 +158,12 @@ class Player: ObservableObject {
     internal func engineInit() {
         setEQBands()
         guard let file = file else {
-            UIApplication.shared.presentAlert(title: "Engine Init Error", message: "Audio File Buffer did not exist.")
+            UIApplication.shared.presentAlert(title: "Engine Init Error", message: "Audio File did not exist.")
             return
         }
-//        player.scheduleBuffer(audioBuffer, at: nil, options: .interrupts, completionHandler: nil)
-        player.scheduleFile(file, at: nil)
+        player.scheduleFile(file, at: nil, completionCallbackType: .dataPlayedBack) { egg in
+            guard egg == .dataPlayedBack else { return }
+        }
         engine.prepare()
         do {
             try engine.start()
@@ -195,38 +196,3 @@ class Player: ObservableObject {
         }
     }
 }
-
-
-let AVFileTypeLookupTable: [String: AVFileType] = [
-    "mov": .mov,
-    "mp4": .mp4,
-    "m4v": .m4v,
-    "m4a": .m4a,
-    "3gp": .mobile3GPP,
-    "3gpp": .mobile3GPP,
-    "sdv": .mobile3GPP,
-    "3g2": .mobile3GPP2,
-    "3gp2": .mobile3GPP2,
-    "caf": .caf,
-    "wav": .wav,
-    "wave": .wav,
-    "bwf": .wav,
-    "aif": .aiff,
-    "aiff": .aiff,
-    "aifc": .aifc,
-    "cdda": .aifc,
-    "amr": .amr,
-    "mp3": .mp3,
-    "au": .au,
-    "snd": .au,
-    "ac3": .ac3,
-    "eac3": .eac3,
-    "jpg": .jpg,
-    "jpeg": .jpg,
-    "dng": .dng,
-    "heic": .heic,
-    "avci": .avci,
-    "heif": .heif,
-    "tif": .tif,
-    "tiff": .tif
-]
