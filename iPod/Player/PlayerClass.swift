@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import MediaPlayer
 import AVFoundation
+import Combine
 
 class Player: ObservableObject {
     static let shared = Player()
@@ -19,9 +20,16 @@ class Player: ObservableObject {
     @Published var coverImage: Image = Image("MissingArtwork")
     @Published var trackTitle: String = "Not Playing"
     
+    @Published var progress: Double = 0
+    @Published var playbackTime: Double = 0
+    @Published var duration: Double = 1
+    
     @Published var isPaused: Bool = true
     
+    var ignoreCallback = false
+    
     func resume() {
+        if !self.engine.isRunning { self.engine.prepare(); try? self.engine.start() }
         self.player.play()
         DispatchQueue.main.async {
             self.isPaused = false
@@ -37,49 +45,59 @@ class Player: ObservableObject {
     
     func stop() {
         self.player.stop()
-        self.currentlyPlaying = nil
+        self.setPlayerData(nil)
         DispatchQueue.main.async {
             self.isPaused = true
         }
     }
     
     func togglePlayback() {
-        if self.player.isPlaying {
+        if !self.isPaused {
             self.pause()
         } else {
             self.resume()
         }
     }
     
+    func beginPlayingFromQueue(_ queue: [UInt64]) {
+        self.stop()
+        StorageManager.shared.s.playbackHistory = []
+        DispatchQueue.main.async {
+            self.playerQueue = queue
+            Task {
+                try? await self.nextSong()
+            }
+        }
+    }
+    
     func nextSong() async throws {
-        guard let _ = self.playerQueue.first else { return }
-        let nextQueueItem = self.playerQueue.popFirst()!
-        try await self.playSongItem(persistentID: nextQueueItem, addToHistory: true)
+        guard let nextQueueItem = self.playerQueue.first else { return }
+        DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
+        try await self.playSongItem(persistentID: nextQueueItem)
     }
     
     func previousSong() async throws {
-        guard let _ = StorageManager.shared.s.playbackHistory.last else { return }
-        let item = StorageManager.shared.s.playbackHistory.popLast()!
+        guard let item = StorageManager.shared.s.playbackHistory.last else { return }
+        StorageManager.shared.s.playbackHistory.removeLast()
         if let playing = self.currentlyPlaying {
-            self.playerQueue.insert(playing.persistentID, at: 0)
+            DispatchQueue.main.async {
+                self.playerQueue.insert(playing.persistentID, at: 0)
+            }
         }
-        try await self.playSongItem(persistentID: item, addToHistory: false)
+        try await self.playSongItem(persistentID: item)
     }
     
     func tabBar(_ egg: Bool) {
         if egg {
-            UITabBar.showTabBar(animated: true)
+            UITabBar.showTabBar(animated: false)
+            playerBarShown = true
         } else {
             UITabBar.hideTabBar(animated: false)
+            playerBarShown = false
         }
     }
     
     @Published var playerQueue: [UInt64] = []
-    
-    internal static func getSongAssetUrlByID(persistentID: UInt64) -> URL? {
-        let item = Player.getSongItem(persistentID: persistentID)
-        return item?.assetURL
-    }
     
     static func getSongItem(persistentID: UInt64) -> MPMediaItem? {
         guard let query = MPMediaQuery.songs().items else { return nil }
@@ -90,20 +108,33 @@ class Player: ObservableObject {
         return item
     }
     
-    public func playSongItem(persistentID: UInt64, addToHistory: Bool = false) async throws {
+    public func playSongItem(persistentID: UInt64) async throws {
+        
+        // stop whats playing, also clears out player data for us
         self.stop()
-        setPlayerData(nil)
+        
+        // get the song that we need to play now and its asset url
         guard let song = Player.getSongItem(persistentID: persistentID) else { throw "No song found" }
-        self.currentlyPlaying = song
         guard let fileUrl = song.assetURL else { throw "Asset track fetch failed" }
-        if addToHistory, let playing = self.currentlyPlaying {
-            StorageManager.shared.s.playbackHistory.append(playing.persistentID)
-        }
+        
         do {
+            // reset end of file
+            
+            // set the data of the class' variables to the currently playing song
+            // - coverImage
+            // - trackTitle
+            
             setPlayerData(song)
-            try prepareToPlay(url: fileUrl)
+            
+            // schedules the track to be played if it can and inits the engine
+            file = try AVAudioFile(forReading: fileUrl)
+            engineInit()
+            
+            // starts the player
+            
             self.resume()
         } catch {
+            // clears the data for the player view
             setPlayerData(nil)
             await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
             throw error
@@ -112,33 +143,33 @@ class Player: ObservableObject {
     
     internal func setPlayerData(_ item: MPMediaItem?) {
         DispatchQueue.main.async {
-            self.objectWillChange.send()
             if let song = item {
                 self.trackTitle = song.title ?? "Unknown"
                 self.coverImage = Image(uiImage: song.art)
+                self.currentlyPlaying = song
+                self.duration = song.playbackDuration
             } else {
                 self.trackTitle = "Not Playing"
                 self.coverImage = Image(uiImage: Placeholders.noArtwork)
+                self.currentlyPlaying = nil
+                self.progress = 0
+                self.playbackTime = 0
+                self.duration = 1
                 self.isPaused = true
             }
         }
     }
     
-    internal func prepareToPlay(url: URL) throws {
-//      file prep
-        file = try AVAudioFile(forReading: url)
-        
-        engineInit()
-    }
-    
     var currentlyPlaying: MPMediaItem? = nil
     private var file: AVAudioFile?
     private let engine = AVAudioEngine()
-    private let player = AVAudioPlayerNode()
+    private let player = AVAudioPlayerNodeClass()
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
     
+    
+    var cancellable = Set<AnyCancellable>()
+    
     init() {
-        
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
         
         setEQBands()
@@ -153,6 +184,17 @@ class Player: ObservableObject {
         
         // connect eq node to mixer
         engine.connect(eq, to: mixer, format: mixer.outputFormat(forBus: 0))
+        
+        player
+            .publisher(for: \.currentPlayTime)
+            .sink { playtime in
+                DispatchQueue.main.async {
+                    self.playbackTime = playtime
+                    self.duration = self.player.duration
+                    self.progress = playtime / self.player.duration
+                }
+            }
+            .store(in: &cancellable)
     }
     
     internal func engineInit() {
@@ -161,9 +203,11 @@ class Player: ObservableObject {
             UIApplication.shared.presentAlert(title: "Engine Init Error", message: "Audio File did not exist.")
             return
         }
-        player.scheduleFile(file, at: nil, completionCallbackType: .dataPlayedBack) { egg in
-            guard egg == .dataPlayedBack else { return }
+        player.scheduleFile(file, at: nil, completionCallbackType: .dataPlayedBack) { type in
+            guard type == .dataPlayedBack else { return }
+            self.playerDidFinishPlaying()
         }
+    
         engine.prepare()
         do {
             try engine.start()
@@ -171,6 +215,20 @@ class Player: ObservableObject {
             UIApplication.shared.presentAlert(title: "Engine Init Error", message: error.localizedDescription)
         }
     }
+    
+    func playerDidFinishPlaying() {
+        // playback ended, do any cleanup
+        if let last = self.currentlyPlaying {
+            let id = last.persistentID
+            StorageManager.shared.s.playbackHistory.append(id)
+        }
+        DispatchQueue.main.async {
+            self.isPaused = true
+        }
+    }
+    
+    
+    
     
     var computedFrequencies: [Int] {
         var array: [Int] = []

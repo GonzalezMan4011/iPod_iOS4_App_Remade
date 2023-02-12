@@ -26,8 +26,10 @@ class StorageManager: ObservableObject {
     
     var s: StorageObject {
         didSet {
-            self.objectWillChange.send()
-            StorageManager.saveLoadedObjectToLocalStorage(self)
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+                StorageManager.saveLoadedObjectToLocalStorage(self)
+            }
         }
     }
         
@@ -99,7 +101,8 @@ class StorageManager: ObservableObject {
         eqMax: 12,
         
         appColorTheme: AccentColor,
-        playerBlurAmount: 5,
+        playerBlurAmount: 10,
+        miniplayerProgress: false,
         
         playbackHistory: []
     )
@@ -113,6 +116,7 @@ struct StorageObject: Codable {
     
     var appColorTheme: Color
     var playerBlurAmount: Float
+    var miniplayerProgress: Bool
 
     var playbackHistory: [UInt64]
 }

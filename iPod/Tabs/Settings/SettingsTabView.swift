@@ -47,7 +47,7 @@ struct SettingsTabView: View {
                     Button("Reset Color") {
                         store.s.appColorTheme = AccentColor
                     }
-                    
+                    Toggle("Show Miniplayer Progress", isOn: $store.s.miniplayerProgress)
                     Slider(value: $store.s.playerBlurAmount, in: 1...50)
                         .task {
                             guard let song = lib.songs.randomElement() else { return }

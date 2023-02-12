@@ -17,9 +17,8 @@ struct AlbumView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Button("Play All") {
-                StorageManager.shared.s.playbackHistory = []
-                player.playerQueue = album.items.map({ $0.persistentID })
-//                player.startPlayingFromQueue()
+                let newQueue = album.items.map({ $0.persistentID })
+                player.beginPlayingFromQueue(newQueue)
             }
             .buttonStyle(.bordered)
         }

@@ -67,10 +67,16 @@ struct SongsTabView: View {
     }
     
     func search(_ q: String) {
-        self.songsFiltered = ml.songs.filter { song in
-            song.title?.lowercased().contains(q.lowercased()) ?? false
-            ||
-            song.artist?.lowercased().contains(q.lowercased()) ?? false
+        DispatchQueue.global(qos: .userInteractive).async {
+            let filtered = ml.songs.filter { song in
+                song.title?.lowercased().contains(q.lowercased()) ?? false
+                ||
+                song.artist?.lowercased().contains(q.lowercased()) ?? false
+            }
+            
+            DispatchQueue.main.async {
+                self.songsFiltered = filtered
+            }
         }
     }
     
