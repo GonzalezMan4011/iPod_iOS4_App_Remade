@@ -186,12 +186,19 @@ class Player: ObservableObject {
         engine.connect(eq, to: mixer, format: mixer.outputFormat(forBus: 0))
         
         player
+            .publisher(for: \.duration)
+            .sink { duration in
+                DispatchQueue.main.async {
+                    self.duration = duration
+                }
+            }
+            .store(in: &cancellable)
+        player
             .publisher(for: \.currentPlayTime)
             .sink { playtime in
                 DispatchQueue.main.async {
                     self.playbackTime = playtime
-                    self.duration = self.player.duration
-                    self.progress = playtime / self.player.duration
+                    self.progress = playtime / self.duration
                 }
             }
             .store(in: &cancellable)
