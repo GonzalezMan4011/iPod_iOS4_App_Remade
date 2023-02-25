@@ -14,6 +14,7 @@
 		AA3365162984B13B00420C53 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365152984B13B00420C53 /* AlbumView.swift */; };
 		AA3365182984B18000420C53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365172984B18000420C53 /* ContentView.swift */; };
 		AA33651A2984B20600420C53 /* Coverflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365192984B20600420C53 /* Coverflow.swift */; };
+		AA9417BB29AA7570007D3704 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = AA9417BA29AA7570007D3704 /* Introspect */; };
 		AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */; };
 		AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* StorageManager.swift */; };
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */,
+				AA9417BB29AA7570007D3704 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,7 @@
 			children = (
 				AAE74C592984293A00E03B2D /* iPod */,
 				AAE74C582984293A00E03B2D /* Products */,
+				AA9417C129AAB12B007D3704 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -204,6 +207,7 @@
 			name = iPod;
 			packageProductDependencies = (
 				AA33305F2993FFD4009F594F /* LNPopupUI */,
+				AA9417BA29AA7570007D3704 /* Introspect */,
 			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
@@ -235,6 +239,7 @@
 			mainGroup = AAE74C4E2984293A00E03B2D;
 			packageReferences = (
 				AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */,
+				AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = AAE74C582984293A00E03B2D /* Products */;
 			projectDirPath = "";
@@ -513,6 +518,14 @@
 				kind = branch;
 			};
 		};
+		AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -520,6 +533,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */;
 			productName = LNPopupUI;
+		};
+		AA9417BA29AA7570007D3704 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

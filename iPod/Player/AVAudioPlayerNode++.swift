@@ -36,7 +36,6 @@ class AVAudioPlayerNodeClass: AVAudioPlayerNode {
         let updateInterval: Double = 1
         
         timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
-            print("updating")
             if self.isPlaying {
                 self.currentPlayTime += updateInterval
                 if self.currentPlayTime > self.duration {

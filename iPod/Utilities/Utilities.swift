@@ -295,3 +295,25 @@ extension UIApplication {
         vc.present(alert, animated: true, completion: nil)
     }
 }
+
+// MARK: - Get current view controller
+
+extension UIApplication {
+    
+    static var visibleVC: UIViewController? {
+        var currentVC = UIApplication.shared.windows.first { $0.isKeyWindow }?.rootViewController
+        while let presentedVC = currentVC?.presentedViewController {
+            if let navVC = (presentedVC as? UINavigationController)?.viewControllers.last {
+                currentVC = navVC
+            } else if let tabVC = (presentedVC as? UITabBarController)?.selectedViewController {
+                currentVC = tabVC
+            } else {
+                currentVC = presentedVC
+            }
+        }
+        return currentVC
+    }
+    
+}
+
+

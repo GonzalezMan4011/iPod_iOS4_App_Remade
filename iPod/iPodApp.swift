@@ -22,6 +22,13 @@ struct iPodApp: App {
                 .onChange(of: store.s.appColorTheme) { color in
                     UIApplication.shared.setTintColor(color)
                 }
+                .task {
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
+                    let albums = MusicLibrary.shared.albums
+                    albums.forEach { a in
+                        print(a.albumTitle, a.representativeItem?.releaseDate)
+                    }
+                }
         }
     }
 }
