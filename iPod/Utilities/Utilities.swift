@@ -315,5 +315,3 @@ extension UIApplication {
     }
     
 }
-
-

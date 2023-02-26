@@ -1,4 +1,0 @@
-module MediaPlayerPrivate {
-    header "MediaPlayerPrivate.h"
-    export *
-}

@@ -15,6 +15,19 @@
 		AA3365182984B18000420C53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365172984B18000420C53 /* ContentView.swift */; };
 		AA33651A2984B20600420C53 /* Coverflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365192984B20600420C53 /* Coverflow.swift */; };
 		AA9417BB29AA7570007D3704 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = AA9417BA29AA7570007D3704 /* Introspect */; };
+		AA9417D729AABAEE007D3704 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417CB29AABAED007D3704 /* Builder.swift */; };
+		AA9417D829AABAEE007D3704 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417CC29AABAED007D3704 /* Generator.swift */; };
+		AA9417D929AABAEE007D3704 /* ColorConverters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417CD29AABAED007D3704 /* ColorConverters.swift */; };
+		AA9417DA29AABAEE007D3704 /* MMCQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417CE29AABAED007D3704 /* MMCQ.swift */; };
+		AA9417DB29AABAEE007D3704 /* Vibrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417CF29AABAED007D3704 /* Vibrant.swift */; };
+		AA9417DC29AABAEE007D3704 /* VibrantColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D029AABAEE007D3704 /* VibrantColors.swift */; };
+		AA9417DD29AABAEE007D3704 /* SVImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D129AABAEE007D3704 /* SVImage.swift */; };
+		AA9417DE29AABAEE007D3704 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D229AABAEE007D3704 /* Util.swift */; };
+		AA9417DF29AABAEE007D3704 /* Quantizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D329AABAEE007D3704 /* Quantizer.swift */; };
+		AA9417E029AABAEE007D3704 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D429AABAEE007D3704 /* Filter.swift */; };
+		AA9417E129AABAEE007D3704 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D529AABAEE007D3704 /* Constants.swift */; };
+		AA9417E229AABAEE007D3704 /* Vbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D629AABAEE007D3704 /* Vbox.swift */; };
+		AA9417E529AAD1A8007D3704 /* ViewExtractor in Frameworks */ = {isa = PBXBuildFile; productRef = AA9417E429AAD1A8007D3704 /* ViewExtractor */; };
 		AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */; };
 		AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* StorageManager.swift */; };
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
@@ -49,6 +62,18 @@
 		AA3365192984B20600420C53 /* Coverflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coverflow.swift; sourceTree = "<group>"; };
 		AA33651B2985558200420C53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA33651C2985559300420C53 /* iPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iPod.entitlements; sourceTree = "<group>"; };
+		AA9417CB29AABAED007D3704 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
+		AA9417CC29AABAED007D3704 /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
+		AA9417CD29AABAED007D3704 /* ColorConverters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConverters.swift; sourceTree = "<group>"; };
+		AA9417CE29AABAED007D3704 /* MMCQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMCQ.swift; sourceTree = "<group>"; };
+		AA9417CF29AABAED007D3704 /* Vibrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vibrant.swift; sourceTree = "<group>"; };
+		AA9417D029AABAEE007D3704 /* VibrantColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VibrantColors.swift; sourceTree = "<group>"; };
+		AA9417D129AABAEE007D3704 /* SVImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVImage.swift; sourceTree = "<group>"; };
+		AA9417D229AABAEE007D3704 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		AA9417D329AABAEE007D3704 /* Quantizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quantizer.swift; sourceTree = "<group>"; };
+		AA9417D429AABAEE007D3704 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		AA9417D529AABAEE007D3704 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AA9417D629AABAEE007D3704 /* Vbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vbox.swift; sourceTree = "<group>"; };
 		AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioPlayerNode++.swift"; sourceTree = "<group>"; };
 		AABA01EE2991AFAD0088591A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */,
+				AA9417E529AAD1A8007D3704 /* ViewExtractor in Frameworks */,
 				AA9417BB29AA7570007D3704 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +104,7 @@
 		AA3330532992FDBB009F594F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AA9417CA29AABABC007D3704 /* Swift-Vibrant */,
 				AAFCDA9129848023003609B2 /* Utilities.swift */,
 			);
 			path = Utilities;
@@ -91,12 +118,30 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		AA9417CA29AABABC007D3704 /* Swift-Vibrant */ = {
+			isa = PBXGroup;
+			children = (
+				AA9417CB29AABAED007D3704 /* Builder.swift */,
+				AA9417CD29AABAED007D3704 /* ColorConverters.swift */,
+				AA9417D529AABAEE007D3704 /* Constants.swift */,
+				AA9417D429AABAEE007D3704 /* Filter.swift */,
+				AA9417CC29AABAED007D3704 /* Generator.swift */,
+				AA9417D129AABAEE007D3704 /* SVImage.swift */,
+				AA9417CE29AABAED007D3704 /* MMCQ.swift */,
+				AA9417D329AABAEE007D3704 /* Quantizer.swift */,
+				AA9417D229AABAEE007D3704 /* Util.swift */,
+				AA9417D629AABAEE007D3704 /* Vbox.swift */,
+				AA9417CF29AABAED007D3704 /* Vibrant.swift */,
+				AA9417D029AABAEE007D3704 /* VibrantColors.swift */,
+			);
+			path = "Swift-Vibrant";
+			sourceTree = "<group>";
+		};
 		AAE74C4E2984293A00E03B2D = {
 			isa = PBXGroup;
 			children = (
 				AAE74C592984293A00E03B2D /* iPod */,
 				AAE74C582984293A00E03B2D /* Products */,
-				AA9417C129AAB12B007D3704 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +253,7 @@
 			packageProductDependencies = (
 				AA33305F2993FFD4009F594F /* LNPopupUI */,
 				AA9417BA29AA7570007D3704 /* Introspect */,
+				AA9417E429AAD1A8007D3704 /* ViewExtractor */,
 			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
@@ -240,6 +286,7 @@
 			packageReferences = (
 				AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */,
 				AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				AA9417E329AAD1A8007D3704 /* XCRemoteSwiftPackageReference "ViewExtractor" */,
 			);
 			productRefGroup = AAE74C582984293A00E03B2D /* Products */;
 			projectDirPath = "";
@@ -266,20 +313,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9417E229AABAEE007D3704 /* Vbox.swift in Sources */,
+				AA9417E129AABAEE007D3704 /* Constants.swift in Sources */,
 				AA33306429940602009F594F /* PlayerPopover.swift in Sources */,
+				AA9417D829AABAEE007D3704 /* Generator.swift in Sources */,
 				AAFCDA9229848023003609B2 /* Utilities.swift in Sources */,
 				AA33651429848C2100420C53 /* SettingsTabView.swift in Sources */,
 				AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */,
 				AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */,
+				AA9417DC29AABAEE007D3704 /* VibrantColors.swift in Sources */,
+				AA9417DD29AABAEE007D3704 /* SVImage.swift in Sources */,
 				AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */,
+				AA9417DF29AABAEE007D3704 /* Quantizer.swift in Sources */,
 				AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */,
 				AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */,
+				AA9417DE29AABAEE007D3704 /* Util.swift in Sources */,
+				AA9417E029AABAEE007D3704 /* Filter.swift in Sources */,
 				AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */,
 				AA33651A2984B20600420C53 /* Coverflow.swift in Sources */,
 				AA3365182984B18000420C53 /* ContentView.swift in Sources */,
 				AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */,
+				AA9417D929AABAEE007D3704 /* ColorConverters.swift in Sources */,
+				AA9417DB29AABAEE007D3704 /* Vibrant.swift in Sources */,
 				AA3365162984B13B00420C53 /* AlbumView.swift in Sources */,
 				AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */,
+				AA9417D729AABAEE007D3704 /* Builder.swift in Sources */,
+				AA9417DA29AABAEE007D3704 /* MMCQ.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +585,14 @@
 				minimumVersion = 0.2.3;
 			};
 		};
+		AA9417E329AAD1A8007D3704 /* XCRemoteSwiftPackageReference "ViewExtractor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GeorgeElsham/ViewExtractor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -538,6 +605,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		AA9417E429AAD1A8007D3704 /* ViewExtractor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA9417E329AAD1A8007D3704 /* XCRemoteSwiftPackageReference "ViewExtractor" */;
+			productName = ViewExtractor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

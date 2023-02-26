@@ -9,26 +9,41 @@ import SwiftUI
 import MediaPlayer
 import Introspect
 
-
 struct AlbumView: View {
     var album: MPMediaItemCollection
     @ObservedObject var player = Player.shared
-    
+    @Environment(\.colorScheme) var cs
+    @State var palette: Palette = .init()
+    var albumColor: Color {
+        Color(uiColor: (cs == .light ? palette.DarkMuted?.uiColor : palette.Vibrant?.uiColor) ?? StorageManager.shared.s.appColorTheme.uiColor)
+    }
     @State var showTitle = false
+    
+    func setTint() {
+        let artwork = album.albumArt
+        let colors = Vibrant.from(artwork).getPalette()
+        self.palette = colors
+    }
+    
     var body: some View {
         ScrollView {
             cover
             albumInfo
             controls
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                if showTitle {
-                    Text(album.albumTitle ?? Placeholders.noItemTitle)
-                }
+            
+            List {
+                Text("1")
+                Text("2")
+                Text("3")
+                Text("4")
             }
         }
+        .tint(albumColor)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(showTitle ? album.albumTitle ?? Placeholders.noItemTitle : "")
+        .task(priority: .high) { setTint() }
+        .animation(.easeInOut(duration: 0.2), value: albumColor)
+        .animation(.easeInOut(duration: 0.2), value: showTitle)
     }
     
     @ViewBuilder var cover: some View {
@@ -66,7 +81,7 @@ struct AlbumView: View {
             } label: {
                 Text(album.representativeItem?.albumArtist ?? Placeholders.noItemTitle)
                     .font(.title3)
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(albumColor)
             }
             .buttonStyle(.plain)
             
@@ -85,6 +100,7 @@ struct AlbumView: View {
                     .foregroundColor(.secondary)
             }
         }
+        .multilineTextAlignment(.center)
         .onAppear { self.showTitle = false }.onDisappear { self.showTitle = true }
     }
     
@@ -111,7 +127,24 @@ struct AlbumView: View {
         .frame(maxWidth: 400)
     }
     
-    
+    @ViewBuilder var songsList: some View {
+        let sorted = album.items.sorted { lhs, rhs in
+            lhs.albumTrackNumber < rhs.albumTrackNumber
+        }
+        ForEach(sorted) { song in
+            HStack {
+                Button {
+                    
+                } label: {
+                    Label {
+                        Text(song.title ?? Placeholders.noItemTitle)
+                    } icon: {
+                        Text("\(song.albumTrackNumber)")
+                    }
+                }
+            }
+        }
+    }
     
     func play() {
         
