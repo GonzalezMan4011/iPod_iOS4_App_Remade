@@ -7,7 +7,7 @@ or
 
 > [Download Here](https://nightly.link/llsc12/iPod/workflows/build/main/iPod.zip)
 
-> You should join [my discord server](https://discord.gg/ShhsvW6V) to report bugs.
+> You should join [my discord server](https://discord.gg/ChsC2gFfjs) to report bugs.
 
 This is what I think an iPod app would look like on modern iOS, plus extra features!
 
