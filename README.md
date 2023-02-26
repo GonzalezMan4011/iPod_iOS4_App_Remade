@@ -13,6 +13,9 @@ This is what I think an iPod app would look like on modern iOS, plus extra featu
 
 I’ve made notes available [here](notes/notes.md)
 
+## Important
+This only supports iOS 15+ and it does not work with Apple Music Subscriptions. Only synced music or any other non-protected songs are supported.
+
 ## Backstory
 I hate the official Music app a lot because it sucks, it has a ton of Apple Music ads (annoying when you sync music from your Mac) and it's kinda boring.
 
