@@ -67,7 +67,8 @@ struct AlbumView: View {
             shape
                 .strokeBorder(.gray.opacity(0.2), lineWidth: 0.5, antialiased: true)
         }
-        .padding(30)
+        .padding([.horizontal, .bottom],30)
+        .padding(.top, 10)
         .background {
             Image(uiImage: album.albumArt)
                 .resizable()
@@ -138,7 +139,7 @@ struct AlbumView: View {
             lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
         }
         
-        let spacing: CGFloat = 5
+        let spacing: CGFloat = 6
         VStack(spacing: 0) {
             Divider()
             AlbumDividedVStack(alignment: .trailing, spacing: 0) {
@@ -154,7 +155,7 @@ struct AlbumView: View {
                                 Text(song.title ?? Placeholders.noItemTitle)
                                     .multilineTextAlignment(.leading)
                                     .lineLimit(1)
-                                Text(song.albumArtist ?? Placeholders.noItemTitle)
+                                Text(song.artist ?? Placeholders.noItemTitle)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                     .lineLimit(1)
@@ -162,9 +163,8 @@ struct AlbumView: View {
                             Spacer()
                         }
                         .padding(.vertical, spacing)
-//                        .border(.black)
                     }
-                    .buttonStyle(.plain)
+                    .tint(.primary)
                 }
             }
             Divider()

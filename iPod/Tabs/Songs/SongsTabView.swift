@@ -49,7 +49,7 @@ struct SongsTabView: View {
                             } label: {
                                 SongButton(song: song)
                             }
-                            .buttonStyle(.plain)
+//                            .buttonStyle(.plain)
                         }
                     }
                 }
