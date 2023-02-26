@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import ViewExtractor
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
@@ -314,4 +315,34 @@ extension UIApplication {
         return currentVC
     }
     
+}
+
+// MARK: - Dividers between views
+
+struct DividedVStack<Content: View>: View {
+    @ViewBuilder let content: Content
+    let alignment: HorizontalAlignment
+    let spacing: CGFloat?
+    
+    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) {
+        self.alignment = alignment
+        self.spacing = spacing
+        self.content = content()
+    }
+    
+    var body: some View {
+        Extract(content) { views in
+            VStack(alignment: alignment, spacing: spacing) {
+                let first = views.first?.id
+
+                ForEach(views) { view in
+                    if view.id != first {
+                        Divider()
+                    }
+
+                    view
+                }
+            }
+        }
+    }
 }

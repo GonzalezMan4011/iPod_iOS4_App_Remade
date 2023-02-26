@@ -101,8 +101,10 @@ class StorageManager: ObservableObject {
         eqMax: 12,
         
         appColorTheme: AccentColor,
+        useAppColorMore: false,
+        
         playerBlurAmount: 10,
-        miniplayerProgress: false,
+        tintAlbumsByArtwork: true,
         
         playbackHistory: []
     )
@@ -115,8 +117,10 @@ struct StorageObject: Codable {
     var eqMax: Double
     
     var appColorTheme: Color
+    var useAppColorMore: Bool
+    
     var playerBlurAmount: Float
-    var miniplayerProgress: Bool
+    var tintAlbumsByArtwork: Bool
 
     var playbackHistory: [UInt64]
 }

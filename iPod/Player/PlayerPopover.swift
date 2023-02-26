@@ -16,10 +16,6 @@ struct PlayerPopover: View {
         VStack {
             fullpageView
         }
-        .popupBarStyle(.custom)
-        .popupBarCustomizer({ popupBar in
-            popupBar.progressViewStyle = store.s.miniplayerProgress ? .bottom : .none
-        })
         .popupImage(player.coverImage, resizable: true)
         .popupTitle(player.trackTitle)
         .popupProgress(1)

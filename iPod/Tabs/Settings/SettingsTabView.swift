@@ -47,7 +47,10 @@ struct SettingsTabView: View {
                     Button("Reset Color") {
                         store.s.appColorTheme = AccentColor
                     }
-                    Toggle("Show Miniplayer Progress", isOn: $store.s.miniplayerProgress)
+                    Toggle("Prioritise App Color", isOn: $store.s.useAppColorMore)
+                    
+                    Toggle("Tint Albums By Artwork", isOn: $store.s.tintAlbumsByArtwork)
+                    
                     Slider(value: $store.s.playerBlurAmount, in: 1...50)
                         .task {
                             guard let song = lib.songs.randomElement() else { return }
@@ -492,7 +495,7 @@ struct EQSettings: View {
             Section("Presets") {
                 ForEach(store.s.eqPresets) { preset in
                     Button(preset.name) {
-                        withAnimation(.spring()) {
+                        withAnimation(.default) {
                             store.s.eqBands = preset.bands
                         }
                     }

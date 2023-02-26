@@ -59,9 +59,12 @@ class Player: ObservableObject {
         }
     }
     
-    func beginPlayingFromQueue(_ queue: [UInt64]) {
+    func beginPlayingFromQueue(_ queue: [UInt64], atPos index: Int = 0) {
         self.stop()
-        StorageManager.shared.s.playbackHistory = []
+        
+        StorageManager.shared.s.playbackHistory = Array(queue[0..<index])
+        let queue = Array(queue[index..<queue.count])
+        
         DispatchQueue.main.async {
             self.playerQueue = queue
             Task {

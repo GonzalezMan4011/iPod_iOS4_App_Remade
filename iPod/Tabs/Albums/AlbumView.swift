@@ -8,16 +8,22 @@
 import SwiftUI
 import MediaPlayer
 import Introspect
+import ViewExtractor
 
 struct AlbumView: View {
     var album: MPMediaItemCollection
     @ObservedObject var player = Player.shared
+    @ObservedObject var store = StorageManager.shared
     @Environment(\.colorScheme) var cs
     @State var palette: Palette = .init()
+
     var albumColor: Color {
-        Color(uiColor: (cs == .light ? palette.DarkMuted?.uiColor : palette.Vibrant?.uiColor) ?? StorageManager.shared.s.appColorTheme.uiColor)
+        if store.s.tintAlbumsByArtwork {
+            return Color(uiColor: (cs == .light ? palette.DarkMuted?.uiColor : palette.Vibrant?.uiColor) ?? store.s.appColorTheme.uiColor)
+        } else {
+            return store.s.appColorTheme
+        }
     }
-    @State var showTitle = false
     
     func setTint() {
         let artwork = album.albumArt
@@ -25,25 +31,24 @@ struct AlbumView: View {
         self.palette = colors
     }
     
+    init(album: MPMediaItemCollection) {
+        self.album = album
+    }
+    
     var body: some View {
         ScrollView {
-            cover
-            albumInfo
-            controls
-            
-            List {
-                Text("1")
-                Text("2")
-                Text("3")
-                Text("4")
+            LazyVStack(spacing: 0) {
+                cover
+                albumInfo
+                controls
+                songsList
             }
         }
         .tint(albumColor)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(showTitle ? album.albumTitle ?? Placeholders.noItemTitle : "")
+        .navigationTitle(album.albumTitle ?? Placeholders.noItemTitle)
         .task(priority: .high) { setTint() }
         .animation(.easeInOut(duration: 0.2), value: albumColor)
-        .animation(.easeInOut(duration: 0.2), value: showTitle)
     }
     
     @ViewBuilder var cover: some View {
@@ -77,7 +82,7 @@ struct AlbumView: View {
             Text(album.albumTitle ?? Placeholders.noItemTitle)
                 .font(.title3.bold())
             NavigationLink {
-                #warning("add artist destination")
+#warning("add artist destination")
             } label: {
                 Text(album.representativeItem?.albumArtist ?? Placeholders.noItemTitle)
                     .font(.title3)
@@ -101,7 +106,6 @@ struct AlbumView: View {
             }
         }
         .multilineTextAlignment(.center)
-        .onAppear { self.showTitle = false }.onDisappear { self.showTitle = true }
     }
     
     @ViewBuilder var controls: some View {
@@ -112,6 +116,7 @@ struct AlbumView: View {
                 Label("Play", systemImage: "play.fill")
                     .frame(height: 35)
                     .frame(maxWidth: .infinity)
+                    .font(.body.bold())
             }
             .buttonStyle(.bordered)
             Button {
@@ -120,6 +125,7 @@ struct AlbumView: View {
                 Label("Shuffle", systemImage: "shuffle")
                     .frame(height: 35)
                     .frame(maxWidth: .infinity)
+                    .font(.body.bold())
             }
             .buttonStyle(.bordered)
         }
@@ -129,29 +135,75 @@ struct AlbumView: View {
     
     @ViewBuilder var songsList: some View {
         let sorted = album.items.sorted { lhs, rhs in
-            lhs.albumTrackNumber < rhs.albumTrackNumber
+            lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
         }
-        ForEach(sorted) { song in
-            HStack {
-                Button {
-                    
-                } label: {
-                    Label {
-                        Text(song.title ?? Placeholders.noItemTitle)
-                    } icon: {
-                        Text("\(song.albumTrackNumber)")
+        
+        let spacing: CGFloat = 5
+        VStack(spacing: 0) {
+            Divider()
+            AlbumDividedVStack(alignment: .trailing, spacing: 0) {
+                ForEach(sorted) { song in
+                    Button {
+                        playSong(song)
+                    } label: {
+                        HStack {
+                            Text(song.albumTrackNumber == 0 ? "" : "\(song.albumTrackNumber)")
+                                .foregroundColor(.secondary)
+                                .frame(width: 35)
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(song.title ?? Placeholders.noItemTitle)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(1)
+                                Text(song.albumArtist ?? Placeholders.noItemTitle)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                        }
+                        .padding(.vertical, spacing)
+//                        .border(.black)
                     }
+                    .buttonStyle(.plain)
                 }
             }
+            Divider()
         }
+        .padding(.horizontal)
+    }
+    
+    func playSong(_ song: MPMediaItem) {
+        let songs = album.items.sorted { lhs, rhs in
+            lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+        }
+        
+        guard let index = songs.firstIndex(of: song) else {
+            UIApplication.shared.presentAlert(title: "Error", message: "The selected song could not be found.", actions: [UIAlertAction(title: "Ok", style: .cancel)])
+            return
+        }
+        
+        let queue = songs.map { $0.persistentID }
+        player.beginPlayingFromQueue(queue, atPos: index)
     }
     
     func play() {
+        let songs = album.items.sorted { lhs, rhs in
+            lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+        }
         
+        let queue = songs.map { $0.persistentID }
+        player.beginPlayingFromQueue(queue)
     }
     
     func shuffle() {
+        var songs = album.items.sorted { lhs, rhs in
+            lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+        }
         
+        songs.shuffle()
+        
+        let queue = songs.map { $0.persistentID }
+        player.beginPlayingFromQueue(queue)
     }
 }
 
@@ -170,29 +222,61 @@ struct AlbumViewPreviewView: View {
             ScrollView {
                 if let album = album {
                     NavigationLink(destination: AlbumView(album: album), isActive: $open) {
-                        Text("gm")
+                        Text(album.albumTitle ?? Placeholders.noItemTitle)
                     }
+                    .buttonStyle(.bordered)
+                    
+                    Button("Shuffle") {
+                        shuffle(open: false)
+                    }
+                    .buttonStyle(.bordered)
+                    .padding()
                 } else {
                     ProgressView()
                         .task {
-                            let gm = true
-                            if gm {
-                                if let albums = MPMediaQuery.albums().collections {
-                                    let eggs = albums.filter { ($0.albumTitle ?? "gm").contains("Burning") }
-                                    self.album = eggs.randomElement()
-                                    guard self.album != nil else { return }
-                                    self.open = true
-                                }
-                            } else {
-                                if let albums = MPMediaQuery.albums().collections {
-                                    self.album = albums.randomElement()
-                                    guard self.album != nil else { return }
-                                    self.open = true
-                                }
-                            }
+                            shuffle(open: true)
                         }
                 }
             }.navigationTitle("Albums")
+        }
+    }
+    
+    func shuffle(open: Bool) {
+        if let albums = MPMediaQuery.albums().collections {
+            let eggs = albums.filter { ($0.albumTitle ?? "").contains("Mario") }
+            self.album = eggs.randomElement()
+            guard self.album != nil else { return }
+            self.open = open
+        }
+    }
+}
+
+
+fileprivate struct AlbumDividedVStack<Content: View>: View {
+    @ViewBuilder let content: Content
+    let alignment: HorizontalAlignment
+    let spacing: CGFloat?
+    
+    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) {
+        self.alignment = alignment
+        self.spacing = spacing
+        self.content = content()
+    }
+    
+    var body: some View {
+        Extract(content) { views in
+            VStack(alignment: alignment, spacing: spacing) {
+                let first = views.first?.id
+
+                ForEach(views) { view in
+                    if view.id != first {
+                        Divider()
+                            .padding(.leading, 35)
+                    }
+
+                    view
+                }
+            }
         }
     }
 }
