@@ -28,6 +28,7 @@
 		AA9417E129AABAEE007D3704 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D529AABAEE007D3704 /* Constants.swift */; };
 		AA9417E229AABAEE007D3704 /* Vbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9417D629AABAEE007D3704 /* Vbox.swift */; };
 		AA9417E529AAD1A8007D3704 /* ViewExtractor in Frameworks */ = {isa = PBXBuildFile; productRef = AA9417E429AAD1A8007D3704 /* ViewExtractor */; };
+		AAAC154729ABD69700A62C85 /* LibraryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAC154629ABD69700A62C85 /* LibraryTabView.swift */; };
 		AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */; };
 		AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* StorageManager.swift */; };
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
@@ -74,6 +75,7 @@
 		AA9417D429AABAEE007D3704 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		AA9417D529AABAEE007D3704 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AA9417D629AABAEE007D3704 /* Vbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vbox.swift; sourceTree = "<group>"; };
+		AAAC154629ABD69700A62C85 /* LibraryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTabView.swift; sourceTree = "<group>"; };
 		AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioPlayerNode++.swift"; sourceTree = "<group>"; };
 		AABA01EE2991AFAD0088591A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +106,7 @@
 		AA3330532992FDBB009F594F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AABA01EE2991AFAD0088591A /* StorageManager.swift */,
 				AA9417CA29AABABC007D3704 /* Swift-Vibrant */,
 				AAFCDA9129848023003609B2 /* Utilities.swift */,
 			);
@@ -137,6 +140,14 @@
 			path = "Swift-Vibrant";
 			sourceTree = "<group>";
 		};
+		AAAC154529ABD66700A62C85 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AAAC154629ABD69700A62C85 /* LibraryTabView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		AAE74C4E2984293A00E03B2D = {
 			isa = PBXGroup;
 			children = (
@@ -163,7 +174,6 @@
 				AAF7C66A2986BA2800E1FA65 /* Player */,
 				AA3365192984B20600420C53 /* Coverflow.swift */,
 				AA3330532992FDBB009F594F /* Utilities */,
-				AABA01EE2991AFAD0088591A /* StorageManager.swift */,
 				AAFCDA86298456D4003609B2 /* Tabs */,
 				AAF7C65629869B5300E1FA65 /* Assets */,
 				AAE74C68298429E800E03B2D /* MusicLibraryTools */,
@@ -200,6 +210,7 @@
 		AAFCDA86298456D4003609B2 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				AAAC154529ABD66700A62C85 /* Library */,
 				AAFCDA8A298456EB003609B2 /* Albums */,
 				AAFCDA8B29845714003609B2 /* Songs */,
 				AAFCDA8E298457DC003609B2 /* Playlists */,
@@ -327,6 +338,7 @@
 				AA9417DF29AABAEE007D3704 /* Quantizer.swift in Sources */,
 				AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */,
 				AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */,
+				AAAC154729ABD69700A62C85 /* LibraryTabView.swift in Sources */,
 				AA9417DE29AABAEE007D3704 /* Util.swift in Sources */,
 				AA9417E029AABAEE007D3704 /* Filter.swift in Sources */,
 				AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */,
@@ -498,7 +510,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -541,7 +553,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

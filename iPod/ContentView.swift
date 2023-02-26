@@ -14,6 +14,10 @@ struct ContentView: View {
     @ObservedObject var player = Player.shared
     var body: some View {
         TabView {
+            LibraryTabView()
+                .tabItem {
+                    Label("Library", systemImage: "square.stack.fill")
+                }
             AlbumsTabView()
                 .tabItem {
                     Label("Albums", systemImage: "square.stack.fill")

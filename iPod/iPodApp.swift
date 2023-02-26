@@ -18,6 +18,19 @@ struct iPodApp: App {
                 .onAppear {
                     let color = store.s.appColorTheme
                     UIApplication.shared.setTintColor(color)
+                    
+                    #if targetEnvironment(macCatalyst)
+                    let scenes = UIApplication.shared.connectedScenes.compactMap { scene in
+                        return scene as? UIWindowScene
+                    }
+
+                    scenes.forEach { scene in
+                        if let titlebar = scene.titlebar {
+                            titlebar.titleVisibility = .hidden
+                            titlebar.toolbar = nil
+                        }
+                    }
+                    #endif
                 }
                 .onChange(of: store.s.appColorTheme) { color in
                     UIApplication.shared.setTintColor(color)

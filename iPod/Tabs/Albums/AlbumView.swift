@@ -16,6 +16,10 @@ struct AlbumView: View {
     @ObservedObject var store = StorageManager.shared
     @Environment(\.colorScheme) var cs
     @State var palette: Palette = .init()
+    
+    var useAltLayout: Bool {
+        UIDevice.current.userInterfaceIdiom == .mac || UIDevice.current.userInterfaceIdiom == .pad
+    }
 
     var albumColor: Color {
         if store.s.tintAlbumsByArtwork {
@@ -37,11 +41,13 @@ struct AlbumView: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
-                cover
-                albumInfo
-                controls
-                songsList
+            switch UIDevice.current.userInterfaceIdiom {
+            case .pad:
+                ipadLayout
+            case .mac:
+                ipadLayout
+            default:
+                iosLayout
             }
         }
         .tint(albumColor)
@@ -51,43 +57,72 @@ struct AlbumView: View {
         .animation(.easeInOut(duration: 0.2), value: albumColor)
     }
     
+    @ViewBuilder var iosLayout: some View {
+        LazyVStack(spacing: 0) {
+            cover
+            albumInfo
+            controls
+            songsList
+        }
+    }
+    
+    @ViewBuilder var ipadLayout: some View {
+        LazyVStack(spacing: 0) {
+            HStack(spacing: 0) {
+                cover
+                VStack(alignment: .leading) {
+                    Spacer()
+                    albumInfo
+                    controls
+                }
+                .padding(.bottom, 30)
+                Spacer()
+            }
+            songsList
+        }
+    }
+    
     @ViewBuilder var cover: some View {
         let shape = RoundedRectangle(cornerRadius: 20, style: .continuous)
+
         VStack {
             Spacer(minLength: 0)
             Image(uiImage: album.albumArt)
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 400)
+                .frame(maxWidth: 300)
             Spacer(minLength: 0)
         }
-        .aspectRatio(1.0, contentMode: .fill)
         .clipShape(shape)
         .background {
             shape
                 .strokeBorder(.gray.opacity(0.2), lineWidth: 0.5, antialiased: true)
         }
-        .padding([.horizontal, .bottom],30)
-        .padding(.top, 10)
+        .aspectRatio(1.0, contentMode: .fill)
+        .frame(maxHeight: 300)
+        .padding([.horizontal, .bottom], 30)
+        .padding(.top, useAltLayout ? 30 : 10)
         .background {
             Image(uiImage: album.albumArt)
                 .resizable()
                 .scaledToFit()
                 .blur(radius: 200)
         }
-        .padding(.horizontal, 40)
+        .padding(.horizontal, useAltLayout ? 0 : 40)
     }
     
     @ViewBuilder var albumInfo: some View {
-        VStack(spacing: 2) {
+        VStack(alignment: .leading, spacing: useAltLayout ? 6 : 2) {
             Text(album.albumTitle ?? Placeholders.noItemTitle)
-                .font(.title3.bold())
+                .font(useAltLayout ? .title.bold() : .title3.bold())
+                .multilineTextAlignment(.leading)
             NavigationLink {
 #warning("add artist destination")
             } label: {
                 Text(album.representativeItem?.albumArtist ?? Placeholders.noItemTitle)
                     .font(.title3)
                     .foregroundColor(albumColor)
+                    .multilineTextAlignment(.leading)
             }
             .buttonStyle(.plain)
             
@@ -97,11 +132,11 @@ struct AlbumView: View {
                 let components = calendar.dateComponents([.year], from: date)
                 let year = components.year == nil ? "" : String(components.year!)
                 let separator = genre.isEmpty || year.isEmpty ? "" : " • "
-                Text("\(genre + separator + year)".capitalized)
-                    .font(.footnote)
+                Text(useAltLayout ? "\(genre + separator + year)".uppercased() : "\(genre + separator + year)".capitalized)
+                    .font(useAltLayout ? .subheadline : .footnote)
                     .foregroundColor(.secondary)
             } else if let genre = album.representativeItem?.genre {
-                Text(genre)
+                Text(useAltLayout ? genre.uppercased() : genre.capitalized)
                     .font(.footnote)
                     .foregroundColor(.secondary)
             }
@@ -130,7 +165,7 @@ struct AlbumView: View {
             }
             .buttonStyle(.bordered)
         }
-        .padding()
+        .padding(useAltLayout ? 0 : 15)
         .frame(maxWidth: 400)
     }
     
@@ -139,7 +174,8 @@ struct AlbumView: View {
             lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
         }
         
-        let spacing: CGFloat = 6
+        let spacing: CGFloat = useAltLayout ? 15 : 6
+        
         VStack(spacing: 0) {
             Divider()
             AlbumDividedVStack(alignment: .trailing, spacing: 0) {
