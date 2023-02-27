@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct LibraryTabView: View {
-    @State var egg = false
+    @ObservedObject var lib = LibraryData.shared
     var body: some View {
-        Text("Under Contruction!")
-            .padding()
-            .background(.red)
-            .offset(y: egg ? -20 : 0)
+        NavigationView {
+            ScrollView {
+                
+            }
+        }
+        .navigationViewStyle(.stack)
+    }
+}
+
+class LibraryData: ObservableObject {
+    static let shared = LibraryData()
+    
+    init() {
+        print("gorn")
     }
 }
 

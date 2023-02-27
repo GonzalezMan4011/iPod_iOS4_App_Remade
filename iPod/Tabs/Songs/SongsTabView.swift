@@ -63,6 +63,19 @@ struct SongsTabView: View {
             .onChange(of: searchQuery) { _ in
                 search(searchQuery)
             }
+            
+            if useAltLayout { // idk if this is necessary but better safe than sorry
+                PlayerPopover()
+                    .background(
+                        ArtCoverBackground()
+                    )
+            }
+        }
+        .introspectSplitViewController { vc in
+            vc.maximumPrimaryColumnWidth = 400
+            #if targetEnvironment(macCatalyst)
+            vc.preferredPrimaryColumnWidth = 400
+            #endif
         }
     }
     

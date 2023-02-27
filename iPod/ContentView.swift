@@ -16,7 +16,7 @@ struct ContentView: View {
         TabView {
             LibraryTabView()
                 .tabItem {
-                    Label("Library", systemImage: "square.stack.fill")
+                    Label("Library", systemImage: "music.note.house.fill")
                 }
             AlbumsTabView()
                 .tabItem {

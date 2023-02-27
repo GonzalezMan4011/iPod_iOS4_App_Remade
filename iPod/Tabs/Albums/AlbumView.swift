@@ -16,10 +16,6 @@ struct AlbumView: View {
     @ObservedObject var store = StorageManager.shared
     @Environment(\.colorScheme) var cs
     @State var palette: Palette = .init()
-    
-    var useAltLayout: Bool {
-        UIDevice.current.userInterfaceIdiom == .mac || UIDevice.current.userInterfaceIdiom == .pad
-    }
 
     var albumColor: Color {
         if store.s.tintAlbumsByArtwork {
@@ -41,12 +37,9 @@ struct AlbumView: View {
     
     var body: some View {
         ScrollView {
-            switch UIDevice.current.userInterfaceIdiom {
-            case .pad:
+            if useAltLayout {
                 ipadLayout
-            case .mac:
-                ipadLayout
-            default:
+            } else {
                 iosLayout
             }
         }
@@ -112,7 +105,7 @@ struct AlbumView: View {
     }
     
     @ViewBuilder var albumInfo: some View {
-        VStack(alignment: .leading, spacing: useAltLayout ? 6 : 2) {
+        VStack(alignment: useAltLayout ? .leading : .center, spacing: useAltLayout ? 6 : 2) {
             Text(album.albumTitle ?? Placeholders.noItemTitle)
                 .font(useAltLayout ? .title.bold() : .title3.bold())
                 .multilineTextAlignment(.leading)

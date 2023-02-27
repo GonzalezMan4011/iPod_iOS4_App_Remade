@@ -346,3 +346,8 @@ struct DividedVStack<Content: View>: View {
         }
     }
 }
+
+// MARK: - Variable to change ui layouts for ipad and mac
+var useAltLayout: Bool {
+    UIDevice.current.userInterfaceIdiom == .mac || UIDevice.current.userInterfaceIdiom == .pad
+}

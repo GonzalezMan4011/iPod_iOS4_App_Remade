@@ -39,6 +39,12 @@ struct AlbumsTabView: View {
                 search(searchQuery)
             }
         }
+        .introspectSplitViewController { vc in
+            vc.maximumPrimaryColumnWidth = 400
+            #if targetEnvironment(macCatalyst)
+            vc.preferredPrimaryColumnWidth = 400
+            #endif
+        }
     }
     
     struct AlbumButton: View {

@@ -119,6 +119,12 @@ struct SettingsTabView: View {
             }
             .navigationTitle("Settings")
         }
+        .introspectSplitViewController { vc in
+            vc.maximumPrimaryColumnWidth = 400
+            #if targetEnvironment(macCatalyst)
+            vc.preferredPrimaryColumnWidth = 400
+            #endif
+        }
     }
     
     @ViewBuilder var AppIcons: some View {
