@@ -40,8 +40,8 @@ I'm making this to bring nostalgia and make it a little more fun to listen to mu
 i have no clue what to put here, so dont copy my code formatting its ass
 
 ## TODO
-- [ ] Fix icon switching
-- [ ] Equaliser
+- [x] Fix icon switching
+- [x] Equaliser
 - [ ] Player backend
 - [ ] Coverflow
 - [ ] iPad UI?
