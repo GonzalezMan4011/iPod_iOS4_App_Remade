@@ -68,6 +68,8 @@ struct PlayerPopover: View {
             cover
             songInfo
             mainControls
+                .allowsHitTesting(player.currentlyPlaying == nil ? false : true)
+                .opacity(player.currentlyPlaying == nil ? 0.6 : 1)
         }
         .padding(.horizontal)
     }
@@ -129,7 +131,8 @@ struct PlayerPopover: View {
         guard let nodeTime = self.player.player.lastRenderTime else { return }
         if let playerTime = self.player.player.playerTime(forNodeTime: nodeTime) {
             let secs = Double(playerTime.sampleTime) / playerTime.sampleRate
-            self.progress = secs / self.player.duration
+            let gm = (secs / self.player.duration)
+            self.progress = gm.isLessThanOrEqualTo(1) ? gm : 1
         }
     }
     
@@ -144,8 +147,10 @@ struct PlayerPopover: View {
             })
             .task {
                 if self.timer == nil {
-                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: { _ in
-                        self.updateProgress()
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                        Task {
+                            await self.updateProgress()
+                        }
                     })
                 }
             }
@@ -280,15 +285,14 @@ struct NewSlider<Leading: View, Trailing: View>: View {
     
     @ViewBuilder var slider: some View {
         GeometryReader { geo in
-            let a = Capsule(style: .continuous)
             ZStack(alignment: .leading) {
-                a
+                Rectangle()
                     .foregroundColor(.clear)
                     .background(.ultraThinMaterial)
                 Rectangle()
-                    .frame(width: (geo.size.width * percentage))
+                    .frame(width: geo.size.width * percentage)
             }
-            .clipShape(a)
+            .clipShape(Capsule(style: .continuous))
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged({ value in

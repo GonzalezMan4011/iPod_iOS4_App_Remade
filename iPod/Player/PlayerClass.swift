@@ -44,15 +44,17 @@ class Player: ObservableObject {
     }
     
     func stop() {
+        self.disableEofCallback = true
         self.player.stop()
         self.setPlayerData(nil)
         DispatchQueue.main.async {
             self.isPaused = true
         }
+        self.disableEofCallback = false
     }
     
     func togglePlayback() {
-        if !self.isPaused {
+        if !self.isPaused  {
             self.pause()
         } else {
             self.resume()
@@ -75,9 +77,15 @@ class Player: ObservableObject {
     
     func nextSong() async throws {
         guard let nextQueueItem = self.playerQueue.first else { return }
-        DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
-        try await self.playSongItem(persistentID: nextQueueItem)
+        if currentlyPlaying == nil {
+            DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
+            try await self.playSongItem(persistentID: nextQueueItem)
+        } else {
+            player.stop()
+        }
     }
+    
+    var disableEofCallback = false
     
     func previousSong() async throws {
         guard let item = StorageManager.shared.s.playbackHistory.last else { return }
@@ -87,7 +95,9 @@ class Player: ObservableObject {
                 self.playerQueue.insert(playing.persistentID, at: 0)
             }
         }
+        disableEofCallback = true
         try await self.playSongItem(persistentID: item)
+        disableEofCallback = false
     }
     
     func tabBar(_ egg: Bool) {
@@ -173,7 +183,7 @@ class Player: ObservableObject {
     var cancellable = Set<AnyCancellable>()
     
     init() {
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         
         setEQBands()
         
@@ -219,12 +229,19 @@ class Player: ObservableObject {
     
     func playerDidFinishPlaying() {
         // playback ended, do any cleanup
-        if let last = self.currentlyPlaying {
-            let id = last.persistentID
-            StorageManager.shared.s.playbackHistory.append(id)
-        }
-        DispatchQueue.main.async {
-            self.isPaused = true
+        if !disableEofCallback {
+            if let last = self.currentlyPlaying {
+                let id = last.persistentID
+                StorageManager.shared.s.playbackHistory.append(id)
+            }
+            DispatchQueue.main.async {
+                self.isPaused = true
+            }
+            Task {
+                guard let nextQueueItem = self.playerQueue.first else { return }
+                DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
+                try await self.playSongItem(persistentID: nextQueueItem)
+            }
         }
     }
     
