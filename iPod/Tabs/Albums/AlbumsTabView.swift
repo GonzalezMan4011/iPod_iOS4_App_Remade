@@ -68,7 +68,7 @@ struct AlbumsTabView: View {
                         .font(.subheadline)
                         .foregroundColor(.primary)
                         .lineLimit(1)
-                    Text(album.representativeItem?.artist ?? Placeholders.noItemTitle)
+                    Text(album.representativeItem?.albumArtist ?? Placeholders.noItemTitle)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .lineLimit(1)
