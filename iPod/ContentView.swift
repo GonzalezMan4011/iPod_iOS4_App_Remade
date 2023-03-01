@@ -46,7 +46,7 @@ struct ContentView: View {
         })
         .ignoresSafeArea()
         .overlay {
-            Coverflow(rotation: $rotation)
+            Coverflow()
                 .ignoresSafeArea()
                 .opacity(rotation == .landscapeLeft || rotation == .landscapeRight ? 1 : 0)
                 .animation(.easeInOut, value: rotation)
