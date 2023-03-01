@@ -46,7 +46,7 @@ struct AlbumView: View {
         .tint(albumColor)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(album.albumTitle ?? Placeholders.noItemTitle)
-        .task(priority: .high) { setTint() }
+        .task(priority: .background) { setTint() }
         .animation(.easeInOut(duration: 0.2), value: albumColor)
     }
     
@@ -83,7 +83,6 @@ struct AlbumView: View {
             Image(uiImage: album.albumArt)
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 300)
             Spacer(minLength: 0)
         }
         .clipShape(shape)
@@ -92,7 +91,7 @@ struct AlbumView: View {
                 .strokeBorder(.gray.opacity(0.2), lineWidth: 0.5, antialiased: true)
         }
         .aspectRatio(1.0, contentMode: .fill)
-        .frame(maxHeight: 300)
+        .frame(maxWidth: 300, maxHeight: 300)
         .padding([.horizontal, .bottom], 30)
         .padding(.top, useAltLayout ? 30 : 10)
         .background {
@@ -108,7 +107,6 @@ struct AlbumView: View {
         VStack(alignment: useAltLayout ? .leading : .center, spacing: useAltLayout ? 6 : 2) {
             Text(album.albumTitle ?? Placeholders.noItemTitle)
                 .font(useAltLayout ? .title.bold() : .title3.bold())
-                .multilineTextAlignment(.leading)
             NavigationLink {
 #warning("add artist destination")
             } label: {
@@ -134,7 +132,7 @@ struct AlbumView: View {
                     .foregroundColor(.secondary)
             }
         }
-        .multilineTextAlignment(.center)
+        .multilineTextAlignment(useAltLayout ? .leading : .center)
     }
     
     @ViewBuilder var controls: some View {

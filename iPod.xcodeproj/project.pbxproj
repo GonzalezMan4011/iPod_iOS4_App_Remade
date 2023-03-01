@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA2B537329AEE04E00B68994 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = AA2B537229AEE04E00B68994 /* MarqueeText */; };
 		AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; };
 		AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AA33306429940602009F594F /* PlayerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA33306329940602009F594F /* PlayerPopover.swift */; };
@@ -31,6 +32,8 @@
 		AAAC154729ABD69700A62C85 /* LibraryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAC154629ABD69700A62C85 /* LibraryTabView.swift */; };
 		AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */; };
 		AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* StorageManager.swift */; };
+		AABD2AAD29AD066A00A65445 /* RecentlyAddedSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABD2AAC29AD066A00A65445 /* RecentlyAddedSubView.swift */; };
+		AABD2AB329AD8ABA00A65445 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = AABD2AB229AD8ABA00A65445 /* WelcomeSheet */; };
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
 		AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE74C5E2984293C00E03B2D /* Assets.xcassets */; };
 		AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C69298429FB00E03B2D /* MusicLibrary.swift */; };
@@ -78,6 +81,7 @@
 		AAAC154629ABD69700A62C85 /* LibraryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTabView.swift; sourceTree = "<group>"; };
 		AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioPlayerNode++.swift"; sourceTree = "<group>"; };
 		AABA01EE2991AFAD0088591A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		AABD2AAC29AD066A00A65445 /* RecentlyAddedSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyAddedSubView.swift; sourceTree = "<group>"; };
 		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE74C5A2984293A00E03B2D /* iPodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodApp.swift; sourceTree = "<group>"; };
 		AAE74C5E2984293C00E03B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,8 +99,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */,
+				AABD2AB329AD8ABA00A65445 /* WelcomeSheet in Frameworks */,
 				AA9417E529AAD1A8007D3704 /* ViewExtractor in Frameworks */,
 				AA9417BB29AA7570007D3704 /* Introspect in Frameworks */,
+				AA2B537329AEE04E00B68994 /* MarqueeText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +150,17 @@
 			isa = PBXGroup;
 			children = (
 				AAAC154629ABD69700A62C85 /* LibraryTabView.swift */,
+				AABD2AAB29AD065700A65445 /* SectionSubViews */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		AABD2AAB29AD065700A65445 /* SectionSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				AABD2AAC29AD066A00A65445 /* RecentlyAddedSubView.swift */,
+			);
+			path = SectionSubViews;
 			sourceTree = "<group>";
 		};
 		AAE74C4E2984293A00E03B2D = {
@@ -265,6 +280,8 @@
 				AA33305F2993FFD4009F594F /* LNPopupUI */,
 				AA9417BA29AA7570007D3704 /* Introspect */,
 				AA9417E429AAD1A8007D3704 /* ViewExtractor */,
+				AABD2AB229AD8ABA00A65445 /* WelcomeSheet */,
+				AA2B537229AEE04E00B68994 /* MarqueeText */,
 			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
@@ -286,7 +303,7 @@
 				};
 			};
 			buildConfigurationList = AAE74C522984293A00E03B2D /* Build configuration list for PBXProject "iPod" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -298,6 +315,8 @@
 				AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */,
 				AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				AA9417E329AAD1A8007D3704 /* XCRemoteSwiftPackageReference "ViewExtractor" */,
+				AABD2AB129AD8ABA00A65445 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */,
+				AA2B537129AEE04E00B68994 /* XCRemoteSwiftPackageReference "MarqueeText" */,
 			);
 			productRefGroup = AAE74C582984293A00E03B2D /* Products */;
 			projectDirPath = "";
@@ -334,6 +353,7 @@
 				AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */,
 				AA9417DC29AABAEE007D3704 /* VibrantColors.swift in Sources */,
 				AA9417DD29AABAEE007D3704 /* SVImage.swift in Sources */,
+				AABD2AAD29AD066A00A65445 /* RecentlyAddedSubView.swift in Sources */,
 				AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */,
 				AA9417DF29AABAEE007D3704 /* Quantizer.swift in Sources */,
 				AAFCDA90298457EA003609B2 /* PlaylistsTabView.swift in Sources */,
@@ -502,7 +522,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/iPod/Utilities/MediaPlayerUI",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -545,7 +565,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/iPod/Utilities/MediaPlayerUI",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -581,6 +601,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AA2B537129AEE04E00B68994 /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joekndy/MarqueeText";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/LeoNatan/LNPopupUI";
@@ -605,9 +633,22 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		AABD2AB129AD8ABA00A65445 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MAJKFL/Welcome-Sheet";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AA2B537229AEE04E00B68994 /* MarqueeText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA2B537129AEE04E00B68994 /* XCRemoteSwiftPackageReference "MarqueeText" */;
+			productName = MarqueeText;
+		};
 		AA33305F2993FFD4009F594F /* LNPopupUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */;
@@ -622,6 +663,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA9417E329AAD1A8007D3704 /* XCRemoteSwiftPackageReference "ViewExtractor" */;
 			productName = ViewExtractor;
+		};
+		AABD2AB229AD8ABA00A65445 /* WelcomeSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AABD2AB129AD8ABA00A65445 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */;
+			productName = WelcomeSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

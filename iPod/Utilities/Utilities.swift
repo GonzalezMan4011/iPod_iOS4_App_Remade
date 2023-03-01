@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import ViewExtractor
+import MediaPlayer
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
@@ -298,9 +299,7 @@ extension UIApplication {
 }
 
 // MARK: - Get current view controller
-
 extension UIApplication {
-    
     static var visibleVC: UIViewController? {
         var currentVC = UIApplication.shared.windows.first { $0.isKeyWindow }?.rootViewController
         while let presentedVC = currentVC?.presentedViewController {
@@ -318,7 +317,6 @@ extension UIApplication {
 }
 
 // MARK: - Dividers between views
-
 struct DividedVStack<Content: View>: View {
     @ViewBuilder let content: Content
     let alignment: HorizontalAlignment
@@ -334,12 +332,12 @@ struct DividedVStack<Content: View>: View {
         Extract(content) { views in
             VStack(alignment: alignment, spacing: spacing) {
                 let first = views.first?.id
-
+                
                 ForEach(views) { view in
                     if view.id != first {
                         Divider()
                     }
-
+                    
                     view
                 }
             }
@@ -350,4 +348,277 @@ struct DividedVStack<Content: View>: View {
 // MARK: - Variable to change ui layouts for ipad and mac
 var useAltLayout: Bool {
     UIDevice.current.userInterfaceIdiom == .mac || UIDevice.current.userInterfaceIdiom == .pad
+}
+
+
+// MARK: - Extension to add context menu quickly to items
+struct LibraryItemContextMenuModifier: ViewModifier {
+    var album: MPMediaItemCollection?
+    var song: MPMediaItem?
+    var playlist: MPMediaItemCollection?
+    @ObservedObject var player = Player.shared
+    func body(content: Content) -> some View {
+        if let album = album {
+            if #available(iOS 16.0, *) {
+                content
+                    .contextMenu {
+                        Button {
+                            let songs = album.items.sorted { lhs, rhs in
+                                lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+                            }
+                            
+                            let queue = songs.map { $0.persistentID }
+                            player.beginPlayingFromQueue(queue)
+                        } label: {
+                            Label("Play", systemImage: "play")
+                        }
+                        
+                        Divider()
+                        
+                        Button {
+                            let songs = album.items.sorted { lhs, rhs in
+                                lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+                            }
+                            
+                            let queue = songs.map { $0.persistentID }
+                            
+                            player.playerQueue.insert(contentsOf: queue, at: 0)
+                        } label: {
+                            Label("Play Next", systemImage: "text.line.first.and.arrowtriangle.forward")
+                        }
+                        Button {
+                            let songs = album.items.sorted { lhs, rhs in
+                                lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+                            }
+                            
+                            let queue = songs.map { $0.persistentID }
+                            
+                            player.playerQueue.append(contentsOf: queue)
+                        } label: {
+                            Label("Play Last", systemImage: "text.line.last.and.arrowtriangle.forward")
+                        }
+                    } preview: {
+                        VStack(alignment: .leading) {
+                            Image(uiImage: album.albumArt)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            Text(album.albumTitle ?? Placeholders.noItemTitle)
+                            Text(album.representativeItem?.albumArtist ?? Placeholders.noItemTitle)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                    }
+                
+            } else {
+                content
+                    .contextMenu {
+                        Button {
+                            let songs = album.items.sorted { lhs, rhs in
+                                lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+                            }
+                            
+                            let queue = songs.map { $0.persistentID }
+                            player.beginPlayingFromQueue(queue)
+                        } label: {
+                            Label("Play", systemImage: "play")
+                        }
+                        
+                        Divider()
+                        
+                        Button {
+                            let songs = album.items.sorted { lhs, rhs in
+                                lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+                            }
+                            
+                            let queue = songs.map { $0.persistentID }
+                            
+                            player.playerQueue.insert(contentsOf: queue, at: 0)
+                        } label: {
+                            Label("Play Next", systemImage: "text.line.first.and.arrowtriangle.forward")
+                        }
+                        Button {
+                            let songs = album.items.sorted { lhs, rhs in
+                                lhs.albumTrackNumber < rhs.albumTrackNumber && lhs.discNumber < rhs.discNumber
+                            }
+                            
+                            let queue = songs.map { $0.persistentID }
+                            
+                            player.playerQueue.append(contentsOf: queue)
+                        } label: {
+                            Label("Play Last", systemImage: "text.line.last.and.arrowtriangle.forward")
+                        }
+                    }
+            }
+        } else if let song = song {
+            if #available(iOS 16.0, *) {
+                content
+                    .contextMenu {
+                        Button("gm") {
+                            
+                        }
+                    } preview: {
+                        let size: CGFloat = 100
+                        let shape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        
+                        HStack(alignment: .center) {
+                            Image(uiImage: song.art)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: size)
+                                .frame(maxWidth: size)
+                                .clipShape(shape)
+                                .background {
+                                    shape
+                                        .strokeBorder(.gray.opacity(0.2), lineWidth: 0.5, antialiased: true)
+                                }
+                            
+                            VStack(alignment: .leading) {
+                                Text(song.title ?? Placeholders.noItemTitle)
+                                Text(song.albumArtist ?? Placeholders.noItemTitle)
+                                    .foregroundColor(.init(UIColor.secondaryLabel))
+                                    .font(Font.caption)
+                                
+                                if let date = song.value(forProperty: MPMediaItemPropertyReleaseDate) as? Date {
+                                    let albumName = song.albumTitle ?? ""
+                                    let calendar = Calendar.current
+                                    let components = calendar.dateComponents([.year], from: date)
+                                    let year = components.year == nil ? "" : String(components.year!)
+                                    let separator = albumName.isEmpty || year.isEmpty ? "" : " • "
+                                    Text(useAltLayout ? "\(albumName + separator + year)".uppercased() : "\(albumName + separator + year)".capitalized)
+                                        .foregroundColor(.init(UIColor.tertiaryLabel))
+                                        .font(.caption2)
+                                } else {
+                                    Text(song.albumTitle ?? Placeholders.noItemTitle)
+                                        .foregroundColor(.init(UIColor.tertiaryLabel))
+                                        .font(.caption2)
+                                }
+                            }
+                            
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                        }
+                        .padding()
+                    }
+                
+            } else {
+                content.contextMenu {
+                    Button("gm") {
+                        
+                    }
+                    
+                }
+            }
+        } else if let playlist = playlist {
+            
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func addContextMenu(album: MPMediaItemCollection) -> some View {
+        self
+            .modifier(LibraryItemContextMenuModifier(album: album))
+    }
+    func addContextMenu(song: MPMediaItem) -> some View {
+        self
+            .modifier(LibraryItemContextMenuModifier(song: song))
+    }
+    func addContextMenu(playlist: MPMediaItemCollection) -> some View {
+        self
+            .modifier(LibraryItemContextMenuModifier(playlist: playlist))
+    }
+}
+
+// MARK: - Extension to Color that adds random pastel colors and some color additions
+extension Color {
+    static func random(withMixedColor mixColor: Color? = nil) -> Color {
+        // Randomly generate number in closure
+        let randomColorValueGenerator = { () -> CGColor in
+            let r = CGFloat(arc4random() % 256 ) / 256
+            let g = CGFloat(arc4random() % 256 ) / 256
+            let b = CGFloat(arc4random() % 256 ) / 256
+            return CGColor(red: r, green: g, blue: b, alpha: 1)
+        }
+        
+        var niceColor = randomColorValueGenerator()
+        
+        // Mix the color
+        if let mixColor = mixColor {
+            var mixRed: CGFloat = 0, mixGreen: CGFloat = 0, mixBlue: CGFloat = 0;
+            mixColor.uiColor.getRed(&mixRed, green: &mixGreen, blue: &mixBlue, alpha: nil)
+            
+            niceColor = CGColor(red: (niceColor.red + mixRed) / 2, green: niceColor.green, blue: niceColor.blue, alpha: niceColor.alpha)
+            
+            niceColor = CGColor(red: niceColor.red, green: (niceColor.green + mixGreen) / 2, blue: niceColor.blue, alpha: niceColor.alpha)
+            
+            niceColor = CGColor(red: niceColor.red, green: niceColor.green, blue: (niceColor.blue + mixBlue) / 2, alpha: niceColor.alpha)
+        }
+        
+        return Color(cgColor: niceColor)
+    }
+}
+
+extension CGColor {
+    var red: CGFloat {
+        CIColor(cgColor: self).red
+    }
+    var green: CGFloat {
+        CIColor(cgColor: self).green
+    }
+    var blue: CGFloat {
+        CIColor(cgColor: self).blue
+    }
+    var alpha: CGFloat {
+        CIColor(cgColor: self).alpha
+    }
+}
+
+// MARK: - Set system volume
+extension MPVolumeView {
+    static func setVolume(_ volume: Float) {
+        let volumeView = MPVolumeView()
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+        
+        DispatchQueue.main.async {
+            slider?.value = volume
+        }
+    }
+}
+
+// MARK: - Timestamp from Double (in seconds)
+extension Double {
+    var asTimestamp: String {
+        let seconds = Int(self)
+        let (h, m, s) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        let hStr: String = h == 0 ? "" : "\(h):"
+        let mStr: String = "\(m)"
+        let sStr: String = {
+            if s <= 9 { return "0\(s)" }
+            else { return "\(s)" }
+        }()
+        
+        return "\(hStr)\(mStr):\(sStr)"
+    }
+}
+
+// MARK: - Add Bold and Italic UIFont chaining
+extension UIFont {
+    func withTraits(traits:UIFontDescriptor.SymbolicTraits) -> UIFont {
+        let descriptor = fontDescriptor.withSymbolicTraits(traits)
+        return UIFont(descriptor: descriptor!, size: 0) //size 0 means keep the size as it is
+    }
+
+    func bold() -> UIFont {
+        return withTraits(traits: .traitBold)
+    }
+
+    func italic() -> UIFont {
+        return withTraits(traits: .traitItalic)
+    }
 }

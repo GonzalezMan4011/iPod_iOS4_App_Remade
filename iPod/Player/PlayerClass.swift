@@ -164,9 +164,9 @@ class Player: ObservableObject {
     }
     
     var currentlyPlaying: MPMediaItem? = nil
-    private var file: AVAudioFile?
+    var file: AVAudioFile?
     private let engine = AVAudioEngine()
-    private let player = AVAudioPlayerNodeClass()
+    let player = AVAudioPlayerNodeClass()
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
     
     
@@ -193,15 +193,6 @@ class Player: ObservableObject {
             .sink { duration in
                 DispatchQueue.main.async {
                     self.duration = duration
-                }
-            }
-            .store(in: &cancellable)
-        player
-            .publisher(for: \.currentPlayTime)
-            .sink { playtime in
-                DispatchQueue.main.async {
-                    self.playbackTime = playtime
-                    self.progress = playtime / self.duration
                 }
             }
             .store(in: &cancellable)
