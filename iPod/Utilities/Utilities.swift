@@ -622,3 +622,14 @@ extension UIFont {
         return withTraits(traits: .traitItalic)
     }
 }
+
+// MARK: - Negated
+extension CGFloat {
+    /// Returns the negative of the value
+    /// - Returns: self with a negated value
+    func negated() -> Self {
+        var gm = self
+        gm.negate()
+        return gm
+    }
+}
