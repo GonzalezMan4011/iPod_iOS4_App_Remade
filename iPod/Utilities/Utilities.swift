@@ -43,9 +43,6 @@ struct VerticalIndex: ViewModifier {
                                 }
                             }
                         }
-                        .task {
-                            print(indexableList)
-                        }
                     }
             }
         }
