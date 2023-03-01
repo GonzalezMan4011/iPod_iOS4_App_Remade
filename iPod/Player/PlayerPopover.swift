@@ -71,6 +71,7 @@ struct PlayerPopover: View {
                 .allowsHitTesting(player.currentlyPlaying == nil ? false : true)
                 .opacity(player.currentlyPlaying == nil ? 0.6 : 1)
         }
+        .preferredColorScheme(.dark)
         .padding(.horizontal)
     }
     
@@ -90,6 +91,7 @@ struct PlayerPopover: View {
                     ), value: player.isPaused
                 )
                 .background(HideVolumeHUD())
+                .shadow(radius: 8)
         }
         .frame(maxWidth: 500, maxHeight: 500)
         .padding(.horizontal)
@@ -287,8 +289,7 @@ struct NewSlider<Leading: View, Trailing: View>: View {
         GeometryReader { geo in
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .foregroundColor(.clear)
-                    .background(.ultraThinMaterial)
+                    .foregroundColor(.white.opacity(0.1))
                 Rectangle()
                     .frame(width: geo.size.width * percentage)
             }
@@ -346,7 +347,19 @@ struct HideVolumeHUD: UIViewRepresentable {
 struct PlayerPopover_Previews: PreviewProvider {
     static var previews: some View {
         PlayerPopover()
-            .background(.blue)
-            .preferredColorScheme(.dark)
+            .background {
+                Player.shared.coverImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .blur(radius: 50)
+                    .overlay {
+                        Rectangle()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .opacity(0)
+                            .allowsHitTesting(false)
+                            .background(.ultraThinMaterial)
+                    }
+                    .ignoresSafeArea()
+            }
     }
 }
