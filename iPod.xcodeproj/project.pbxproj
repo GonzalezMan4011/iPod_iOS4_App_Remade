@@ -12,12 +12,10 @@
 		AA2B537D29B0207600B68994 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B537C29B0207600B68994 /* ContentView.swift */; };
 		AA2B537F29B0208100B68994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B537E29B0208100B68994 /* Assets.xcassets */; };
 		AA2B538229B0208100B68994 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B538129B0208100B68994 /* Preview Assets.xcassets */; };
-		AA2B538529B0208100B68994 /* iPod Remote Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AA2B537829B0207600B68994 /* iPod Remote Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AA2B538529B0208100B68994 /* iPod Remote Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AA2B537829B0207600B68994 /* iPod Remote Watch App.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA2B538B29B020B600B68994 /* Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B538A29B020B600B68994 /* Communication.swift */; };
 		AA2B538E29B0A60600B68994 /* MediaPlayer+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B538D29B0A60600B68994 /* MediaPlayer+Utils.swift */; };
 		AA2B539129B0A7F800B68994 /* SettingsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B539029B0A7F800B68994 /* SettingsStorageManager.swift */; };
-		AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; };
-		AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AA33306429940602009F594F /* PlayerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA33306329940602009F594F /* PlayerPopover.swift */; };
 		AA33651429848C2100420C53 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA33651329848C2100420C53 /* SettingsTabView.swift */; };
 		AA3365162984B13B00420C53 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3365152984B13B00420C53 /* AlbumView.swift */; };
@@ -45,6 +43,8 @@
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
 		AAE74C5F2984293C00E03B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE74C5E2984293C00E03B2D /* Assets.xcassets */; };
 		AAE74C6A298429FB00E03B2D /* MusicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C69298429FB00E03B2D /* MusicLibrary.swift */; };
+		AAEEEE8829B0CA7900BF6F2B /* LNPopupUI in Frameworks */ = {isa = PBXBuildFile; productRef = AAEEEE8729B0CA7900BF6F2B /* LNPopupUI */; };
+		AAEEEE8929B0CA7900BF6F2B /* LNPopupUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AAEEEE8729B0CA7900BF6F2B /* LNPopupUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF7C66B2986BA3200E1FA65 /* PlayerClass.swift */; };
 		AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA87298456E2003609B2 /* AlbumsTabView.swift */; };
 		AAFCDA8D29845726003609B2 /* SongsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA8C29845726003609B2 /* SongsTabView.swift */; };
@@ -80,7 +80,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */,
+				AAEEEE8929B0CA7900BF6F2B /* LNPopupUI in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */,
+				AAEEEE8829B0CA7900BF6F2B /* LNPopupUI in Frameworks */,
 				AABD2AB329AD8ABA00A65445 /* WelcomeSheet in Frameworks */,
 				AA9417E529AAD1A8007D3704 /* ViewExtractor in Frameworks */,
 				AA9417BB29AA7570007D3704 /* Introspect in Frameworks */,
@@ -251,6 +251,7 @@
 				AAE74C592984293A00E03B2D /* iPod */,
 				AA2B537929B0207600B68994 /* iPod Remote Watch App */,
 				AAE74C582984293A00E03B2D /* Products */,
+				AAEEEE8629B0CA7900BF6F2B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -286,6 +287,13 @@
 				AAE74C69298429FB00E03B2D /* MusicLibrary.swift */,
 			);
 			path = MusicLibraryTools;
+			sourceTree = "<group>";
+		};
+		AAEEEE8629B0CA7900BF6F2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AAF7C65629869B5300E1FA65 /* Assets */ = {
@@ -380,11 +388,11 @@
 			);
 			name = iPod;
 			packageProductDependencies = (
-				AA33305F2993FFD4009F594F /* LNPopupUI */,
 				AA9417BA29AA7570007D3704 /* Introspect */,
 				AA9417E429AAD1A8007D3704 /* ViewExtractor */,
 				AABD2AB229AD8ABA00A65445 /* WelcomeSheet */,
 				AA2B537229AEE04E00B68994 /* MarqueeText */,
+				AAEEEE8729B0CA7900BF6F2B /* LNPopupUI */,
 			);
 			productName = Music;
 			productReference = AAE74C572984293A00E03B2D /* iPod.app */;
@@ -507,6 +515,7 @@
 /* Begin PBXTargetDependency section */
 		AA2B538429B0208100B68994 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = AA2B537729B0207500B68994 /* iPod Remote Watch App */;
 			targetProxy = AA2B538329B0208100B68994 /* PBXContainerItemProxy */;
 		};
@@ -856,11 +865,6 @@
 			package = AA2B537129AEE04E00B68994 /* XCRemoteSwiftPackageReference "MarqueeText" */;
 			productName = MarqueeText;
 		};
-		AA33305F2993FFD4009F594F /* LNPopupUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */;
-			productName = LNPopupUI;
-		};
 		AA9417BA29AA7570007D3704 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA9417B929AA7570007D3704 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
@@ -875,6 +879,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AABD2AB129AD8ABA00A65445 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */;
 			productName = WelcomeSheet;
+		};
+		AAEEEE8729B0CA7900BF6F2B /* LNPopupUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA33305E2993FFD4009F594F /* XCRemoteSwiftPackageReference "LNPopupUI" */;
+			productName = LNPopupUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

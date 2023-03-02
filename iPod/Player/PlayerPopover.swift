@@ -276,6 +276,7 @@ struct NewSlider<Leading: View, Trailing: View>: View {
             if labelStyle == .stack {
                 VStack {
                     slider
+                        .animation(.easeInOut(duration: 0.2), value: value)
                     HStack {
                         leadingView
                         Spacer()
@@ -298,7 +299,6 @@ struct NewSlider<Leading: View, Trailing: View>: View {
         }
         .shadow(color: .black.opacity(isHeld ? 0.4 : 0.1), radius: isHeld ? 8 : 2)
         .animation(.spring().speed(1.5), value: isHeld)
-        .animation(.easeInOut(duration: 0.2), value: value)
         .frame(height: labelStyle == .stack ? 70 : 60)
     }
     
