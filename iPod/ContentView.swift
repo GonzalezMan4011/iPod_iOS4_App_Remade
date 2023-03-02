@@ -71,6 +71,7 @@ struct ArtCoverBackground: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .blur(radius: CGFloat(store.s.playerBlurAmount))
+            .animation(.spring())
             .overlay {
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

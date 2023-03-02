@@ -80,6 +80,7 @@ struct PlayerPopover: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .animation(.spring())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .scaleEffect(player.isPaused ? 0.8 : 1)
                 .animation(
