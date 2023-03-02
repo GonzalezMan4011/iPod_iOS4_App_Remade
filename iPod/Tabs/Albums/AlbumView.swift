@@ -13,7 +13,7 @@ import ViewExtractor
 struct AlbumView: View {
     var album: MPMediaItemCollection
     @ObservedObject var player = Player.shared
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = SettingsStorageManager.shared
     @Environment(\.colorScheme) var cs
     @State var palette: Palette = .init()
 

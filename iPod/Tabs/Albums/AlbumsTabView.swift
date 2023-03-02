@@ -34,7 +34,7 @@ struct AlbumsTabView: View {
                 .padding(10)
             }
             .navigationTitle("Albums")
-            .searchable(text: $searchQuery, prompt: Text("Search Albums"))
+            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search Albums"))
             .onChange(of: searchQuery) { _ in
                 search(searchQuery)
             }

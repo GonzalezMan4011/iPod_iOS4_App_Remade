@@ -64,7 +64,7 @@ class Player: ObservableObject {
     func beginPlayingFromQueue(_ queue: [UInt64], atPos index: Int = 0) {
         self.stop()
         
-        StorageManager.shared.s.playbackHistory = Array(queue[0..<index])
+        SettingsStorageManager.shared.s.playbackHistory = Array(queue[0..<index])
         let queue = Array(queue[index..<queue.count])
         
         DispatchQueue.main.async {
@@ -88,8 +88,8 @@ class Player: ObservableObject {
     var disableEofCallback = false
     
     func previousSong() async throws {
-        guard let item = StorageManager.shared.s.playbackHistory.last else { return }
-        StorageManager.shared.s.playbackHistory.removeLast()
+        guard let item = SettingsStorageManager.shared.s.playbackHistory.last else { return }
+        SettingsStorageManager.shared.s.playbackHistory.removeLast()
         if let playing = self.currentlyPlaying {
             DispatchQueue.main.async {
                 self.playerQueue.insert(playing.persistentID, at: 0)
@@ -232,7 +232,7 @@ class Player: ObservableObject {
         if !disableEofCallback {
             if let last = self.currentlyPlaying {
                 let id = last.persistentID
-                StorageManager.shared.s.playbackHistory.append(id)
+                SettingsStorageManager.shared.s.playbackHistory.append(id)
             }
             DispatchQueue.main.async {
                 self.isPaused = true
@@ -259,7 +259,7 @@ class Player: ObservableObject {
     }
     
     func setEQBands() {
-        let bands = StorageManager.shared.s.eqBands
+        let bands = EQStorageManager.shared.s.eqBands
         var freq = 32
         eq.globalGain = 1
         for i in 0..<eq.bands.count {

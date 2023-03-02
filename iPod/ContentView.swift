@@ -64,7 +64,7 @@ struct ContentView: View {
 }
 
 struct ArtCoverBackground: View {
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = SettingsStorageManager.shared
     @ObservedObject var play = Player.shared
     var body: some View {
         play.coverImage

@@ -15,7 +15,7 @@ fileprivate var cancellable = Set<AnyCancellable>()
 
 struct PlayerPopover: View {
     @ObservedObject var player = Player.shared
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = EQStorageManager.shared
     @Environment(\.colorScheme) var cs
     var body: some View {
         VStack {

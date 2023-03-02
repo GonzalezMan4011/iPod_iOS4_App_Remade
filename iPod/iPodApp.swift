@@ -12,7 +12,7 @@ let AccentColor = Color(red: 0.925, green: 0.471, blue: 0.208)
 
 @main
 struct iPodApp: App {
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = SettingsStorageManager.shared
     @AppStorage("LastOnboardingVersion") var lastObVer: String = UserDefaults.standard.string(forKey: "LastOnboardingVersion") ?? "0.0.0"
     @State var isShowingOnboarding = false
     @Environment(\.colorScheme) var cs

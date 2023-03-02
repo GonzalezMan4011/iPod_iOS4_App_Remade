@@ -9,7 +9,8 @@ import SwiftUI
 import MediaPlayer
 
 struct SettingsTabView: View {
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var eqStore = EQStorageManager.shared
+    @ObservedObject var settingsStore = SettingsStorageManager.shared
     @ObservedObject var lib = MusicLibrary.shared
     @State var song: MPMediaItem? = nil
     @State var showHiddenAlbum = false
@@ -38,20 +39,20 @@ struct SettingsTabView: View {
                         Text("Equaliser")
                     }
                 }
-                .onChange(of: store.s.eqBands) { _ in
+                .onChange(of: eqStore.s.eqBands) { _ in
                     Player.shared.setEQBands()
                 }
                 
                 Section("Theming") {
-                    ColorPicker("App Color", selection: $store.s.appColorTheme, supportsOpacity: false)
+                    ColorPicker("App Color", selection: $settingsStore.s.appColorTheme, supportsOpacity: false)
                     Button("Reset Color") {
-                        store.s.appColorTheme = AccentColor
+                        settingsStore.s.appColorTheme = AccentColor
                     }
-                    Toggle("Prioritise App Color", isOn: $store.s.useAppColorMore)
+                    Toggle("Prioritise App Color", isOn: $settingsStore.s.useAppColorMore)
                     
-                    Toggle("Tint Albums By Artwork", isOn: $store.s.tintAlbumsByArtwork)
+                    Toggle("Tint Albums By Artwork", isOn: $settingsStore.s.tintAlbumsByArtwork)
                     
-                    Slider(value: $store.s.playerBlurAmount, in: 1...50)
+                    Slider(value: $settingsStore.s.playerBlurAmount, in: 1...50)
                         .task {
                             guard let song = lib.songs.randomElement() else { return }
                             self.song = song
@@ -65,7 +66,7 @@ struct SettingsTabView: View {
                             Image(uiImage: song.art)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .blur(radius: CGFloat(showHiddenAlbum ? 0.0 : store.s.playerBlurAmount))
+                                .blur(radius: CGFloat(showHiddenAlbum ? 0.0 : settingsStore.s.playerBlurAmount))
                                 .overlay {
                                     Rectangle()
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -101,7 +102,7 @@ struct SettingsTabView: View {
                 
                 Section("DEBUG") {
                     Button("Reset Storage") {
-                        store.s = StorageManager.blankTemplate
+                        settingsStore.s = SettingsStorageManager.blankTemplate
                     }
                     Button("Respring") {
                         let window = UIApplication.shared.windows.first!
@@ -110,8 +111,10 @@ struct SettingsTabView: View {
                         }
                     }
                     Button {
-                        let trol = String(reflecting: StorageManager.shared.s)
-                        print(trol)
+                        print(
+                            String(reflecting: SettingsStorageManager.shared.s),
+                            String(reflecting: EQStorageManager.shared.s)
+                        )
                     } label: {
                         Text("print storage to console")
                     }
@@ -371,7 +374,7 @@ struct VerticalSlider: View {
     @Binding var value: Double
     @Binding var state: Bool
     var geo: CGSize
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = EQStorageManager.shared
     
     var body: some View {
         Slider(
@@ -393,7 +396,7 @@ struct EQSettings: View {
     @State var text2 = ""
     @State var alert = false
     @State var focusedBand = 0
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = EQStorageManager.shared
     @State var options = false
     
     @State var showDbLabels = false

@@ -14,6 +14,8 @@
 		AA2B538229B0208100B68994 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B538129B0208100B68994 /* Preview Assets.xcassets */; };
 		AA2B538529B0208100B68994 /* iPod Remote Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AA2B537829B0207600B68994 /* iPod Remote Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA2B538B29B020B600B68994 /* Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B538A29B020B600B68994 /* Communication.swift */; };
+		AA2B538E29B0A60600B68994 /* MediaPlayer+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B538D29B0A60600B68994 /* MediaPlayer+Utils.swift */; };
+		AA2B539129B0A7F800B68994 /* SettingsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B539029B0A7F800B68994 /* SettingsStorageManager.swift */; };
 		AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; };
 		AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AA33306429940602009F594F /* PlayerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA33306329940602009F594F /* PlayerPopover.swift */; };
@@ -37,7 +39,7 @@
 		AA9417E529AAD1A8007D3704 /* ViewExtractor in Frameworks */ = {isa = PBXBuildFile; productRef = AA9417E429AAD1A8007D3704 /* ViewExtractor */; };
 		AAAC154729ABD69700A62C85 /* LibraryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAC154629ABD69700A62C85 /* LibraryTabView.swift */; };
 		AAB4AF672998FEB60073B2A1 /* AVAudioPlayerNode++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */; };
-		AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* StorageManager.swift */; };
+		AABA01EF2991AFAD0088591A /* EQStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA01EE2991AFAD0088591A /* EQStorageManager.swift */; };
 		AABD2AAD29AD066A00A65445 /* RecentlyAddedSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABD2AAC29AD066A00A65445 /* RecentlyAddedSubView.swift */; };
 		AABD2AB329AD8ABA00A65445 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = AABD2AB229AD8ABA00A65445 /* WelcomeSheet */; };
 		AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE74C5A2984293A00E03B2D /* iPodApp.swift */; };
@@ -92,6 +94,8 @@
 		AA2B537E29B0208100B68994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B538129B0208100B68994 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA2B538A29B020B600B68994 /* Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communication.swift; sourceTree = "<group>"; };
+		AA2B538D29B0A60600B68994 /* MediaPlayer+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaPlayer+Utils.swift"; sourceTree = "<group>"; };
+		AA2B539029B0A7F800B68994 /* SettingsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsStorageManager.swift; sourceTree = "<group>"; };
 		AA33306329940602009F594F /* PlayerPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopover.swift; sourceTree = "<group>"; };
 		AA33651329848C2100420C53 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
 		AA3365152984B13B00420C53 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
@@ -113,7 +117,7 @@
 		AA9417D629AABAEE007D3704 /* Vbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vbox.swift; sourceTree = "<group>"; };
 		AAAC154629ABD69700A62C85 /* LibraryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTabView.swift; sourceTree = "<group>"; };
 		AAB4AF662998FEB60073B2A1 /* AVAudioPlayerNode++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioPlayerNode++.swift"; sourceTree = "<group>"; };
-		AABA01EE2991AFAD0088591A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		AABA01EE2991AFAD0088591A /* EQStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EQStorageManager.swift; sourceTree = "<group>"; };
 		AABD2AAC29AD066A00A65445 /* RecentlyAddedSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyAddedSubView.swift; sourceTree = "<group>"; };
 		AAE74C572984293A00E03B2D /* iPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE74C5A2984293A00E03B2D /* iPodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodApp.swift; sourceTree = "<group>"; };
@@ -177,12 +181,22 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		AA2B538F29B0A7B000B68994 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B539029B0A7F800B68994 /* SettingsStorageManager.swift */,
+				AABA01EE2991AFAD0088591A /* EQStorageManager.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
 		AA3330532992FDBB009F594F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				AABA01EE2991AFAD0088591A /* StorageManager.swift */,
+				AA2B538F29B0A7B000B68994 /* Stores */,
 				AA9417CA29AABABC007D3704 /* Swift-Vibrant */,
 				AAFCDA9129848023003609B2 /* Utilities.swift */,
+				AA2B538D29B0A60600B68994 /* MediaPlayer+Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -462,7 +476,7 @@
 				AAFCDA9229848023003609B2 /* Utilities.swift in Sources */,
 				AA33651429848C2100420C53 /* SettingsTabView.swift in Sources */,
 				AAF7C66C2986BA3200E1FA65 /* PlayerClass.swift in Sources */,
-				AABA01EF2991AFAD0088591A /* StorageManager.swift in Sources */,
+				AABA01EF2991AFAD0088591A /* EQStorageManager.swift in Sources */,
 				AA9417DC29AABAEE007D3704 /* VibrantColors.swift in Sources */,
 				AA9417DD29AABAEE007D3704 /* SVImage.swift in Sources */,
 				AABD2AAD29AD066A00A65445 /* RecentlyAddedSubView.swift in Sources */,
@@ -479,6 +493,8 @@
 				AAE74C5B2984293A00E03B2D /* iPodApp.swift in Sources */,
 				AA9417D929AABAEE007D3704 /* ColorConverters.swift in Sources */,
 				AA9417DB29AABAEE007D3704 /* Vibrant.swift in Sources */,
+				AA2B539129B0A7F800B68994 /* SettingsStorageManager.swift in Sources */,
+				AA2B538E29B0A60600B68994 /* MediaPlayer+Utils.swift in Sources */,
 				AA3365162984B13B00420C53 /* AlbumView.swift in Sources */,
 				AAFCDA88298456E2003609B2 /* AlbumsTabView.swift in Sources */,
 				AA9417D729AABAEE007D3704 /* Builder.swift in Sources */,

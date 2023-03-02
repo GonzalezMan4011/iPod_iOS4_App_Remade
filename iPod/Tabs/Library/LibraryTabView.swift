@@ -50,7 +50,7 @@ struct LibraryTabView: View {
     
     struct RecentlyAddedAlbumButton: View {
         var album: MPMediaItemCollection
-        @ObservedObject var store = StorageManager.shared
+        @ObservedObject var store = SettingsStorageManager.shared
         @Environment(\.colorScheme) var cs
         @State var palette: Palette? = nil
 

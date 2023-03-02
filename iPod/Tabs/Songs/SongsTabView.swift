@@ -60,7 +60,7 @@ struct SongsTabView: View {
             #if !targetEnvironment(macCatalyst)
             .modifier(VerticalIndex(indexableList: indexes))
             #endif
-            .searchable(text: $searchQuery, prompt: Text("Search Songs"))
+            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search Songs"))
             .onChange(of: searchQuery) { _ in
                 search(searchQuery)
             }
