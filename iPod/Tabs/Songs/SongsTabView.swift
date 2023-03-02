@@ -37,8 +37,8 @@ struct SongsTabView: View {
                     Section(header: Text(letter).id(letter)) {
                         let songlist = db.filter { gm in
                             var char: String {
-                                let character: String = "\((gm.title ?? "#").prefix(1))"
-                                guard alphabet.contains(character.uppercased()) else { return "#" }
+                                let character: String = "\((gm.title ?? "#").prefix(1))".uppercased()
+                                guard alphabet.contains(character) else { return "#" }
                                 return character
                             }
                             return char == letter

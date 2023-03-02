@@ -36,3 +36,5 @@ package:
 	# Zip
 	@zip -r9 packages/iPod.ipa Payload
 	@rm -rf Payload
+clean:
+	@rm -rf $(IPOD_TMP)/
