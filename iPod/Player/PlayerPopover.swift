@@ -39,10 +39,8 @@ struct PlayerPopover: View {
             .animation(.easeInOut, value: player.currentlyPlaying)
             
             Button {
-                Task {
-                    guard player.currentlyPlaying != nil else { return }
-                    try? await player.nextSong()
-                }
+                guard player.currentlyPlaying != nil else { return }
+                try? player.nextSong()
             } label: {
                 Image(systemName: "forward.fill")
                     .font(.body.bold())
@@ -136,10 +134,13 @@ struct PlayerPopover: View {
         if let playerTime = self.player.player.playerTime(forNodeTime: nodeTime) {
             let secs = Double(playerTime.sampleTime) / playerTime.sampleRate
             let gm = (secs / self.player.duration)
+            print(secs, self.player.duration, gm)
             self.progress = gm.isLessThanOrEqualTo(1) ? gm : 1
         }
     }
     
+    @State var playbackSliderHeld = false
+
     @ViewBuilder var mainControls: some View {
         VStack(spacing: 40) {
             NewSlider(value: $progress, max: 1, leadingView: {
@@ -148,14 +149,24 @@ struct PlayerPopover: View {
             }, trailingView: {
                 Text(player.duration.asTimestamp)
                     .font(.caption2)
-            })
+            }, isHeld: $playbackSliderHeld)
             .task {
                 if self.timer == nil {
-                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in
                         Task {
                             await self.updateProgress()
                         }
                     })
+                }
+            }
+            .onChange(of: playbackSliderHeld) { state in
+                if state == true {
+                    player.pause()
+                } else {
+                    let seekTo = progress * player.duration
+                    let newPos = AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: seekTo))
+                    player.resume()
+                    #warning("idk what to do but this dont work")
                 }
             }
             
@@ -163,7 +174,7 @@ struct PlayerPopover: View {
                 Button {
                     Task {
                         guard player.currentlyPlaying != nil else { return }
-                        try? await player.previousSong()
+                        try? player.previousSong()
                     }
                 } label: {
                     Image(systemName: "backward.fill")
@@ -185,10 +196,8 @@ struct PlayerPopover: View {
                 .frame(maxHeight: 35)
                 
                 Button {
-                    Task {
-                        guard player.currentlyPlaying != nil else { return }
-                        try? await player.nextSong()
-                    }
+                    guard player.currentlyPlaying != nil else { return }
+                    try? player.nextSong()
                 } label: {
                     Image(systemName: "forward.fill")
                         .resizable()
@@ -212,6 +221,8 @@ struct VolumeSlider: View {
         self.volume = Double(avsession.outputVolume)
     }
     
+    @State var volumeSliderHeld = false
+    
     var body: some View {
         NewSlider(value: $volume, max: 1, leadingView: {
             Image(systemName: "speaker.fill")
@@ -225,16 +236,17 @@ struct VolumeSlider: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxHeight: 15)
                 .frame(width: 25)
-        }, labelStyle: .row)
+        }, isHeld: $volumeSliderHeld, labelStyle: .row)
         .onChange(of: volume, perform: { _ in
             MPVolumeView.setVolume(Float(volume))
         })
         .task {
             avsession.publisher(for: \.outputVolume)
-                .debounce(for: .seconds(1.0), scheduler: RunLoop.main)
                 .sink { newVol in
-                    withAnimation(.spring()) {
-                        self.volume = Double(newVol)
+                    if !volumeSliderHeld {
+                        withAnimation(.spring()) {
+                            self.volume = Double(newVol)
+                        }
                     }
                 }
                 .store(in: &cancellable)
@@ -248,7 +260,7 @@ struct NewSlider<Leading: View, Trailing: View>: View {
     @ViewBuilder var leadingView: Leading
     @ViewBuilder var trailingView: Trailing
     
-    @State var isHeld: Bool = false
+    @Binding var isHeld: Bool
     
     var labelStyle: NewSliderLabelStyle = .stack
     

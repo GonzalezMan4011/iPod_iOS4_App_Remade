@@ -28,9 +28,9 @@ class Player: ObservableObject {
     
     var ignoreCallback = false
     
-    func resume() {
+    func resume(_ pos: AVAudioTime? = nil) {
         if !self.engine.isRunning { self.engine.prepare(); try? self.engine.start() }
-        self.player.play()
+        self.player.play(at: pos)
         DispatchQueue.main.async {
             self.isPaused = false
         }
@@ -69,17 +69,15 @@ class Player: ObservableObject {
         
         DispatchQueue.main.async {
             self.playerQueue = queue
-            Task {
-                try? await self.nextSong()
-            }
+            try? self.nextSong()
         }
     }
     
-    func nextSong() async throws {
+    func nextSong() throws {
         guard let nextQueueItem = self.playerQueue.first else { return }
         if currentlyPlaying == nil {
             DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
-            try await self.playSongItem(persistentID: nextQueueItem)
+            try self.playSongItem(persistentID: nextQueueItem)
         } else {
             player.stop()
         }
@@ -87,7 +85,7 @@ class Player: ObservableObject {
     
     var disableEofCallback = false
     
-    func previousSong() async throws {
+    func previousSong() throws {
         guard let item = SettingsStorageManager.shared.s.playbackHistory.last else { return }
         SettingsStorageManager.shared.s.playbackHistory.removeLast()
         if let playing = self.currentlyPlaying {
@@ -96,7 +94,7 @@ class Player: ObservableObject {
             }
         }
         disableEofCallback = true
-        try await self.playSongItem(persistentID: item)
+        try self.playSongItem(persistentID: item)
         disableEofCallback = false
     }
     
@@ -121,7 +119,7 @@ class Player: ObservableObject {
         return item
     }
     
-    public func playSongItem(persistentID: UInt64) async throws {
+    public func playSongItem(persistentID: UInt64) throws {
         
         // stop whats playing, also clears out player data for us
         self.stop()
@@ -149,7 +147,7 @@ class Player: ObservableObject {
         } catch {
             // clears the data for the player view
             setPlayerData(nil)
-            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
+            UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
             throw error
         }
     }
@@ -237,11 +235,10 @@ class Player: ObservableObject {
             DispatchQueue.main.async {
                 self.isPaused = true
             }
-            Task {
-                guard let nextQueueItem = self.playerQueue.first else { return }
-                DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
-                try await self.playSongItem(persistentID: nextQueueItem)
-            }
+            
+            guard let nextQueueItem = self.playerQueue.first else { return }
+            DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
+            try? self.playSongItem(persistentID: nextQueueItem)
         }
     }
     

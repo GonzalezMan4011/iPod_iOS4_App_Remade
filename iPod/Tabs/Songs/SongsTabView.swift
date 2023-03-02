@@ -45,7 +45,7 @@ struct SongsTabView: View {
                         }
                         ForEach(songlist) { song in
                             Button {
-                                Task { try? await player.playSongItem(persistentID: song.persistentID) }
+                                try? player.playSongItem(persistentID: song.persistentID) 
                             } label: {
                                 SongButton(song: song)
                                     .drawingGroup()
