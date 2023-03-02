@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "ipod icon thing.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"
