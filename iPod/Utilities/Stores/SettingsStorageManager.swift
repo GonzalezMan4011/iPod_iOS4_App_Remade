@@ -12,7 +12,7 @@ import SwiftUI
 
 class SettingsStorageManager: ObservableObject {
     
-    static let shared = SettingsStorageManager("eqStore")
+    static let shared = SettingsStorageManager("settingsStore")
     
     var name: String
     var fileLocation: URL
