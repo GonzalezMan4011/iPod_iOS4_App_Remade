@@ -21,3 +21,5 @@ Assuming your `AVAudioPlayerNode` is in a variable named `player`:
 > Get your `player.lastRenderTime`, note that this is optional and won't be available when it's paused. I store this in a variable named `nodeTime`
 > Declare playerTime with `player.playerTime(forNodeTime: nodeTime)`, this is optional too.
 > You can now get the number of seconds your player has read into with `Double(playerTime.sampleTime) / playerTime.sampleRate`!
+
+> Note that the player's `lastRenderTime` property can't be observed (if I remember correctly), I ended up checking the progress every 0.2 seconds in iPod's player popover.
