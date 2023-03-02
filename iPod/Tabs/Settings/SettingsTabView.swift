@@ -29,7 +29,20 @@ struct SettingsTabView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     }
+                }
+                Button {
+                    let url = URL(string: "https://discord.gg/ChsC2gFfjs")!
+                    UIApplication.shared.open(url)
                     
+                } label: {
+                    Label {
+                        Text("Join the iPod Discord!")
+                    } icon: {
+                        Image("Icon1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                    }
                 }
                 
                 Section("Audio") {
