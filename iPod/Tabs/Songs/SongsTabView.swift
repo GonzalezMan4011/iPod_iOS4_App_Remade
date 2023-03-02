@@ -48,6 +48,7 @@ struct SongsTabView: View {
                                 Task { try? await player.playSongItem(persistentID: song.persistentID) }
                             } label: {
                                 SongButton(song: song)
+                                    .drawingGroup()
                             }
                             .addContextMenu(song: song)
                         }

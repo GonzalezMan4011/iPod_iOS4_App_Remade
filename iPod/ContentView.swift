@@ -78,6 +78,7 @@ struct ArtCoverBackground: View {
                     .allowsHitTesting(false)
                     .background(.ultraThinMaterial)
             }
+            .drawingGroup()
             .ignoresSafeArea()
     }
 }

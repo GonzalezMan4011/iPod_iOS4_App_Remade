@@ -73,6 +73,7 @@ struct PlayerPopover: View {
         }
         .preferredColorScheme(.dark)
         .padding(.horizontal)
+        .frame(maxWidth: 500)
     }
     
     @ViewBuilder var cover: some View {
@@ -123,6 +124,7 @@ struct PlayerPopover: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.horizontal)
+//        .padding(.top, useAltLayout ? 15 : 0)
     }
     
     @State var progress: Double = 0
@@ -266,7 +268,7 @@ struct NewSlider<Leading: View, Trailing: View>: View {
                     }
                 }
                 .foregroundColor(.white.opacity(isHeld ? 1 : 0.75))
-                .scaleEffect(isHeld ? 1.1 : 1)
+                .scaleEffect(isHeld && !useAltLayout ? 1.1 : 1)
                 .padding()
             } else {
                 HStack {
@@ -275,7 +277,7 @@ struct NewSlider<Leading: View, Trailing: View>: View {
                     trailingView
                 }
                 .foregroundColor(.white.opacity(isHeld ? 1 : 0.75))
-                .scaleEffect(isHeld ? 1.1 : 1)
+                .scaleEffect(isHeld && !useAltLayout ? 1.1 : 1)
                 .padding()
             }
         }

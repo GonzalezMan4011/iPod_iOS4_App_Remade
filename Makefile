@@ -4,6 +4,7 @@ STRIP          = $(shell command -v strip)
 IPOD_TMP         = $(TMPDIR)/iPod
 IPOD_STAGE_DIR   = $(IPOD_TMP)/stage
 IPOD_APP_DIR     = $(IPOD_TMP)/Build/Products/Release-iphoneos/iPod.app
+IPOD_MAC_DIR     = $(IPOD_TMP)/Build/Products/Release-maccatalyst/iPod.app
 
 .PHONY: package
 
@@ -11,6 +12,11 @@ package:
 	# Build
 	@set -o pipefail; \
 		xcodebuild -jobs $(shell sysctl -n hw.ncpu) -project 'iPod.xcodeproj' -scheme iPod -configuration Release -arch arm64 -sdk iphoneos -derivedDataPath $(IPOD_TMP) \
+		CODE_SIGNING_ALLOWED=NO DSTROOT=$(IPOD_TMP)/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
+
+	@set -o pipefail; \
+		xcodebuild -jobs $(shell sysctl -n hw.ncpu) -project 'iPod.xcodeproj' -scheme iPod -configuration Release -sdk macosx \
+		SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES SUPPORTS_MACCATALYST=YES -derivedDataPath $(IPOD_TMP) \
 		CODE_SIGNING_ALLOWED=NO DSTROOT=$(IPOD_TMP)/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
 	
 	@rm -rf Payload

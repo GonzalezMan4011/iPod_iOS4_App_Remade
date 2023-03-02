@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AA2B537329AEE04E00B68994 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = AA2B537229AEE04E00B68994 /* MarqueeText */; };
+		AA2B537B29B0207600B68994 /* iPod_RemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B537A29B0207600B68994 /* iPod_RemoteApp.swift */; };
+		AA2B537D29B0207600B68994 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B537C29B0207600B68994 /* ContentView.swift */; };
+		AA2B537F29B0208100B68994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B537E29B0208100B68994 /* Assets.xcassets */; };
+		AA2B538229B0208100B68994 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B538129B0208100B68994 /* Preview Assets.xcassets */; };
+		AA2B538529B0208100B68994 /* iPod Remote Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AA2B537829B0207600B68994 /* iPod Remote Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AA2B538B29B020B600B68994 /* Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B538A29B020B600B68994 /* Communication.swift */; };
 		AA3330602993FFD4009F594F /* LNPopupUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; };
 		AA3330612994002E009F594F /* LNPopupUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA33305F2993FFD4009F594F /* LNPopupUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AA33306429940602009F594F /* PlayerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA33306329940602009F594F /* PlayerPopover.swift */; };
@@ -44,7 +50,28 @@
 		AAFCDA9229848023003609B2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCDA9129848023003609B2 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AA2B538329B0208100B68994 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAE74C4F2984293A00E03B2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA2B537729B0207500B68994;
+			remoteInfo = "iPod Remote Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		AA2B538629B0208200B68994 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				AA2B538529B0208100B68994 /* iPod Remote Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA3330622994002E009F594F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,6 +86,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA2B537829B0207600B68994 /* iPod Remote Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iPod Remote Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2B537A29B0207600B68994 /* iPod_RemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPod_RemoteApp.swift; sourceTree = "<group>"; };
+		AA2B537C29B0207600B68994 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA2B537E29B0208100B68994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA2B538129B0208100B68994 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AA2B538A29B020B600B68994 /* Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communication.swift; sourceTree = "<group>"; };
 		AA33306329940602009F594F /* PlayerPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopover.swift; sourceTree = "<group>"; };
 		AA33651329848C2100420C53 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
 		AA3365152984B13B00420C53 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
@@ -94,6 +127,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AA2B537529B0207500B68994 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE74C542984293A00E03B2D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,6 +149,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA2B537929B0207600B68994 /* iPod Remote Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B537A29B0207600B68994 /* iPod_RemoteApp.swift */,
+				AA2B537C29B0207600B68994 /* ContentView.swift */,
+				AA2B538C29B020BF00B68994 /* Utilities */,
+				AA2B537E29B0208100B68994 /* Assets.xcassets */,
+				AA2B538029B0208100B68994 /* Preview Content */,
+			);
+			path = "iPod Remote Watch App";
+			sourceTree = "<group>";
+		};
+		AA2B538029B0208100B68994 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B538129B0208100B68994 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AA2B538C29B020BF00B68994 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B538A29B020B600B68994 /* Communication.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		AA3330532992FDBB009F594F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE74C592984293A00E03B2D /* iPod */,
+				AA2B537929B0207600B68994 /* iPod Remote Watch App */,
 				AAE74C582984293A00E03B2D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -175,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE74C572984293A00E03B2D /* iPod.app */,
+				AA2B537829B0207600B68994 /* iPod Remote Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,6 +332,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AA2B537729B0207500B68994 /* iPod Remote Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA2B538929B0208200B68994 /* Build configuration list for PBXNativeTarget "iPod Remote Watch App" */;
+			buildPhases = (
+				AA2B537429B0207500B68994 /* Sources */,
+				AA2B537529B0207500B68994 /* Frameworks */,
+				AA2B537629B0207500B68994 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iPod Remote Watch App";
+			productName = "iPod Remote Watch App";
+			productReference = AA2B537829B0207600B68994 /* iPod Remote Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		AAE74C562984293A00E03B2D /* iPod */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAE74C652984293C00E03B2D /* Build configuration list for PBXNativeTarget "iPod" */;
@@ -270,10 +357,12 @@
 				AAE74C542984293A00E03B2D /* Frameworks */,
 				AAE74C552984293A00E03B2D /* Resources */,
 				AA3330622994002E009F594F /* Embed Frameworks */,
+				AA2B538629B0208200B68994 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AA2B538429B0208100B68994 /* PBXTargetDependency */,
 			);
 			name = iPod;
 			packageProductDependencies = (
@@ -294,9 +383,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					AA2B537729B0207500B68994 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					AAE74C562984293A00E03B2D = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -323,11 +415,21 @@
 			projectRoot = "";
 			targets = (
 				AAE74C562984293A00E03B2D /* iPod */,
+				AA2B537729B0207500B68994 /* iPod Remote Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AA2B537629B0207500B68994 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2B538229B0208100B68994 /* Preview Assets.xcassets in Resources */,
+				AA2B537F29B0208100B68994 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE74C552984293A00E03B2D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -339,6 +441,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AA2B537429B0207500B68994 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2B537D29B0207600B68994 /* ContentView.swift in Sources */,
+				AA2B537B29B0207600B68994 /* iPod_RemoteApp.swift in Sources */,
+				AA2B538B29B020B600B68994 /* Communication.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE74C532984293A00E03B2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -376,7 +488,75 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AA2B538429B0208100B68994 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA2B537729B0207500B68994 /* iPod Remote Watch App */;
+			targetProxy = AA2B538329B0208100B68994 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		AA2B538729B0208200B68994 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"iPod Remote Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 566RT33SA2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "iPod Remote";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.llsc12.iPod;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		AA2B538829B0208200B68994 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"iPod Remote Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 566RT33SA2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "iPod Remote";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.llsc12.iPod;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.llsc12.iPod.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
 		AAE74C632984293C00E03B2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -494,6 +674,7 @@
 		AAE74C662984293C00E03B2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6 AppIcon7 AppIcon8";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -537,6 +718,7 @@
 		AAE74C672984293C00E03B2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon2 AppIcon3 AppIcon4 AppIcon5 AppIcon6 AppIcon7 AppIcon8";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -580,6 +762,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA2B538929B0208200B68994 /* Build configuration list for PBXNativeTarget "iPod Remote Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2B538729B0208200B68994 /* Debug */,
+				AA2B538829B0208200B68994 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AAE74C522984293A00E03B2D /* Build configuration list for PBXProject "iPod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
