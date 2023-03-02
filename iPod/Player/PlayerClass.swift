@@ -31,6 +31,7 @@ class Player: ObservableObject {
     func resume(_ pos: AVAudioTime? = nil) {
         if !self.engine.isRunning { self.engine.prepare(); try? self.engine.start() }
         self.player.play(at: pos)
+        
         DispatchQueue.main.async {
             self.isPaused = false
         }
@@ -69,7 +70,9 @@ class Player: ObservableObject {
         
         DispatchQueue.main.async {
             self.playerQueue = queue
-            try? self.nextSong()
+            Task {
+                try await self.nextSong()
+            }
         }
     }
     
@@ -77,7 +80,9 @@ class Player: ObservableObject {
         guard let nextQueueItem = self.playerQueue.first else { return }
         if currentlyPlaying == nil {
             DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
-            try self.playSongItem(persistentID: nextQueueItem)
+            Task {
+                try await self.playSongItem(persistentID: nextQueueItem)
+            }
         } else {
             player.stop()
         }
@@ -94,7 +99,9 @@ class Player: ObservableObject {
             }
         }
         disableEofCallback = true
-        try self.playSongItem(persistentID: item)
+        Task {
+            try await self.playSongItem(persistentID: item)
+        }
         disableEofCallback = false
     }
     
@@ -119,7 +126,7 @@ class Player: ObservableObject {
         return item
     }
     
-    public func playSongItem(persistentID: UInt64) throws {
+    public func playSongItem(persistentID: UInt64) async throws {
         
         // stop whats playing, also clears out player data for us
         self.stop()
@@ -147,7 +154,7 @@ class Player: ObservableObject {
         } catch {
             // clears the data for the player view
             setPlayerData(nil)
-            UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
+            await UIApplication.shared.presentAlert(title: "Track Error", message: "This track cannot be played.\n\(error.localizedDescription)\n\n\(String(reflecting: error))", actions: [UIAlertAction(title: "OK", style: .cancel)])
             throw error
         }
     }
@@ -238,7 +245,9 @@ class Player: ObservableObject {
             
             guard let nextQueueItem = self.playerQueue.first else { return }
             DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
-            try? self.playSongItem(persistentID: nextQueueItem)
+            Task {
+                try? await self.playSongItem(persistentID: nextQueueItem)
+            }
         }
     }
     

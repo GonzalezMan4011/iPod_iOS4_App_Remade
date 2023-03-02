@@ -174,7 +174,7 @@ struct PlayerPopover: View {
                 Button {
                     Task {
                         guard player.currentlyPlaying != nil else { return }
-                        try? player.previousSong()
+                        try? await player.previousSong()
                     }
                 } label: {
                     Image(systemName: "backward.fill")
@@ -196,8 +196,10 @@ struct PlayerPopover: View {
                 .frame(maxHeight: 35)
                 
                 Button {
-                    guard player.currentlyPlaying != nil else { return }
-                    try? player.nextSong()
+                    Task {
+                        guard player.currentlyPlaying != nil else { return }
+                        try? await player.nextSong()
+                    }
                 } label: {
                     Image(systemName: "forward.fill")
                         .resizable()
