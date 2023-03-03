@@ -18,6 +18,13 @@ struct LibraryTabView: View {
                 recentlyAddedSection
             }
             .navigationTitle("Library")
+            .background {
+                AlbumCoverFlowBG()
+                    .blur(radius: useAltLayout ? 150 : 50)
+                    .background(.ultraThinMaterial)
+                    .overlay(.black.opacity(0.4))
+                    .ignoresSafeArea()
+            }
         }
         .navigationViewStyle(.stack)
     }
@@ -51,27 +58,6 @@ struct LibraryTabView: View {
     struct RecentlyAddedAlbumButton: View {
         var album: MPMediaItemCollection
         @ObservedObject var store = SettingsStorageManager.shared
-        @Environment(\.colorScheme) var cs
-        @State var palette: Palette? = nil
-
-        var albumColor: Color? {
-            if store.s.tintAlbumsByArtwork   {
-                if let uicolor = cs == .light ? palette?.DarkMuted?.uiColor : palette?.Vibrant?.uiColor {
-                    return Color(uiColor: uicolor)
-                } else {
-                    return nil
-                }
-            } else {
-                return nil
-            }
-        }
-        
-        func setTint() {
-            guard palette == nil else { return }
-            let artwork = album.albumArt
-            let colors = Vibrant.from(artwork).getPalette()
-            self.palette = colors
-        }
         
         init(album: MPMediaItemCollection) {
             self.album = album
@@ -91,9 +77,7 @@ struct LibraryTabView: View {
                             .strokeBorder(.gray.opacity(0.2), lineWidth: 0.5, antialiased: true)
                     }
             }
-            .task(priority: .background) { setTint() }
-            .shadow(color: albumColor ?? .clear, radius: albumColor == nil ? 0 : 5)
-            .animation(.easeInOut, value: albumColor)
+            .shadow(radius: 5)
             .addContextMenu(album: album)
         }
     }

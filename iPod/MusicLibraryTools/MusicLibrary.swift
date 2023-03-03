@@ -21,6 +21,8 @@ class MusicLibrary: ObservableObject {
     @Published public var playlists: [MPMediaItemCollection] = []
     @Published public var artists: [MPMediaItem] = []
     
+    @Published public var carousel: [UIImage]? = nil
+    
     init() {
         status = MPMediaLibrary.authorizationStatus()
         
@@ -37,6 +39,8 @@ class MusicLibrary: ObservableObject {
             self.status = status
             self.updateLibrary()
         }
+        
+        self.carousel = Array(self.albums.shuffled().prefix(bgCarouselItems)).map { $0.albumArt }
     }
     
     internal func updateLibrary() {
@@ -45,6 +49,8 @@ class MusicLibrary: ObservableObject {
             if let playlists = MPMediaQuery.playlists().collections { self.playlists = playlists }
             if let songs = MPMediaQuery.songs().items { self.songs = songs }
             if let artists = MPMediaQuery.artists().items { self.artists = artists }
+            
+            self.carousel = Array(self.albums.shuffled().prefix(bgCarouselItems)).map { $0.albumArt }
         }
     }
 }

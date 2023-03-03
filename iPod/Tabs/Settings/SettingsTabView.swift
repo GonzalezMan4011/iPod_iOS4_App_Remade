@@ -131,6 +131,9 @@ struct SettingsTabView: View {
                     } label: {
                         Text("print storage to console")
                     }
+                    NavigationLink("testing fullscreen covers") {
+                        AlbumCoverFlowBG()
+                    }
                 }
             }
             .navigationTitle("Settings")

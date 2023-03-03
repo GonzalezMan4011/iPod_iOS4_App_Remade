@@ -12,6 +12,7 @@ import MediaPlayer
 struct SongsTabView: View {
     @ObservedObject var player = Player.shared
     @ObservedObject var ml = MusicLibrary.shared
+    @ObservedObject var store = SettingsStorageManager.shared
     @State var searchQuery: String = ""
     
     @State var songsFiltered: [MPMediaItem] = []
@@ -46,6 +47,14 @@ struct SongsTabView: View {
                         ForEach(songlist) { song in
                             Button {
                                 Task {
+                                    let list = db
+                                    if let i = list.firstIndex(of: song) {
+                                        let prev = Array(list.prefix(upTo: i))
+                                        let queue = Array(list.suffix(from: i + 1))
+                                        
+                                        store.s.playbackHistory = prev.map({ $0.persistentID })
+                                        player.playerQueue = queue.map({ $0.persistentID })
+                                    }
                                     try? await player.playSongItem(persistentID: song.persistentID)
                                 }
                             } label: {
