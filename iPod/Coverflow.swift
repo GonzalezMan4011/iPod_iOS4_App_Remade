@@ -18,7 +18,28 @@ struct Coverflow: View {
     }
     
     @ViewBuilder var main: some View {
-        Text("coverflow!")
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+                ForEach(1..<20) { num in
+                    VStack {
+                        GeometryReader { geo in
+                            let screenframe = UIScreen.main.bounds
+                            let distanceToCentre = geo.frame(in: .global).midY.distance(to: screenframe.midY)
+                            
+                            Text("Hi")
+                                .font(.largeTitle)
+                                .padding()
+                                .background(.red)
+                                .frame(width: 200, height: 200)
+                                .scaleEffect(
+                                    (-100...100).contains(distanceToCentre) ? distanceToCentre : 1
+                                )
+                        }
+                        .frame(width: 200, height: 200)
+                    }
+                }
+            }
+        }
     }
 }
 

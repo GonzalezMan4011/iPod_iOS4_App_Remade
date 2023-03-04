@@ -12,6 +12,7 @@ import MediaPlayer
 struct SongsTabView: View {
     @ObservedObject var player = Player.shared
     @ObservedObject var ml = MusicLibrary.shared
+    @ObservedObject var store = SettingsStorageManager.shared
     @State var searchQuery: String = ""
     
     @State var songsFiltered: [MPMediaItem] = []
@@ -37,19 +38,30 @@ struct SongsTabView: View {
                     Section(header: Text(letter).id(letter)) {
                         let songlist = db.filter { gm in
                             var char: String {
-                                let character: String = "\((gm.title ?? "#").prefix(1))"
-                                guard alphabet.contains(character.uppercased()) else { return "#" }
+                                let character: String = "\((gm.title ?? "#").prefix(1))".uppercased()
+                                guard alphabet.contains(character) else { return "#" }
                                 return character
                             }
                             return char == letter
                         }
                         ForEach(songlist) { song in
                             Button {
-                                Task { try? await player.playSongItem(persistentID: song.persistentID) }
+                                Task {
+                                    let list = db
+                                    if let i = list.firstIndex(of: song) {
+                                        let prev = Array(list.prefix(upTo: i))
+                                        let queue = Array(list.suffix(from: i + 1))
+                                        
+                                        store.s.playbackHistory = prev.map({ $0.persistentID })
+                                        player.playerQueue = queue.map({ $0.persistentID })
+                                    }
+                                    try? await player.playSongItem(persistentID: song.persistentID)
+                                }
                             } label: {
                                 SongButton(song: song)
+                                    .drawingGroup()
                             }
-                            .buttonStyle(.plain)
+                            .addContextMenu(song: song)
                         }
                     }
                 }
@@ -59,10 +71,23 @@ struct SongsTabView: View {
             #if !targetEnvironment(macCatalyst)
             .modifier(VerticalIndex(indexableList: indexes))
             #endif
-            .searchable(text: $searchQuery, prompt: Text("Search Songs"))
+            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search Songs"))
             .onChange(of: searchQuery) { _ in
                 search(searchQuery)
             }
+            
+            if useAltLayout { // idk if this is necessary but better safe than sorry
+                PlayerPopover()
+                    .background(
+                        ArtCoverBackground()
+                    )
+            }
+        }
+        .introspectSplitViewController { vc in
+            vc.maximumPrimaryColumnWidth = 400
+            #if targetEnvironment(macCatalyst)
+            vc.preferredPrimaryColumnWidth = 400
+            #endif
         }
     }
     

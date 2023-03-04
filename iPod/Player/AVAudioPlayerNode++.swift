@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 class AVAudioPlayerNodeClass: AVAudioPlayerNode {
-    var timer = Timer()
+//    var timer = Timer()
     private var audioFile: AVAudioFile? {
         didSet {
             self.duration = audioFile?.duration ?? 0
@@ -18,7 +18,6 @@ class AVAudioPlayerNodeClass: AVAudioPlayerNode {
         }
     }
     @objc dynamic var duration: TimeInterval
-    @objc dynamic var currentPlayTime: TimeInterval
     var canBeResumed: Bool
     var isPlayable: Bool
 //    var activeSubscription: (()->())?
@@ -27,24 +26,22 @@ class AVAudioPlayerNodeClass: AVAudioPlayerNode {
     
     override init() {
         duration = 0
-        currentPlayTime = 0
         audioFile = nil
         canBeResumed = false
         isPlayable = false
         super.init()
-        
-        let updateInterval: Double = 1
-        
-        timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
-            print("updating")
-            if self.isPlaying {
-                self.currentPlayTime += updateInterval
-                if self.currentPlayTime > self.duration {
-                    self.setPlaybackPosition(0)
-                    self.pause()
-                }
-            }
-        }
+//
+//        let updateInterval: Double = 1
+//
+//        timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
+//            if self.isPlaying {
+//                self.currentPlayTime += updateInterval
+//                if self.currentPlayTime > self.duration {
+//                    self.setPlaybackPosition(0)
+//                    self.pause()
+//                }
+//            }
+//        }
 //        activeSubscription = nil
     }
     
@@ -115,7 +112,6 @@ class AVAudioPlayerNodeClass: AVAudioPlayerNode {
     
     override func play(at when: AVAudioTime?) {
         super.play(at: when)
-        currentPlayTime = AVAudioTime.seconds(forHostTime: when?.hostTime ?? 0)
 //        startTimer()
         canBeResumed = true
     }
@@ -155,45 +151,44 @@ class AVAudioPlayerNodeClass: AVAudioPlayerNode {
         super.stop()
         self.reset()
 //        stopTimer()
-        currentPlayTime = 0.0
         canBeResumed = false
     }
     
-    func fastForward() {
-        if canBeResumed {
-            if isPlaying {
-                pause()
-                self.reset()
-                canBeResumed = false
-            }
-            currentPlayTime = (currentPlayTime + 10 > duration) ? duration : (currentPlayTime + 10)
-            play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
-        } else if isPlayable {
-            currentPlayTime = 10
-            play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
-        }
-    }
+//    func fastForward() {
+//        if canBeResumed {
+//            if isPlaying {
+//                pause()
+//                self.reset()
+//                canBeResumed = false
+//            }
+//            currentPlayTime = (currentPlayTime + 10 > duration) ? duration : (currentPlayTime + 10)
+//            play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
+//        } else if isPlayable {
+//            currentPlayTime = 10
+//            play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
+//        }
+//    }
     
     func setPlaybackPosition(_ newPos: Double) {
         pause()
         self.reset()
-        currentPlayTime = newPos
-        play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
+//        currentPlayTime = newPos
+        play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: newPos)))
     }
     
-    func rewind() {
-        if canBeResumed {
-            if isPlaying {
-                pause()
-                self.reset()
-                canBeResumed = false
-            }
-            currentPlayTime = (currentPlayTime - 10 < 0) ? 0 : (currentPlayTime - 10)
-            play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
-        } else if isPlayable {
-            play()
-        }
-    }
+//    func rewind() {
+//        if canBeResumed {
+//            if isPlaying {
+//                pause()
+//                self.reset()
+//                canBeResumed = false
+//            }
+//            currentPlayTime = (currentPlayTime - 10 < 0) ? 0 : (currentPlayTime - 10)
+//            play(at: AVAudioTime(hostTime: AVAudioTime.hostTime(forSeconds: currentPlayTime)))
+//        } else if isPlayable {
+//            play()
+//        }
+//    }
 }
 
 //MARK:- AVAudioFile Extension

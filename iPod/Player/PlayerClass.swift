@@ -28,9 +28,10 @@ class Player: ObservableObject {
     
     var ignoreCallback = false
     
-    func resume() {
+    func resume(_ pos: AVAudioTime? = nil) {
         if !self.engine.isRunning { self.engine.prepare(); try? self.engine.start() }
-        self.player.play()
+        self.player.play(at: pos)
+        
         DispatchQueue.main.async {
             self.isPaused = false
         }
@@ -44,47 +45,64 @@ class Player: ObservableObject {
     }
     
     func stop() {
+        self.disableEofCallback = true
         self.player.stop()
         self.setPlayerData(nil)
         DispatchQueue.main.async {
             self.isPaused = true
         }
+        self.disableEofCallback = false
     }
     
     func togglePlayback() {
-        if !self.isPaused {
+        if !self.isPaused  {
             self.pause()
         } else {
             self.resume()
         }
     }
     
-    func beginPlayingFromQueue(_ queue: [UInt64]) {
+    func beginPlayingFromQueue(_ queue: [UInt64], atPos index: Int = 0) {
         self.stop()
-        StorageManager.shared.s.playbackHistory = []
+        
+        SettingsStorageManager.shared.s.playbackHistory = Array(queue[0..<index])
+        let queue = Array(queue[index..<queue.count])
+        
         DispatchQueue.main.async {
             self.playerQueue = queue
             Task {
-                try? await self.nextSong()
+                try await self.nextSong()
             }
         }
     }
     
-    func nextSong() async throws {
+    func nextSong() throws {
         guard let nextQueueItem = self.playerQueue.first else { return }
-        DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
-        try await self.playSongItem(persistentID: nextQueueItem)
+        if currentlyPlaying == nil {
+            DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
+            Task {
+                try await self.playSongItem(persistentID: nextQueueItem)
+            }
+        } else {
+            player.stop()
+        }
     }
     
-    func previousSong() async throws {
-        guard let item = StorageManager.shared.s.playbackHistory.last else { return }
-        StorageManager.shared.s.playbackHistory.removeLast()
+    var disableEofCallback = false
+    
+    func previousSong() throws {
+        guard let item = SettingsStorageManager.shared.s.playbackHistory.last else { return }
+        SettingsStorageManager.shared.s.playbackHistory.removeLast()
         if let playing = self.currentlyPlaying {
             DispatchQueue.main.async {
                 self.playerQueue.insert(playing.persistentID, at: 0)
             }
         }
-        try await self.playSongItem(persistentID: item)
+        disableEofCallback = true
+        Task {
+            try await self.playSongItem(persistentID: item)
+        }
+        disableEofCallback = false
     }
     
     func tabBar(_ egg: Bool) {
@@ -161,16 +179,16 @@ class Player: ObservableObject {
     }
     
     var currentlyPlaying: MPMediaItem? = nil
-    private var file: AVAudioFile?
+    var file: AVAudioFile?
     private let engine = AVAudioEngine()
-    private let player = AVAudioPlayerNodeClass()
+    let player = AVAudioPlayerNodeClass()
     private let eq = AVAudioUnitEQ(numberOfBands: 10)
     
     
     var cancellable = Set<AnyCancellable>()
     
     init() {
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         
         setEQBands()
         
@@ -190,15 +208,6 @@ class Player: ObservableObject {
             .sink { duration in
                 DispatchQueue.main.async {
                     self.duration = duration
-                }
-            }
-            .store(in: &cancellable)
-        player
-            .publisher(for: \.currentPlayTime)
-            .sink { playtime in
-                DispatchQueue.main.async {
-                    self.playbackTime = playtime
-                    self.progress = playtime / self.duration
                 }
             }
             .store(in: &cancellable)
@@ -225,12 +234,20 @@ class Player: ObservableObject {
     
     func playerDidFinishPlaying() {
         // playback ended, do any cleanup
-        if let last = self.currentlyPlaying {
-            let id = last.persistentID
-            StorageManager.shared.s.playbackHistory.append(id)
-        }
-        DispatchQueue.main.async {
-            self.isPaused = true
+        if !disableEofCallback {
+            if let last = self.currentlyPlaying {
+                let id = last.persistentID
+                SettingsStorageManager.shared.s.playbackHistory.append(id)
+            }
+            DispatchQueue.main.async {
+                self.isPaused = true
+            }
+            
+            guard let nextQueueItem = self.playerQueue.first else { return }
+            DispatchQueue.main.async { if self.playerQueue.first != nil { self.playerQueue.removeFirst() }}
+            Task {
+                try? await self.playSongItem(persistentID: nextQueueItem)
+            }
         }
     }
     
@@ -248,7 +265,7 @@ class Player: ObservableObject {
     }
     
     func setEQBands() {
-        let bands = StorageManager.shared.s.eqBands
+        let bands = EQStorageManager.shared.s.eqBands
         var freq = 32
         eq.globalGain = 1
         for i in 0..<eq.bands.count {

@@ -7,11 +7,16 @@ or
 
 > [Download Here](https://nightly.link/llsc12/iPod/workflows/build/main/iPod.zip)
 
-> You should join [my discord server](https://discord.gg/ShhsvW6V) to report bugs.
+> You should join [iPod's discord server](https://discord.gg/ChsC2gFfjs) to report bugs.
 
 This is what I think an iPod app would look like on modern iOS, plus extra features!
 
 I’ve made notes available [here](notes/notes.md)
+
+## Important
+This only supports iOS 15+ and it does not work with Apple Music Subscriptions. Only synced music or any other non-protected songs are supported.
+
+This app also has the ability to hurt you, the EQ in the settings can be as powerful as you need it to be. Be careful whilst using custom ranges, you could cause damage to speakers or your ears.
 
 ## Backstory
 I hate the official Music app a lot because it sucks, it has a ton of Apple Music ads (annoying when you sync music from your Mac) and it's kinda boring.
@@ -35,8 +40,8 @@ I'm making this to bring nostalgia and make it a little more fun to listen to mu
 i have no clue what to put here, so dont copy my code formatting its ass
 
 ## TODO
-- [ ] Fix icon switching
-- [ ] Equaliser
+- [x] Fix icon switching
+- [x] Equaliser
 - [ ] Player backend
 - [ ] Coverflow
 - [ ] iPad UI?

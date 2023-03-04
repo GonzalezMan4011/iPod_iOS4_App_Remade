@@ -14,6 +14,10 @@ struct ContentView: View {
     @ObservedObject var player = Player.shared
     var body: some View {
         TabView {
+            LibraryTabView()
+                .tabItem {
+                    Label("Library", systemImage: "music.note.house.fill")
+                }
             AlbumsTabView()
                 .tabItem {
                     Label("Albums", systemImage: "square.stack.fill")
@@ -37,6 +41,7 @@ struct ContentView: View {
             PlayerPopover()
                 .background(
                     ArtCoverBackground()
+                        .preferredColorScheme(.dark)
                 )
         })
         .ignoresSafeArea()
@@ -59,13 +64,14 @@ struct ContentView: View {
 }
 
 struct ArtCoverBackground: View {
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = SettingsStorageManager.shared
     @ObservedObject var play = Player.shared
     var body: some View {
         play.coverImage
             .resizable()
             .aspectRatio(contentMode: .fill)
             .blur(radius: CGFloat(store.s.playerBlurAmount))
+            .animation(.spring())
             .overlay {
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -73,6 +79,7 @@ struct ArtCoverBackground: View {
                     .allowsHitTesting(false)
                     .background(.ultraThinMaterial)
             }
+            .drawingGroup()
             .ignoresSafeArea()
     }
 }

@@ -1,15 +1,14 @@
 //
-//  AlbumsTabView.swift
+//  RecentlyAddedSubView.swift
 //  iPod
 //
-//  Created by Lakhan Lothiyi on 27/01/2023.
+//  Created by Lakhan Lothiyi on 27/02/2023.
 //
 
-import Foundation
 import SwiftUI
 import MediaPlayer
 
-struct AlbumsTabView: View {
+struct RecentlyAddedSubView: View {
     
     @ObservedObject var ml = MusicLibrary.shared
     
@@ -20,30 +19,27 @@ struct AlbumsTabView: View {
     @State var albumsFiltered: [MPMediaItemCollection] = []
     
     var db: [MPMediaItemCollection] {
-        searchQuery.isEmpty ? ml.albums : albumsFiltered
+        searchQuery.isEmpty ?
+        ml.albums.sorted { lhs, rhs in
+            (lhs.representativeItem?.dateAdded ?? Date.init(timeIntervalSince1970: 0)) > (rhs.representativeItem?.dateAdded ?? Date.init(timeIntervalSince1970: 0))
+        }
+        :
+        albumsFiltered
     }
         
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(db) { album in
-                        AlbumButton(album: album)
-                    }
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(db) { album in
+                    AlbumButton(album: album)
                 }
-                .padding(10)
             }
-            .navigationTitle("Albums")
-            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search Albums"))
-            .onChange(of: searchQuery) { _ in
-                search(searchQuery)
-            }
+            .padding(10)
         }
-        .introspectSplitViewController { vc in
-            vc.maximumPrimaryColumnWidth = 400
-            #if targetEnvironment(macCatalyst)
-            vc.preferredPrimaryColumnWidth = 400
-            #endif
+        .navigationTitle("Recently Added")
+        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search Albums"))
+        .onChange(of: searchQuery) { _ in
+            search(searchQuery)
         }
     }
     
@@ -84,8 +80,14 @@ struct AlbumsTabView: View {
             album.albumTitle?.lowercased().contains(q.lowercased()) ?? false
             ||
             album.representativeItem?.artist?.lowercased().contains(q.lowercased()) ?? false
+        }.sorted { lhs, rhs in
+            (lhs.representativeItem?.dateAdded ?? Date.init(timeIntervalSince1970: 0)) > (rhs.representativeItem?.dateAdded ?? Date.init(timeIntervalSince1970: 0))
         }
     }
 }
 
-
+struct RecentlyAddedSubView_Previews: PreviewProvider {
+    static var previews: some View {
+        RecentlyAddedSubView()
+    }
+}

@@ -9,7 +9,8 @@ import SwiftUI
 import MediaPlayer
 
 struct SettingsTabView: View {
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var eqStore = EQStorageManager.shared
+    @ObservedObject var settingsStore = SettingsStorageManager.shared
     @ObservedObject var lib = MusicLibrary.shared
     @State var song: MPMediaItem? = nil
     @State var showHiddenAlbum = false
@@ -28,7 +29,20 @@ struct SettingsTabView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     }
+                }
+                Button {
+                    let url = URL(string: "https://discord.gg/ChsC2gFfjs")!
+                    UIApplication.shared.open(url)
                     
+                } label: {
+                    Label {
+                        Text("Join the iPod Discord!")
+                    } icon: {
+                        Image("Icon1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                    }
                 }
                 
                 Section("Audio") {
@@ -38,17 +52,20 @@ struct SettingsTabView: View {
                         Text("Equaliser")
                     }
                 }
-                .onChange(of: store.s.eqBands) { _ in
+                .onChange(of: eqStore.s.eqBands) { _ in
                     Player.shared.setEQBands()
                 }
                 
                 Section("Theming") {
-                    ColorPicker("App Color", selection: $store.s.appColorTheme, supportsOpacity: false)
+                    ColorPicker("App Color", selection: $settingsStore.s.appColorTheme, supportsOpacity: false)
                     Button("Reset Color") {
-                        store.s.appColorTheme = AccentColor
+                        settingsStore.s.appColorTheme = AccentColor
                     }
-                    Toggle("Show Miniplayer Progress", isOn: $store.s.miniplayerProgress)
-                    Slider(value: $store.s.playerBlurAmount, in: 1...50)
+                    Toggle("Prioritise App Color", isOn: $settingsStore.s.useAppColorMore)
+                    
+                    Toggle("Tint Albums By Artwork", isOn: $settingsStore.s.tintAlbumsByArtwork)
+                    
+                    Slider(value: $settingsStore.s.playerBlurAmount, in: 1...50)
                         .task {
                             guard let song = lib.songs.randomElement() else { return }
                             self.song = song
@@ -62,7 +79,7 @@ struct SettingsTabView: View {
                             Image(uiImage: song.art)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .blur(radius: CGFloat(showHiddenAlbum ? 0.0 : store.s.playerBlurAmount))
+                                .blur(radius: CGFloat(showHiddenAlbum ? 0.0 : settingsStore.s.playerBlurAmount))
                                 .overlay {
                                     Rectangle()
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -98,7 +115,7 @@ struct SettingsTabView: View {
                 
                 Section("DEBUG") {
                     Button("Reset Storage") {
-                        store.s = StorageManager.blankTemplate
+                        settingsStore.s = SettingsStorageManager.blankTemplate
                     }
                     Button("Respring") {
                         let window = UIApplication.shared.windows.first!
@@ -107,14 +124,25 @@ struct SettingsTabView: View {
                         }
                     }
                     Button {
-                        let trol = String(reflecting: StorageManager.shared.s)
-                        print(trol)
+                        print(
+                            String(reflecting: SettingsStorageManager.shared.s),
+                            String(reflecting: EQStorageManager.shared.s)
+                        )
                     } label: {
                         Text("print storage to console")
+                    }
+                    NavigationLink("testing fullscreen covers") {
+                        AlbumCoverFlowBG()
                     }
                 }
             }
             .navigationTitle("Settings")
+        }
+        .introspectSplitViewController { vc in
+            vc.maximumPrimaryColumnWidth = 400
+            #if targetEnvironment(macCatalyst)
+            vc.preferredPrimaryColumnWidth = 400
+            #endif
         }
     }
     
@@ -362,7 +390,7 @@ struct VerticalSlider: View {
     @Binding var value: Double
     @Binding var state: Bool
     var geo: CGSize
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = EQStorageManager.shared
     
     var body: some View {
         Slider(
@@ -384,7 +412,7 @@ struct EQSettings: View {
     @State var text2 = ""
     @State var alert = false
     @State var focusedBand = 0
-    @ObservedObject var store = StorageManager.shared
+    @ObservedObject var store = EQStorageManager.shared
     @State var options = false
     
     @State var showDbLabels = false
@@ -492,7 +520,7 @@ struct EQSettings: View {
             Section("Presets") {
                 ForEach(store.s.eqPresets) { preset in
                     Button(preset.name) {
-                        withAnimation(.spring()) {
+                        withAnimation(.default) {
                             store.s.eqBands = preset.bands
                         }
                     }

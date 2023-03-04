@@ -10,56 +10,59 @@
 import Foundation
 import SwiftUI
 
-class StorageManager: ObservableObject {
+class EQStorageManager: ObservableObject {
     
-    static let shared = StorageManager()
+    static let shared = EQStorageManager("eqStore")
     
-    var fileLocation: URL = {
-        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let storageObjectLocation = docs.appendingPathComponent("storage").appendingPathExtension("object") // add storage.object file
-        print(storageObjectLocation)
-        return storageObjectLocation
-    }()
+    var name: String
+    var fileLocation: URL
     
     internal let encoder = JSONEncoder()
     internal let decoder = JSONDecoder()
     
-    var s: StorageObject {
+    var s: EQStorageObject {
         didSet {
             DispatchQueue.main.async {
                 self.objectWillChange.send()
-                StorageManager.saveLoadedObjectToLocalStorage(self)
+                EQStorageManager.saveLoadedObjectToLocalStorage(self)
             }
         }
     }
         
-    init() {
+    init(_ dbName: String) {
+        self.name = dbName
+        self.fileLocation = {
+            let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let storageObjectLocation = docs.appendingPathComponent(dbName).appendingPathExtension("object") // add object file
+            print(storageObjectLocation)
+            return storageObjectLocation
+        }()
         
         // create file if it doesnt exist
         if !FileManager.default.fileExists(atPath: fileLocation.path) {
-            let starterObj = StorageManager.blankTemplate
+            let starterObj = EQStorageManager.blankTemplate
             let json = try? encoder.encode(starterObj)
             try? json?.write(to: fileLocation, options: .atomic)
             
             // else if it does exist, make sure it successfully gets loaded and decodes, else write a blank template.
         } else if let data = try? Data(contentsOf: fileLocation),
-                  let _ = try? decoder.decode(StorageObject.self, from: data) {} else {
-                      let starterObj = StorageManager.blankTemplate
+                  let _ = try? decoder.decode(EQStorageObject.self, from: data) {} else {
+                      let starterObj = EQStorageManager.blankTemplate
                       let json = try? encoder.encode(starterObj)
                       try? json?.write(to: fileLocation, options: .atomic)
                   }
         
-        self.s = StorageManager.getObjectFromLocalStorage(decoder, fileLocation, encoder: encoder)
+        self.s = EQStorageManager.getObjectFromLocalStorage(decoder, fileLocation, encoder: encoder)
         
         self.objectWillChange.send()
     }
     
-    static private func reloadObjectFromLocalStorage(_ self: StorageManager) {
+    static private func reloadObjectFromLocalStorage(_ self: EQStorageManager) {
         self.objectWillChange.send()
-        self.s = StorageManager.getObjectFromLocalStorage(self.decoder, self.fileLocation, encoder: self.encoder)
+        self.s = EQStorageManager.getObjectFromLocalStorage(self.decoder, self.fileLocation, encoder: self.encoder)
     }
     
-    static private func saveLoadedObjectToLocalStorage(_ self: StorageManager) {
+    static private func saveLoadedObjectToLocalStorage(_ self: EQStorageManager) {
         print("saving object")
         do {
             let json = try self.encoder.encode(self.s)
@@ -69,18 +72,18 @@ class StorageManager: ObservableObject {
         }
     }
     
-    static private func getObjectFromLocalStorage(_ decoder: JSONDecoder, _ fileLocation: URL, encoder: JSONEncoder) -> StorageObject {
+    static private func getObjectFromLocalStorage(_ decoder: JSONDecoder, _ fileLocation: URL, encoder: JSONEncoder) -> EQStorageObject {
         print("loading object")
         do {
             var file: Data
             if FileManager.default.fileExists(atPath: fileLocation.path) {
                 file = try Data(contentsOf: fileLocation)
             } else {
-                let json = try encoder.encode(StorageManager.blankTemplate)
+                let json = try encoder.encode(EQStorageManager.blankTemplate)
                 file = json
             }
             
-            let object = try decoder.decode(StorageObject.self, from: file)
+            let object = try decoder.decode(EQStorageObject.self, from: file)
             
             return object
         } catch {
@@ -90,7 +93,7 @@ class StorageManager: ObservableObject {
     
     
     
-    internal static let blankTemplate = StorageObject(
+    internal static let blankTemplate = EQStorageObject(
         eqBands: [0,0,0,0,0,0,0,0,0,0],
         eqPresets: [
              EQPreset(name: "Default", bands: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]),
@@ -98,27 +101,15 @@ class StorageManager: ObservableObject {
              EQPreset(name: "AirPods Pro (1st generation)", bands: [18.400000000000002, 16.8, 11.7, 4.700000000000001, 1.6000000000000005, 1.8000000000000007, 2.5, 1.1000000000000005, 6.300000000000001, 12.5])
         ],
         eqMin: -6,
-        eqMax: 12,
-        
-        appColorTheme: AccentColor,
-        playerBlurAmount: 10,
-        miniplayerProgress: false,
-        
-        playbackHistory: []
+        eqMax: 12
     )
 }
 
-struct StorageObject: Codable {
+struct EQStorageObject: Codable {
     var eqBands: [Double]
     var eqPresets: [EQPreset]
     var eqMin: Double
     var eqMax: Double
-    
-    var appColorTheme: Color
-    var playerBlurAmount: Float
-    var miniplayerProgress: Bool
-
-    var playbackHistory: [UInt64]
 }
 
 struct EQPreset: Codable, Identifiable, Equatable {
