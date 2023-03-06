@@ -1,4 +1,6 @@
 # iPod
+# NOTE: I have stop working on this fork now that for some reason, the original project has been abandoned to the point where it has been completely deleted. Might make my own with my own code in the future but yeah. Here for archiving purposes only.
+
 ## A modern recreation of the iPod app from iOS 4
 
 > This project is currently under heavy work and is not fully functional. You can still test builds by downloading from [GitHub Actions (nightly.link)](https://nightly.link/llsc12/iPod/workflows/build/main/iPod).
